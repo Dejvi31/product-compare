@@ -81,7 +81,7 @@ const Home = () => {
 
   return (
     <div className="App">
-      <h1>Product Comparison</h1>
+      <h1 className="text-3xl">Product Comparison</h1>
       <div style={{ display: "flex", gap: "3px" }}>
         {products.map((product) => (
           <ProductCard
