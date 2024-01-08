@@ -7,7 +7,7 @@ const products = [
   {
     id: 1,
     name: "TV Samsung",
-    quantity: 5,
+    quantity: 58,
     price: 1500,
     specifications: ["55 inch", "Hdmi", "Smart TV"],
     image:
@@ -16,7 +16,7 @@ const products = [
   {
     id: 2,
     name: "TV LG",
-    quantity: 22,
+    quantity: 79,
     price: 400,
     specifications: ["42 inch", "Hdmi", "Smart TV"],
     image:
@@ -25,7 +25,7 @@ const products = [
   {
     id: 3,
     name: "TV LG",
-    quantity: 10,
+    quantity: 100,
     price: 155,
     specifications: ["32 inch", "Hdmi", "Smart TV"],
     image:
@@ -34,7 +34,7 @@ const products = [
   {
     id: 4,
     name: "TV Samsung",
-    quantity: 15,
+    quantity: 95,
     price: 350,
     specifications: ["32 inch", "Hdmi", "Smart TV"],
     image:
@@ -43,7 +43,7 @@ const products = [
   {
     id: 5,
     name: "TV Samsung",
-    quantity: 5,
+    quantity: 85,
     price: 755,
     specifications: ["52 inch", "Hdmi", "Smart TV"],
     image:

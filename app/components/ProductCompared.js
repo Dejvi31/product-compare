@@ -1,21 +1,87 @@
-import React, {useRef, useEffect} from "react";
+import React, {useRef, useEffect, useState} from "react";
+import { Chart, registerables } from 'chart.js';
+import { Bar } from "react-chartjs-2";
 
 const ProductCompared = ({ comparedProducts, onClose, products }) => {
   const popupRef = useRef(null)
+  Chart.register(...registerables);
+  const [chartData, setChartData] = useState({
+    labels: [],
+    datasets: [
+      {
+        label: "Price Comparison",
+        backgroundColor: "rgba(75,192,192,0.4)",
+        borderColor: "rgba(75,192,192,1)",
+        borderWidth: 1,
+        hoverBackgroundColor: "rgba(75,192,192,0.6)",
+        hoverBorderColor: "rgba(75,192,192,1)",
+        data: [],
+      },
+      {
+        label: "Quantity Comparison",
+        backgroundColor: "rgba(192,75,192,0.4)",
+        borderColor: "rgba(192,75,192,1)",
+        borderWidth: 1,
+        hoverBackgroundColor: "rgba(192,75,192,0.6)",
+        hoverBorderColor: "rgba(192,75,192,1)",
+        data: [],
+      },
+    ],
+  });
 
-  useEffect(()=> {
-    const handleClickOutside = (event) => {
-      if(popupRef.current && !popupRef.current.contains(event.target)) {
-        onClose();
-      }
+  useEffect(() => {
+    const prices = comparedProducts.map((productId) => {
+      const product = products.find((p) => p.id === productId);
+      return product ? product.price : 0;
+    });
+
+    const quantities = comparedProducts.map((productId) => {
+      const product = products.find((p) => p.id === productId);
+      return product ? product.quantity : 0;
+    });
+
+    setChartData((prevChartData) => ({
+      ...prevChartData,
+      labels: comparedProducts.map((productId) => {
+        const product = products.find((p) => p.id === productId);
+        return product ? product.name : "";
+      }),
+      datasets: [
+        {
+          ...prevChartData.datasets[0],
+          data: prices,
+        },
+        {
+          ...prevChartData.datasets[1],
+          data: quantities,
+        },
+      ],
+    }));
+  }, [comparedProducts, products]);
+
+  const handleClickOutside = (event) => {
+    if(popupRef.current && !popupRef.current.contains(event.target)) {
+      onClose();
     }
+  }
+  useEffect(()=> {
     window.addEventListener("click", handleClickOutside);
-
     return () => {
       window.removeEventListener("click", handleClickOutside)
     }
   },[onClose])
 
+  const options = {
+    scales: {
+      x: {
+        type: 'category', 
+        labels: chartData.labels,
+      },
+      y: {
+        beginAtZero: true,
+      },
+    },
+  };
 
   return (
     <div className="popup">
@@ -67,6 +133,7 @@ const ProductCompared = ({ comparedProducts, onClose, products }) => {
             })}
           </tbody>
         </table>
+        <Bar data={chartData} options={options}/>
         <button onClick={onClose} >Close</button>
       </div>
     </div>
