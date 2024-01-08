@@ -13,12 +13,14 @@ const ProductCard = ({ product, onSelect, selected }) => {
       }}
       onClick={() => onSelect(id)}
     >
-      <h3>{name}</h3>
+      <div className='flex justify-between'>
+       <h3>{name}</h3>
+       {selected && <p>✅</p>}
+      </div>
       <img src={image} alt={`${name} Image`} style={{ width: '100%' }} />
-      <p>Quantity: {quantity}</p>
-      <p>Price: ${price}</p>
-      <p>Specifications: {specifications.join(', ')}</p>
-      {selected && <p>✅</p>}
+      <p className='font-semibold'>Quantity: <span className='font-light'>{quantity}</span></p>
+      <p className='font-semibold'>Price: <span className='font-light'>${price}</span></p>
+      <p className='font-semibold'>Specifications: <span className='font-light'>{specifications.join(', ')}</span></p>
     </div>
   );
 };

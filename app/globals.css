@@ -45,18 +45,6 @@ button {
   text-align: center;
 }
 
-.popup h2 {
-  color: rgb(var(--foreground-rgb));
-}
-
-.popup ul {
-  list-style: none;
-  padding: 0;
-}
-
-.popup li {
-  margin-bottom: 10px;
-}
 
 .popup button {
   background-color: rgb(40, 168, 253);

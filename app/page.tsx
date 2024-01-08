@@ -67,9 +67,10 @@ const Home = () => {
     });
   };
 
-  const handleCompare = () => {
+  const handleCompare = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (selectedProducts.length >= 2) {
       setShowPopup(true);
+      event.stopPropagation();
     } else {
       console.log("Please select at least 2 products to compare.");
     }
