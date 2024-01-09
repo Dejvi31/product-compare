@@ -119,7 +119,21 @@ const Home = () => {
           {sortBy === "quantity" && sortOrder === "asc" ? "↑" : "↓"}
         </button>
       </div>
-      <div style={{ display: "flex", gap: "3px" }}>
+      {selectedProducts.length >= 2 && (
+        <button
+          className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l"
+          onClick={handleCompare}
+        >
+          Compare
+        </button>
+      )}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr 1fr",
+          gap: "1rem",
+        }}
+      >
         {sortedProducts.map((product) => (
           <ProductCard
             key={product.id}
@@ -129,14 +143,6 @@ const Home = () => {
           />
         ))}
       </div>
-      {selectedProducts.length >= 2 && (
-        <button
-          className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l"
-          onClick={handleCompare}
-        >
-          Compare
-        </button>
-      )}
       {showPopup && (
         <ProductCompared
           comparedProducts={selectedProducts}

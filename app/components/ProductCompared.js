@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Chart, registerables } from "chart.js";
-import { Bar } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 
 const ProductCompared = ({ comparedProducts, onClose, products }) => {
   const popupRef = useRef(null);
@@ -137,7 +137,7 @@ const ProductCompared = ({ comparedProducts, onClose, products }) => {
             })}
           </tbody>
         </table>
-        <Bar data={chartData} options={options} />
+        <Line data={chartData} options={options} />
         <button
           className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
           onClick={onClose}
