@@ -1,88 +1,53 @@
-import React, { useRef, useEffect, useState } from "react";
-import { Chart, registerables } from "chart.js";
-import { Line } from "react-chartjs-2";
+import React, { useRef, useEffect } from "react";
+import ChartComponent from "../filters/ChartComponent";
 
-const ProductCompared = ({ comparedProducts, onClose, products }) => {
+const ProductCompared = ({ comparedProducts, products, onClose }) => {
   const popupRef = useRef(null);
-  Chart.register(...registerables);
-  const [chartData, setChartData] = useState({
-    labels: [],
-    datasets: [
-      {
-        label: "Price Comparison",
-        backgroundColor: "rgba(75,192,192,0.4)",
-        borderColor: "rgba(75,192,192,1)",
-        borderWidth: 1,
-        hoverBackgroundColor: "rgba(75,192,192,0.6)",
-        hoverBorderColor: "rgba(75,192,192,1)",
-        data: [],
-      },
-      {
-        label: "Quantity Comparison",
-        backgroundColor: "rgba(192,75,192,0.4)",
-        borderColor: "rgba(192,75,192,1)",
-        borderWidth: 1,
-        hoverBackgroundColor: "rgba(192,75,192,0.6)",
-        hoverBorderColor: "rgba(192,75,192,1)",
-        data: [],
-      },
-    ],
+
+  const chartLabels = comparedProducts.map((productId) => {
+    const product = products.find((p) => p.id === productId);
+    return product ? product.name : "";
   });
 
-  useEffect(() => {
-    const prices = comparedProducts.map((productId) => {
-      const product = products.find((p) => p.id === productId);
-      return product ? product.price : 0;
-    });
-
-    const quantities = comparedProducts.map((productId) => {
-      const product = products.find((p) => p.id === productId);
-      return product ? product.quantity : 0;
-    });
-
-    setChartData((prevChartData) => ({
-      ...prevChartData,
-      labels: comparedProducts.map((productId) => {
+  const chartDatasets = [
+    {
+      label: "Price Comparison",
+      backgroundColor: "rgba(75,192,192,0.4)",
+      borderColor: "rgba(75,192,192,1)",
+      borderWidth: 1,
+      hoverBackgroundColor: "rgba(75,192,192,0.6)",
+      hoverBorderColor: "rgba(75,192,192,1)",
+      data: comparedProducts.map((productId) => {
         const product = products.find((p) => p.id === productId);
-        return product ? product.name : "";
+        return product ? product.price : 0;
       }),
-      datasets: [
-        {
-          ...prevChartData.datasets[0],
-          data: prices,
-        },
-        {
-          ...prevChartData.datasets[1],
-          data: quantities,
-        },
-      ],
-    }));
-  }, [comparedProducts, products]);
+    },
+    {
+      label: "Quantity Comparison",
+      backgroundColor: "rgba(192,75,192,0.4)",
+      borderColor: "rgba(192,75,192,1)",
+      borderWidth: 1,
+      hoverBackgroundColor: "rgba(192,75,192,0.6)",
+      hoverBorderColor: "rgba(192,75,192,1)",
+      data: comparedProducts.map((productId) => {
+        const product = products.find((p) => p.id === productId);
+        return product ? product.quantity : 0;
+      }),
+    },
+  ];
 
   const handleClickOutside = (event) => {
     if (popupRef.current && !popupRef.current.contains(event.target)) {
       onClose();
     }
   };
+
   useEffect(() => {
     window.addEventListener("click", handleClickOutside);
     return () => {
       window.removeEventListener("click", handleClickOutside);
     };
   }, [onClose]);
-
-  const options = {
-    scales: {
-      x: {
-        type: "category",
-        labels: chartData.labels,
-      },
-      y: {
-        beginAtZero: true,
-      },
-    },
-  };
-
   return (
     <div className="popup">
       <div className="popup-content" ref={popupRef}>
@@ -137,7 +102,7 @@ const ProductCompared = ({ comparedProducts, onClose, products }) => {
             })}
           </tbody>
         </table>
-        <Line data={chartData} options={options} />
+        <ChartComponent labels={chartLabels} datasets={chartDatasets} />
         <button
           className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
           onClick={onClose}

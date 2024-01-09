@@ -1,7 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import ProductCard from "./components/ProductCard";
-import ProductCompared from "./components/ProductCompared";
+import ProductCard from "./components/products/ProductCard";
+import ProductCompared from "./components/products/ProductCompared";
+import Sorting from "./components/filters/Sorting";
+import Compare from "./components/buttons/Compare";
 
 const products = [
   {
@@ -50,7 +52,6 @@ const products = [
       "https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/71RxCmvnrbL._AC_UF1000,1000_QL80_.jpg",
   },
 ];
-
 const Home = () => {
   const [selectedProducts, setSelectedProducts] = useState<number[]>([]);
   const [showPopup, setShowPopup] = useState(false);
@@ -65,17 +66,6 @@ const Home = () => {
       setSortOrder("asc");
     }
   };
-
-  const sortedProducts = [...products].sort((a, b) => {
-    if (sortBy === "price") {
-      return sortOrder === "asc" ? a.price - b.price : b.price - a.price;
-    } else if (sortBy === "quantity") {
-      return sortOrder === "asc"
-        ? a.quantity - b.quantity
-        : b.quantity - a.quantity;
-    }
-    return 0;
-  });
 
   const handleProductSelect = (productId: number) => {
     setSelectedProducts((prev) => {
@@ -102,31 +92,24 @@ const Home = () => {
     setShowPopup(false);
   };
 
+  const sortedProducts = [...products].sort((a, b) => {
+    if (sortBy === "price") {
+      return sortOrder === "asc" ? a.price - b.price : b.price - a.price;
+    } else if (sortBy === "quantity") {
+      return sortOrder === "asc"
+        ? a.quantity - b.quantity
+        : b.quantity - a.quantity;
+    }
+    return 0;
+  });
+
   return (
     <div className="App">
-      <div className="flex justify-end py-1">
-        <button
-          className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l"
-          onClick={() => handleSort("price")}
-        >
-          Sort by Price {sortBy === "price" && sortOrder === "asc" ? "↑" : "↓"}
-        </button>
-        <button
-          className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r"
-          onClick={() => handleSort("quantity")}
-        >
-          Sort by Quantity{" "}
-          {sortBy === "quantity" && sortOrder === "asc" ? "↑" : "↓"}
-        </button>
-      </div>
-      {selectedProducts.length >= 2 && (
-        <button
-          className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l"
-          onClick={handleCompare}
-        >
-          Compare
-        </button>
-      )}
+      <Sorting handleSort={handleSort} sortBy={sortBy} sortOrder={sortOrder} />
+      <Compare
+        handleCompare={handleCompare}
+        selectedProducts={selectedProducts}
+      />
       <div
         style={{
           display: "grid",
