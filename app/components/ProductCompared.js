@@ -1,9 +1,9 @@
-import React, {useRef, useEffect, useState} from "react";
-import { Chart, registerables } from 'chart.js';
+import React, { useRef, useEffect, useState } from "react";
+import { Chart, registerables } from "chart.js";
 import { Bar } from "react-chartjs-2";
 
 const ProductCompared = ({ comparedProducts, onClose, products }) => {
-  const popupRef = useRef(null)
+  const popupRef = useRef(null);
   Chart.register(...registerables);
   const [chartData, setChartData] = useState({
     labels: [],
@@ -60,21 +60,21 @@ const ProductCompared = ({ comparedProducts, onClose, products }) => {
   }, [comparedProducts, products]);
 
   const handleClickOutside = (event) => {
-    if(popupRef.current && !popupRef.current.contains(event.target)) {
+    if (popupRef.current && !popupRef.current.contains(event.target)) {
       onClose();
     }
-  }
-  useEffect(()=> {
+  };
+  useEffect(() => {
     window.addEventListener("click", handleClickOutside);
     return () => {
-      window.removeEventListener("click", handleClickOutside)
-    }
-  },[onClose])
+      window.removeEventListener("click", handleClickOutside);
+    };
+  }, [onClose]);
 
   const options = {
     scales: {
       x: {
-        type: 'category', 
+        type: "category",
         labels: chartData.labels,
       },
       y: {
@@ -117,7 +117,11 @@ const ProductCompared = ({ comparedProducts, onClose, products }) => {
                     {product?.name}
                   </td>
                   <td className="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
-                  <img src={product?.image} alt={`${product?.name} Image`} style={{ width: '100%' }} />
+                    <img
+                      src={product?.image}
+                      alt={`${product?.name} Image`}
+                      style={{ width: "100%" }}
+                    />
                   </td>
                   <td className="border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
                     {product?.quantity}
@@ -133,8 +137,13 @@ const ProductCompared = ({ comparedProducts, onClose, products }) => {
             })}
           </tbody>
         </table>
-        <Bar data={chartData} options={options}/>
-        <button onClick={onClose} >Close</button>
+        <Bar data={chartData} options={options} />
+        <button
+          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+          onClick={onClose}
+        >
+          Close
+        </button>
       </div>
     </div>
   );

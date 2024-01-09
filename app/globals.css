@@ -17,13 +17,6 @@
   }
 }
 
-button {
-  background-color: rgb(40, 168, 253);
-  color: white;
-  padding: 1rem;
-  border-radius: 1rem;
-}
-
 .popup {
   position: fixed;
   top: 0;
@@ -43,13 +36,4 @@ button {
   max-width: 600px;
   width: 100%;
   text-align: center;
-}
-
-
-.popup button {
-  background-color: rgb(40, 168, 253);
-  color: white;
-  padding: 1rem;
-  border-radius: 1rem;
-  cursor: pointer;
 }
