@@ -54,7 +54,7 @@ const products = [
 const Home = () => {
   const [selectedProducts, setSelectedProducts] = useState<number[]>([]);
   const [showPopup, setShowPopup] = useState(false);
-  const [sortBy, setSortBy] = useState("");
+  const [sortBy, setSortBy] = useState("price");
   const [sortOrder, setSortOrder] = useState("asc");
 
   const handleSort = (type: string) => {
