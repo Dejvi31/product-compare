@@ -2,15 +2,15 @@
 import React, { useState } from "react";
 import Products from "./components/data/Products";
 import ProductCard from "./components/products/ProductCard";
-import ProductCompared from "./components/products/ProductCompared";
 import Sorting from "./components/filters/Sorting";
 import Compare from "./components/buttons/Compare";
+import { useRouter } from "next/navigation";
 
 const Home = () => {
   const [selectedProducts, setSelectedProducts] = useState<number[]>([]);
-  const [showPopup, setShowPopup] = useState(false);
   const [sortBy, setSortBy] = useState("price");
   const [sortOrder, setSortOrder] = useState("asc");
+  const router = useRouter();
 
   const handleSort = (type: string) => {
     if (type === sortBy) {
@@ -33,17 +33,18 @@ const Home = () => {
     });
   };
 
-  const handleCompare = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleCompare = () => {
     if (selectedProducts.length >= 2) {
-      setShowPopup(true);
-      event.stopPropagation();
+      // Save selectedProducts to Local Storage
+      localStorage.setItem(
+        "selectedProducts",
+        JSON.stringify(selectedProducts)
+      );
+
+      router.push("/compare");
     } else {
       console.log("Please select at least 2 products to compare.");
     }
-  };
-
-  const handleClosePopup = () => {
-    setShowPopup(false);
   };
 
   const sortedProducts = [...Products].sort((a, b) => {
@@ -80,13 +81,6 @@ const Home = () => {
           />
         ))}
       </div>
-      {showPopup && (
-        <ProductCompared
-          comparedProducts={selectedProducts}
-          onClose={handleClosePopup}
-          products={Products}
-        />
-      )}
     </div>
   );
 };

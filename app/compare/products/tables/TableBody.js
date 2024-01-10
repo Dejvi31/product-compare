@@ -11,7 +11,11 @@ const TableBody = ({ comparedProducts, products }) => (
         <tr key={index}>
           <TableBodyCell>{name}</TableBodyCell>
           <TableBodyCell>
-            <img src={image} alt={`${name} Image`} style={{ width: "100%" }} />
+            <img
+              src={image}
+              alt={`${name} Image`}
+              className="w-16 h-16 object-cover"
+            />
           </TableBodyCell>
           <TableBodyCell>{quantity}</TableBodyCell>
           <TableBodyCell>${price}</TableBodyCell>

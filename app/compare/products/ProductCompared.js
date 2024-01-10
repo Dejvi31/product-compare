@@ -1,10 +1,9 @@
-import React, { useRef, useEffect } from "react";
-import ChartComponent from "../filters/ChartComponent";
-import PopupForm from "../forms/PopupForm";
+import React from "react";
+import ChartComponent from "./ChartComponent";
+import TableHeader from "./tables/TableHeader";
+import TableBody from "./tables/TableBody";
 
-const ProductCompared = ({ comparedProducts, products, onClose }) => {
-  const popupRef = useRef(null);
-
+const ProductCompared = ({ comparedProducts, products }) => {
   const chartLabels = comparedProducts.map((productId) => {
     const product = products.find((p) => p.id === productId);
     return product ? product.name : "";
@@ -37,30 +36,16 @@ const ProductCompared = ({ comparedProducts, products, onClose }) => {
     },
   ];
 
-  const handleClickOutside = (event) => {
-    if (popupRef.current && !popupRef.current.contains(event.target)) {
-      onClose();
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("click", handleClickOutside);
-    return () => {
-      window.removeEventListener("click", handleClickOutside);
-    };
-  }, [onClose]);
   return (
-    <div className="popup">
-      <div className="popup-content" ref={popupRef}>
+    <div>
+      <div>
         <h2 className="text-2xl">Compared Products</h2>
-        <PopupForm comparedProducts={comparedProducts} products={products} />
+        <table className="border-collapse w-full border border-slate-400 dark:border-slate-500 bg-white dark:bg-slate-800 text-sm shadow-sm">
+          <TableHeader />
+          <TableBody comparedProducts={comparedProducts} products={products} />
+        </table>
+
         <ChartComponent labels={chartLabels} datasets={chartDatasets} />
-        <button
-          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-          onClick={onClose}
-        >
-          Close
-        </button>
       </div>
     </div>
   );

@@ -44,6 +44,51 @@ const products = [
     image:
       "https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/71RxCmvnrbL._AC_UF1000,1000_QL80_.jpg",
   },
+  {
+    id: 6,
+    name: "Iphone 13",
+    quantity: 85,
+    price: 755,
+    specifications: ["52 inch", "Hdmi", "Smart TV"],
+    image:
+      "https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/71RxCmvnrbL._AC_UF1000,1000_QL80_.jpg",
+  },
+  {
+    id: 7,
+    name: "Iphone 14 Pro Max",
+    quantity: 85,
+    price: 755,
+    specifications: ["52 inch", "Hdmi", "Smart TV"],
+    image:
+      "https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/71RxCmvnrbL._AC_UF1000,1000_QL80_.jpg",
+  },
+  {
+    id: 8,
+    name: "Samsung s22 Ultra",
+    quantity: 85,
+    price: 755,
+    specifications: ["52 inch", "Hdmi", "Smart TV"],
+    image:
+      "https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/71RxCmvnrbL._AC_UF1000,1000_QL80_.jpg",
+  },
+  {
+    id: 9,
+    name: "Iphone 15 Pro Max",
+    quantity: 85,
+    price: 755,
+    specifications: ["52 inch", "Hdmi", "Smart TV"],
+    image:
+      "https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/71RxCmvnrbL._AC_UF1000,1000_QL80_.jpg",
+  },
+  {
+    id: 10,
+    name: "Samsung s23 Ultra",
+    quantity: 85,
+    price: 755,
+    specifications: ["52 inch", "Hdmi", "Smart TV"],
+    image:
+      "https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/71RxCmvnrbL._AC_UF1000,1000_QL80_.jpg",
+  },
 ];
 
 export default products;

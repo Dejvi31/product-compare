@@ -1,24 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { Chart, registerables } from "chart.js";
 import { Line } from "react-chartjs-2";
 
 const ChartComponent = ({ labels, datasets }) => {
+  const chartRef = useRef(null);
   Chart.register(...registerables);
-  const [chartData, setChartData] = useState({
-    labels: [],
-    datasets: datasets,
-  });
 
   useEffect(() => {
-    setChartData((prevChartData) => ({
-      ...prevChartData,
-      labels: labels,
-    }));
-  }, [labels]);
+    if (chartRef.current && chartRef.current.chartInstance) {
+      const chart = chartRef.current.chartInstance;
+      chart.data.labels = labels;
+      chart.data.datasets = datasets;
+      chart.update();
+    }
+  }, [labels, datasets]);
 
   return (
     <Line
-      data={chartData}
+      ref={chartRef}
+      data={{
+        labels: labels,
+        datasets: datasets,
+      }}
       options={{
         scales: {
           x: {
