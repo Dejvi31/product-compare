@@ -39,8 +39,8 @@ const ProductCompared = ({ comparedProducts, products }) => {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-2">
-      <div className="mb-2">
+    <div className="container mx-auto px-4 py-2 flex">
+      <div className="mb-2 w-2/4">
         <button
           className="text-gray-500 hover:underline"
           onClick={() => router.back()}
@@ -53,7 +53,11 @@ const ProductCompared = ({ comparedProducts, products }) => {
           <TableBody comparedProducts={comparedProducts} products={products} />
         </table>
 
-        <ChartComponent labels={chartLabels} datasets={chartDatasets} />
+        <ChartComponent
+          className="w-1/4"
+          labels={chartLabels}
+          datasets={chartDatasets}
+        />
       </div>
     </div>
   );
