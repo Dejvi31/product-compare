@@ -2,9 +2,10 @@ import React from "react";
 import ChartComponent from "./ChartComponent";
 import TableHeader from "./tables/TableHeader";
 import TableBody from "./tables/TableBody";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const ProductCompared = ({ comparedProducts, products }) => {
+  const router = useRouter();
   const chartLabels = comparedProducts.map((productId) => {
     const product = products.find((p) => p.id === productId);
     return product ? product.name : "";
@@ -40,9 +41,12 @@ const ProductCompared = ({ comparedProducts, products }) => {
   return (
     <div className="container mx-auto px-4 py-2">
       <div className="mb-2">
-        <Link href={"/"} className="text-gray-500 hover:underline">
-          Go Back
-        </Link>
+        <button
+          className="text-gray-500 hover:underline"
+          onClick={() => router.back()}
+        >
+          Go back
+        </button>
         <h2 className="text-2xl text-center">Compared Products</h2>
         <table className="border-collapse w-full border border-slate-400 dark:border-slate-500 bg-white dark:bg-slate-800 text-sm shadow-sm">
           <TableHeader />

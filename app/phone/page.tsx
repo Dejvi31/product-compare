@@ -1,7 +1,13 @@
 import React from "react";
+import products from "../data/Products";
+import ProductPage from "../components/products/ProductsPage";
 
-const page = () => {
-  return <div>Phone</div>;
+const PhonePage = () => {
+  const phoneProducts = products.filter(
+    (product) => product.category === "phone"
+  );
+
+  return <ProductPage products={phoneProducts} category="Phone" />;
 };
 
-export default page;
+export default PhonePage;
