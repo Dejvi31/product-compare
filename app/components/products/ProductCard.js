@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 const ProductCard = ({ product, onSelect, selected }) => {
   const { id, name, quantity, price, specifications, image } = product;
@@ -14,7 +15,13 @@ const ProductCard = ({ product, onSelect, selected }) => {
         <h3>{name}</h3>
         {selected && <p>✅</p>}
       </div>
-      <img src={image} alt={`${name} Image`} style={{ width: "100%" }} />
+      <Image
+        className="w-34 h-34 object-cover"
+        src={image}
+        alt={`${name} Image`}
+        width={300}
+        height={200}
+      />{" "}
       <p className="font-semibold">
         Quantity: <span className="font-light">{quantity}</span>
       </p>

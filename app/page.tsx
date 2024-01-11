@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import Products from "./components/data/Products";
+import Products from "./data/Products";
 import ProductCard from "./components/products/ProductCard";
 import Sorting from "./components/filters/Sorting";
 import Compare from "./components/buttons/Compare";

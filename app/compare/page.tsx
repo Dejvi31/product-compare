@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import ProductCompared from "./products/ProductCompared";
-import products from "../components/data/Products";
+import products from "../data/Products";
 
 const page = () => {
   const [selectedProducts, setSelectedProducts] = useState<number[]>([]);
