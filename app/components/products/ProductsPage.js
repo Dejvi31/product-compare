@@ -1,20 +1,19 @@
 "use client";
 import React, { useState } from "react";
-import products from "./data/Products";
-import ProductCard from "./components/products/ProductCard";
-import Sorting from "./components/buttons/Sorting";
-import Compare from "./components/buttons/Compare";
-import Search from "./components/filters/Search";
+import ProductList from "./ProductList";
+import Sorting from "../buttons/Sorting";
+import Compare from "../buttons/Compare";
+import Search from "../filters/Search";
 import { useRouter } from "next/navigation";
 
-const Home = () => {
-  const [selectedProducts, setSelectedProducts] = useState<number[]>([]);
+const ProductPage = ({ products, category }) => {
+  const [selectedProducts, setSelectedProducts] = useState([]);
   const [sortBy, setSortBy] = useState("price");
   const [sortOrder, setSortOrder] = useState("asc");
   const [search, setSearch] = useState("");
   const router = useRouter();
 
-  const handleSort = (type: string) => {
+  const handleSort = (type) => {
     if (type === sortBy) {
       setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
     } else {
@@ -23,7 +22,7 @@ const Home = () => {
     }
   };
 
-  const handleProductSelect = (productId: number) => {
+  const handleProductSelect = (productId) => {
     setSelectedProducts((prev) => {
       const index = prev.indexOf(productId);
       if (index !== -1) {
@@ -42,14 +41,15 @@ const Home = () => {
         "selectedProducts",
         JSON.stringify(selectedProducts)
       );
-
+      // Redirect to the compare page
+      // You can customize the route based on your application structure
       router.push("/compare");
     } else {
       console.log("Please select at least 2 products to compare.");
     }
   };
 
-  const sortedProducts = [...products].sort((a, b) => {
+  const sortedProducts = products.sort((a, b) => {
     if (sortBy === "price") {
       return sortOrder === "asc" ? a.price - b.price : b.price - a.price;
     } else if (sortBy === "quantity") {
@@ -63,15 +63,14 @@ const Home = () => {
   const filteredProducts = sortedProducts.filter((product) =>
     product.name.toLowerCase().includes(search.toLowerCase())
   );
+
   return (
     <div className="App">
       <div className="mb-4">
         <Search
           value={search}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setSearch(e.target.value)
-          }
-          placeholder="Search for any product..."
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder={`Search for any ${category} product...`}
         />
       </div>
       <Sorting handleSort={handleSort} sortBy={sortBy} sortOrder={sortOrder} />
@@ -80,18 +79,13 @@ const Home = () => {
         selectedProducts={selectedProducts}
         products={products}
       />
-      <div className="grid grid-cols-4 gap-4">
-        {filteredProducts.map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            onSelect={handleProductSelect}
-            selected={selectedProducts.includes(product.id)}
-          />
-        ))}
-      </div>
+      <ProductList
+        sortedProducts={filteredProducts}
+        handleProductSelect={handleProductSelect}
+        selectedProducts={selectedProducts}
+      />
     </div>
   );
 };
 
-export default Home;
+export default ProductPage;

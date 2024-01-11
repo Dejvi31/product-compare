@@ -1,7 +1,6 @@
-// components/SearchInput.js
 import React from "react";
 
-const SearchInput = ({ value, onChange, placeholder }) => {
+const Search = ({ value, onChange, placeholder }) => {
   return (
     <input
       type="text"
@@ -14,4 +13,4 @@ const SearchInput = ({ value, onChange, placeholder }) => {
   );
 };
 
-export default SearchInput;
+export default Search;

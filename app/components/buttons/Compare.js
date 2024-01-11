@@ -4,13 +4,13 @@ const Compare = ({ handleCompare, selectedProducts, products }) => {
   return (
     (selectedProducts.length >= 2 && (
       <div className="flex items-center">
-        <div className="fixed bottom-7 right-4 text-gray-500">
+        <div className="fixed bottom-7 right-4 text-gray-800">
           {selectedProducts.map((productId, index) => {
             const product = products.find((p) => p.id === productId);
             return (
-              <span key={productId}>
+              <span className="text-xs" key={productId}>
                 {product?.name}
-                {index !== selectedProducts.length - 1 && ", "}
+                {index !== selectedProducts.length - 1 && "⇆"}
               </span>
             );
           })}
