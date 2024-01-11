@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Products from "./data/Products";
 import ProductCard from "./components/products/ProductCard";
-import Sorting from "./components/filters/Sorting";
+import Sorting from "./components/buttons/Sorting";
 import Compare from "./components/buttons/Compare";
 import { useRouter } from "next/navigation";
 
