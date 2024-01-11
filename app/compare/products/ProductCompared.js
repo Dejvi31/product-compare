@@ -3,6 +3,7 @@ import ChartComponent from "./ChartComponent";
 import TableHeader from "./tables/TableHeader";
 import TableBody from "./tables/TableBody";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const ProductCompared = ({ comparedProducts, products }) => {
   const router = useRouter();
@@ -41,12 +42,9 @@ const ProductCompared = ({ comparedProducts, products }) => {
   return (
     <div className="container mx-auto px-4 py-2 flex">
       <div className="mb-2 w-2/4">
-        <button
-          className="text-gray-500 hover:underline"
-          onClick={() => router.back()}
-        >
+        <Link className="text-gray-500 hover:underline" href="/">
           Go back
-        </button>
+        </Link>
         <h2 className="text-2xl text-center">Compared Products</h2>
         <table className="border-collapse w-full border border-slate-400 dark:border-slate-500 bg-white dark:bg-slate-800 text-sm shadow-sm">
           <TableHeader />

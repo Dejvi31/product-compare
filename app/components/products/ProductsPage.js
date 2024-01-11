@@ -41,8 +41,7 @@ const ProductPage = ({ products, category }) => {
         "selectedProducts",
         JSON.stringify(selectedProducts)
       );
-      // Redirect to the compare page
-      // You can customize the route based on your application structure
+
       router.push("/compare");
     } else {
       console.log("Please select at least 2 products to compare.");
