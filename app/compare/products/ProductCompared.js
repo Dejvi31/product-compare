@@ -2,6 +2,7 @@ import React from "react";
 import ChartComponent from "./ChartComponent";
 import TableHeader from "./tables/TableHeader";
 import TableBody from "./tables/TableBody";
+import Link from "next/link";
 
 const ProductCompared = ({ comparedProducts, products }) => {
   const chartLabels = comparedProducts.map((productId) => {
@@ -37,9 +38,12 @@ const ProductCompared = ({ comparedProducts, products }) => {
   ];
 
   return (
-    <div>
-      <div>
-        <h2 className="text-2xl">Compared Products</h2>
+    <div className="container mx-auto px-4 py-2">
+      <div className="mb-2">
+        <Link href={"/"} className="text-gray-500 hover:underline">
+          Go Back
+        </Link>
+        <h2 className="text-2xl text-center">Compared Products</h2>
         <table className="border-collapse w-full border border-slate-400 dark:border-slate-500 bg-white dark:bg-slate-800 text-sm shadow-sm">
           <TableHeader />
           <TableBody comparedProducts={comparedProducts} products={products} />
