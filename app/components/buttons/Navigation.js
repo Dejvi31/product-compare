@@ -13,7 +13,7 @@ const Navigation = ({ categories }) => {
     <div>
       {categories.map((category) => (
         <button
-          className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r"
+          className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold mx-1 py-2 px-4 rounded-r"
           key={category}
           onClick={() => navigateToCategory(category)}
         >

@@ -8,7 +8,7 @@ const TableBody = ({ comparedProducts, products }) => (
         products.find((p) => p.id === productId) || {};
 
       return (
-        <tr key={index}>
+        <tr key={index} className="">
           <TableBodyCell>{name}</TableBodyCell>
           <TableBodyCell>
             <img

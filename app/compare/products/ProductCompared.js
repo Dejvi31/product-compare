@@ -40,22 +40,24 @@ const ProductCompared = ({ comparedProducts, products }) => {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-2 flex">
-      <div className="mb-2 w-2/4">
-        <Link className="text-gray-500 hover:underline" href="/">
-          Go back
-        </Link>
-        <h2 className="text-2xl text-center">Compared Products</h2>
-        <table className="border-collapse w-full border border-slate-400 dark:border-slate-500 bg-white dark:bg-slate-800 text-sm shadow-sm">
-          <TableHeader />
-          <TableBody comparedProducts={comparedProducts} products={products} />
-        </table>
-
-        <ChartComponent
-          className="w-1/4"
-          labels={chartLabels}
-          datasets={chartDatasets}
-        />
+    <div>
+      <Link className="text-gray-500 hover:underline" href="/">
+        Go back
+      </Link>
+      <h2 className="text-2xl text-center">Compared Products</h2>
+      <div className="flex">
+        <div className="w-2/3">
+          <table className="border-collapse w-full border border-slate-400 dark:border-slate-500 bg-white dark:bg-slate-800 text-sm shadow-sm">
+            <TableHeader />
+            <TableBody
+              comparedProducts={comparedProducts}
+              products={products}
+            />
+          </table>
+        </div>
+        <div className="w-1/3">
+          <ChartComponent labels={chartLabels} datasets={chartDatasets} />
+        </div>
       </div>
     </div>
   );

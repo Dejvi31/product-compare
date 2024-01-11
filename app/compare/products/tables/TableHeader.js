@@ -8,7 +8,7 @@ const TableHeader = () => (
       <TableHeaderCell width="1/5" label="Image" />
       <TableHeaderCell width="1/5" label="Quantity" />
       <TableHeaderCell width="1/5" label="Price" />
-      <TableHeaderCell width="2/5" label="Specifications" />
+      <TableHeaderCell width="1/5" label="Specifications" />
     </tr>
   </thead>
 );

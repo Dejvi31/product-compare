@@ -5,9 +5,9 @@ const ProductCard = ({ product, onSelect, selected }) => {
 
   return (
     <div
-      className={`max-w-md ${
-        selected ? "border-2 border-blue-500" : "border"
-      } p-4 m-2 cursor-pointer`}
+      className={`max-w-md border p-4 m-2 cursor-pointer ${
+        selected ? "border-blue-500" : ""
+      }`}
       onClick={() => onSelect(id)}
     >
       <div className="flex justify-between">
