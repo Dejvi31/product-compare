@@ -10,6 +10,7 @@ const Home = () => {
   const [selectedProducts, setSelectedProducts] = useState<number[]>([]);
   const [sortBy, setSortBy] = useState("price");
   const [sortOrder, setSortOrder] = useState("asc");
+  const [search, setSearch] = useState("");
   const router = useRouter();
 
   const handleSort = (type: string) => {
@@ -58,8 +59,19 @@ const Home = () => {
     return 0;
   });
 
+  const filteredProducts = sortedProducts.filter((product) =>
+    product.name.toLowerCase().includes(search.toLowerCase())
+  );
   return (
     <div className="App">
+      <div className="mb-4">
+        <input
+          type="text"
+          placeholder="Search products ..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
       <Sorting handleSort={handleSort} sortBy={sortBy} sortOrder={sortOrder} />
       <Compare
         handleCompare={handleCompare}
@@ -67,7 +79,7 @@ const Home = () => {
         products={Products}
       />
       <div className="grid grid-cols-4 gap-4">
-        {sortedProducts.map((product) => (
+        {filteredProducts.map((product) => (
           <ProductCard
             key={product.id}
             product={product}
