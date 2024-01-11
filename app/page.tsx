@@ -64,14 +64,9 @@ const Home = () => {
       <Compare
         handleCompare={handleCompare}
         selectedProducts={selectedProducts}
+        products={Products}
       />
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr 1fr",
-          gap: "1rem",
-        }}
-      >
+      <div className="grid grid-cols-4 gap-4">
         {sortedProducts.map((product) => (
           <ProductCard
             key={product.id}
