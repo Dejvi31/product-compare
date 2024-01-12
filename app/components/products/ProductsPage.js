@@ -100,11 +100,17 @@ const ProductPage = ({ products, category }) => {
         selectedProducts={selectedProducts}
         products={products}
       />
-      <ProductList
-        sortedProducts={filteredProducts}
-        handleProductSelect={handleProductSelect}
-        selectedProducts={selectedProducts}
-      />
+      {filteredProducts.length > 0 ? (
+        <ProductList
+          sortedProducts={filteredProducts}
+          handleProductSelect={handleProductSelect}
+          selectedProducts={selectedProducts}
+        />
+      ) : (
+        <div className="text-gray-500 mt-4">
+          No Product Found With That Name
+        </div>
+      )}
     </div>
   );
 };

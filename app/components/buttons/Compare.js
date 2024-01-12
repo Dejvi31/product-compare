@@ -4,7 +4,7 @@ const Compare = ({ handleCompare, selectedProducts, products }) => {
   return (
     (selectedProducts.length >= 2 && (
       <div className="flex items-center">
-        <div className="fixed bottom-7 right-4 text-gray-800">
+        <div className="fixed bottom-7 right-4 text-gray-800 bg-white">
           {selectedProducts.map((productId, index) => {
             const product = products.find((p) => p.id === productId);
             return (
