@@ -5,6 +5,7 @@ import products from "../data/Products";
 
 const page = () => {
   const [selectedProducts, setSelectedProducts] = useState<number[]>([]);
+
   useEffect(() => {
     // Retrieve selectedProducts from Local Storage
     const storedSelectedProducts = localStorage.getItem("selectedProducts");
@@ -13,12 +14,12 @@ const page = () => {
     }
   }, []);
   return (
-    <div>
+    <>
       <ProductCompared
         comparedProducts={selectedProducts}
         products={products}
       />
-    </div>
+    </>
   );
 };
 

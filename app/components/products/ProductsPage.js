@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProductList from "./ProductList";
 import Sorting from "../buttons/Sorting";
 import Compare from "../buttons/Compare";
@@ -12,6 +12,14 @@ const ProductPage = ({ products, category }) => {
   const [sortOrder, setSortOrder] = useState("asc");
   const [search, setSearch] = useState("");
   const router = useRouter();
+
+  useEffect(() => {
+    // The selectedProducts are checked if they are in local storage
+    const storedSelectedProducts = localStorage.getItem("selectedProducts");
+    if (storedSelectedProducts) {
+      setSelectedProducts(JSON.parse(storedSelectedProducts));
+    }
+  }, []);
 
   const handleSort = (type) => {
     if (type === sortBy) {
@@ -63,6 +71,12 @@ const ProductPage = ({ products, category }) => {
     product.name.toLowerCase().includes(search.toLowerCase())
   );
 
+  const handleClearSelection = () => {
+    // Clear the selection in both state and localStorage
+    setSelectedProducts([]);
+    localStorage.removeItem("selectedProducts");
+  };
+
   return (
     <div className="App">
       <div className="mb-4">
@@ -73,6 +87,14 @@ const ProductPage = ({ products, category }) => {
         />
       </div>
       <Sorting handleSort={handleSort} sortBy={sortBy} sortOrder={sortOrder} />
+      {selectedProducts.length > 0 && (
+        <button
+          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+          onClick={handleClearSelection}
+        >
+          Clear Selection
+        </button>
+      )}
       <Compare
         handleCompare={handleCompare}
         selectedProducts={selectedProducts}

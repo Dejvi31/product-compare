@@ -2,11 +2,9 @@ import React from "react";
 import ChartComponent from "./ChartComponent";
 import TableHeader from "./tables/TableHeader";
 import TableBody from "./tables/TableBody";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 const ProductCompared = ({ comparedProducts, products }) => {
-  const router = useRouter();
   const chartLabels = comparedProducts.map((productId) => {
     const product = products.find((p) => p.id === productId);
     return product ? product.name : "";
