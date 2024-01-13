@@ -4,9 +4,12 @@ import products from "./data/Products";
 import ProductPage from "./components/products/ProductsPage";
 import Navigation from "./components/buttons/Navigation";
 import Search from "./components/filters/Search";
+import { useRouter } from "next/navigation";
 
 const HomePage = () => {
   const [search, setSearch] = useState<string>("");
+
+  const router = useRouter();
 
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
@@ -22,6 +25,13 @@ const HomePage = () => {
   const tvProducts = filteredProducts.filter(
     (product) => product.category === "tv"
   );
+
+  const goToPhone = () => {
+    router.push("/phone");
+  };
+  const goToTv = () => {
+    router.push("/tv");
+  };
   return (
     <>
       <Navigation categories={["Phone", "Tv"]} />
@@ -35,12 +45,13 @@ const HomePage = () => {
       {filteredProducts.length > 0 ? (
         <>
           <div className="flex justify-center items-center mt-1">
-            <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">
+            <button
+              onClick={goToPhone}
+              className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l"
+            >
               Phone Products
             </button>
-          </div>
 
-          <div className="grid">
             <ProductPage
               products={phoneProducts}
               category="Phone"
@@ -48,13 +59,14 @@ const HomePage = () => {
               sort={false}
             />
           </div>
-
           <div className="flex justify-center items-center mt-1">
-            <h2 className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">
+            <button
+              onClick={goToTv}
+              className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l"
+            >
               TV Products
-            </h2>
-          </div>
-          <div className="flex item-center">
+            </button>
+
             <ProductPage
               products={tvProducts}
               category="TV"

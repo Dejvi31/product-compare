@@ -9,7 +9,7 @@ const TVPage = () => {
   return (
     <>
       <Navigation categories={["Home", "Phone"]} />
-      <ProductPage products={tvProducts} category="TV" />;
+      <ProductPage products={tvProducts} category="TV" />
     </>
   );
 };
