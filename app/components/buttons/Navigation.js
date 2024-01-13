@@ -6,7 +6,11 @@ const Navigation = ({ categories }) => {
   const router = useRouter();
 
   const navigateToCategory = (category) => {
-    router.push(`/${category.toLowerCase()}`);
+    if (category.toLowerCase() === "home") {
+      router.push("/");
+    } else {
+      router.push(`/${category.toLowerCase()}`);
+    }
   };
 
   return (

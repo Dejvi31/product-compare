@@ -8,7 +8,8 @@ const HomePage = () => {
   return (
     <>
       <Navigation categories={["Phone", "Tv"]} />
-      <ProductPage products={products} category="product" />
+
+      <ProductPage products={products} category="" />
     </>
   );
 };
