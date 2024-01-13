@@ -9,11 +9,15 @@ const ProductCard = ({ product, onSelect, selected }) => {
       className={`max-w-md border p-4 m-2 cursor-pointer ${
         selected ? "border-blue-500" : ""
       }`}
-      onClick={() => onSelect(id)}
     >
       <div className="flex justify-between">
         <h3>{name}</h3>
-        {selected && <p>✅</p>}
+        <button
+          className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold px-2 rounded-r"
+          onClick={() => onSelect(id)}
+        >
+          ⇆
+        </button>
       </div>
 
       <div
