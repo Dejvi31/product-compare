@@ -1,7 +1,8 @@
 import React from "react";
 
 const ProductCard = ({ product, onSelect, selected }) => {
-  const { id, name, quantity, price, specifications, image } = product;
+  const { id, name, quantity, price, specifications, image, category } =
+    product;
 
   return (
     <div
@@ -25,7 +26,9 @@ const ProductCard = ({ product, onSelect, selected }) => {
       >
         <div className="w-full h-40"></div>
       </div>
-
+      <p className="font-semibold">
+        Category: <span className="font-light">{category}</span>
+      </p>
       <p className="font-semibold">
         Quantity: <span className="font-light">{quantity}</span>
       </p>

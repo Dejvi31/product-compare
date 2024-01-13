@@ -10,7 +10,7 @@ const PhonePage = () => {
 
   return (
     <>
-      <Navigation categories={["/", "Tv"]} />
+      <Navigation categories={["Home", "Tv"]} />
       <ProductPage products={phoneProducts} category="Phone" />
     </>
   );

@@ -6,7 +6,12 @@ import Compare from "../buttons/Compare";
 import Search from "../filters/Search";
 import { useRouter } from "next/navigation";
 
-const ProductPage = ({ products, category }) => {
+const ProductPage = ({
+  products,
+  category,
+  searchInput = true,
+  sort = true,
+}) => {
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [sortBy, setSortBy] = useState("price");
   const [sortOrder, setSortOrder] = useState("asc");
@@ -79,14 +84,22 @@ const ProductPage = ({ products, category }) => {
 
   return (
     <div className="App">
-      <div className="mb-4">
-        <Search
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder={`Search for any ${category} product...`}
+      {searchInput == true && (
+        <div className="mb-4">
+          <Search
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder={`Search for any ${category} product...`}
+          />
+        </div>
+      )}
+      {sort == true && (
+        <Sorting
+          handleSort={handleSort}
+          sortBy={sortBy}
+          sortOrder={sortOrder}
         />
-      </div>
-      <Sorting handleSort={handleSort} sortBy={sortBy} sortOrder={sortOrder} />
+      )}
       {selectedProducts.length > 0 && (
         <button
           className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
