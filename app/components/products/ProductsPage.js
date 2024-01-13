@@ -16,6 +16,7 @@ const ProductPage = ({
   const [sortBy, setSortBy] = useState("price");
   const [sortOrder, setSortOrder] = useState("asc");
   const [search, setSearch] = useState("");
+
   const router = useRouter();
 
   useEffect(() => {
