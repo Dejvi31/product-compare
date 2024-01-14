@@ -1,5 +1,5 @@
 "use client";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import products from "./data/Products";
 import Navigation from "./components/buttons/Navigation";
 import Search from "./components/filters/Search";
@@ -13,6 +13,12 @@ const HomePage = () => {
 
   const router = useRouter();
 
+  useEffect(() => {
+    const storedSelectedProducts = localStorage.getItem("selectedProducts");
+    if (storedSelectedProducts) {
+      setSelectedProducts(JSON.parse(storedSelectedProducts));
+    }
+  }, []);
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
