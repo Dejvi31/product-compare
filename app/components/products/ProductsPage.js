@@ -62,6 +62,12 @@ const ProductPage = ({
     }
   };
 
+  const handleProductRemove = (productIdToRemove) => {
+    // Implement logic to remove the product from the selected products list
+    setSelectedProducts((prevSelected) =>
+      prevSelected.filter((productId) => productId !== productIdToRemove)
+    );
+  };
   const sortedProducts = products.sort((a, b) => {
     if (sortBy === "price") {
       return sortOrder === "asc" ? a.price - b.price : b.price - a.price;
@@ -77,7 +83,7 @@ const ProductPage = ({
     product.name.toLowerCase().includes(search.toLowerCase())
   );
 
-  const handleClearSelection = () => {
+  const handleClearList = () => {
     // Clear the selection in both state and localStorage
     setSelectedProducts([]);
     localStorage.removeItem("selectedProducts");
@@ -101,18 +107,13 @@ const ProductPage = ({
           sortOrder={sortOrder}
         />
       )}
-      {selectedProducts.length > 1 && (
-        <button
-          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-          onClick={handleClearSelection}
-        >
-          Clear Selection
-        </button>
-      )}
+
       <Compare
         handleCompare={handleCompare}
         selectedProducts={selectedProducts}
         products={products}
+        handleClearList={handleClearList}
+        handleProductRemove={handleProductRemove}
       />
       {filteredProducts.length > 0 ? (
         <ProductList
