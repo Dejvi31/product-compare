@@ -27,6 +27,17 @@ const HomePage = () => {
   );
 
   const handleProductSelect = (productId: number) => {
+    const product = products.find((product) => product.id === productId);
+
+    if (product) {
+      // Save selectedProduct to Local Storage
+      localStorage.setItem("selectedProduct", JSON.stringify(product));
+    } else {
+      console.error(`Product with id ${productId} not found.`);
+    }
+  };
+
+  const handleProductsSelect = (productId: number) => {
     setSelectedProducts((prev) => {
       const index = prev.indexOf(productId);
       if (index !== -1) {
@@ -96,8 +107,9 @@ const HomePage = () => {
 
             <ProductList
               sortedProducts={phoneProducts}
-              handleProductSelect={handleProductSelect}
+              handleProductsSelect={handleProductsSelect}
               selectedProducts={selectedProducts}
+              handleProductSelect={handleProductSelect}
             />
           </div>
 
@@ -113,8 +125,9 @@ const HomePage = () => {
             </div>
             <ProductList
               sortedProducts={tvProducts}
-              handleProductSelect={handleProductSelect}
+              handleProductsSelect={handleProductsSelect}
               selectedProducts={selectedProducts}
+              handleProductSelect={handleProductSelect}
             />
           </div>
         </>

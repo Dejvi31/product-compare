@@ -3,8 +3,9 @@ import ProductCard from "./ProductCard";
 
 const ProductList = ({
   sortedProducts,
-  handleProductSelect,
+  handleProductsSelect,
   selectedProducts,
+  handleProductSelect,
 }) => {
   return (
     <div className="grid grid-cols-5 gap-1">
@@ -12,8 +13,9 @@ const ProductList = ({
         <ProductCard
           key={product.id}
           product={product}
-          onSelect={handleProductSelect}
+          onSelect={handleProductsSelect}
           selected={selectedProducts.includes(product.id)}
+          onProductSelect={handleProductSelect}
         />
       ))}
     </div>

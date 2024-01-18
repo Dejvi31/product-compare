@@ -37,6 +37,17 @@ const ProductPage = ({
   };
 
   const handleProductSelect = (productId) => {
+    const product = products.find((product) => product.id === productId);
+
+    if (product) {
+      // Save selectedProduct to Local Storage
+      localStorage.setItem("selectedProduct", JSON.stringify(product));
+    } else {
+      console.error(`Product with id ${productId} not found.`);
+    }
+  };
+
+  const handleProductsSelect = (productId) => {
     setSelectedProducts((prev) => {
       const index = prev.indexOf(productId);
       if (index !== -1) {
@@ -63,7 +74,6 @@ const ProductPage = ({
   };
 
   const handleProductRemove = (productIdToRemove) => {
-    // Implement logic to remove the product from the selected products list
     setSelectedProducts((prevSelected) =>
       prevSelected.filter((productId) => productId !== productIdToRemove)
     );
@@ -118,8 +128,9 @@ const ProductPage = ({
       {filteredProducts.length > 0 ? (
         <ProductList
           sortedProducts={filteredProducts}
-          handleProductSelect={handleProductSelect}
+          handleProductsSelect={handleProductsSelect}
           selectedProducts={selectedProducts}
+          handleProductSelect={handleProductSelect}
         />
       ) : (
         <div className="text-gray-500 mt-4">
