@@ -83,13 +83,16 @@ const HomePage = () => {
       />
       {filteredProducts.length > 0 ? (
         <>
-          <div className="flex justify-center items-center mt-1">
-            <button
-              onClick={goToPhone}
-              className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l"
-            >
-              Phone Products
-            </button>
+          <div className="mt-8">
+            <div className="flex items-center justify-between">
+              <h2 className="text-2xl font-bold mb-4">Phone Products</h2>
+              <span
+                className="underline cursor-pointer hover:text-gray-500"
+                onClick={goToPhone}
+              >
+                Go There
+              </span>
+            </div>
 
             <ProductList
               sortedProducts={phoneProducts}
@@ -97,14 +100,17 @@ const HomePage = () => {
               selectedProducts={selectedProducts}
             />
           </div>
-          <div className="flex justify-center items-center mt-1">
-            <button
-              onClick={goToTv}
-              className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l"
-            >
-              TV Products
-            </button>
 
+          <div className="mt-8">
+            <div className="flex items-center justify-between">
+              <h2 className="text-2xl font-bold mb-4">TV Products</h2>
+              <span
+                className="underline cursor-pointer hover:text-gray-500"
+                onClick={goToTv}
+              >
+                Go There
+              </span>
+            </div>
             <ProductList
               sortedProducts={tvProducts}
               handleProductSelect={handleProductSelect}
