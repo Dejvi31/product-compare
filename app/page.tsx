@@ -76,13 +76,11 @@ const HomePage = () => {
 
   return (
     <>
-      <div className="flex items-center justify-center">
-        <Search
-          value={search}
-          onChange={handleSearchChange}
-          placeholder="Search for any product..."
-        />
-      </div>
+      <Search
+        value={search}
+        onChange={handleSearchChange}
+        placeholder="Search for any product..."
+      />
       {filteredProducts.length > 0 ? (
         <>
           <div className="flex justify-center items-center mt-1">

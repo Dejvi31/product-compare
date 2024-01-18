@@ -7,7 +7,7 @@ const ProductList = ({
   selectedProducts,
 }) => {
   return (
-    <div className="grid grid-cols-6 gap-1">
+    <div className="grid grid-cols-3 gap-1">
       {sortedProducts.map((product) => (
         <ProductCard
           key={product.id}
