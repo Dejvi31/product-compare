@@ -19,7 +19,10 @@ const ProductCard = ({ product, onSelect, selected }) => {
           <h3>{name}</h3>
           <button
             className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold px-2 rounded-r"
-            onClick={() => onSelect(id)}
+            onClick={(e) => {
+              e.stopPropagation();
+              onSelect(id);
+            }}
           >
             ⇆
           </button>

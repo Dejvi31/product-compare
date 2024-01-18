@@ -1,7 +1,7 @@
 import React from "react";
 
 const page = () => {
-  return <div>Phoneee</div>;
+  return <div>Telefona</div>;
 };
 
 export default page;
