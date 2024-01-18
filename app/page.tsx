@@ -1,7 +1,6 @@
 "use client";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import products from "./data/Products";
-import Navigation from "./components/buttons/Navigation";
 import Search from "./components/filters/Search";
 import { useRouter } from "next/navigation";
 import ProductList from "./components/products/ProductList";
@@ -77,8 +76,7 @@ const HomePage = () => {
 
   return (
     <>
-      <Navigation categories={["Phone", "Tv"]} />
-      <div>
+      <div className="flex items-center justify-center">
         <Search
           value={search}
           onChange={handleSearchChange}
