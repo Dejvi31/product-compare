@@ -116,7 +116,7 @@ const products = [
       "A17 Pro chip",
       "4441mAh",
     ],
-    image: "/images/Iphone15_pro_max.jpg",
+    image: "/images/Iphone15_pro_max.jpeg",
     category: "Phone",
     desc: "Embark on a new era of mobile sophistication with the iPhone 15 Pro Max. Featuring 256GB of storage, a cutting-edge 48MP camera, and 8GB of RAM, this iPhone is a technological marvel. The A17 Pro chip ensures lightning-fast performance, while the 4441mAh battery keeps you powered for extended usage.",
   },
