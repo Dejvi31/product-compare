@@ -9,27 +9,22 @@ const ProductCard = ({ product, onSelect, selected, onProductSelect }) => {
 
   return (
     <div
-      className={`max-w-md border p-4 m-2 cursor-pointer ${
+      className={` relative max-w-md flex items-center justify-center  border p-4 m-2 cursor-pointer ${
         selected ? "border-gray-800" : ""
       }`}
     >
-      {" "}
-      <div className="relative">
-        <div
-          className="bg-cover bg-center w-full h-40 mb-4"
-          style={{ backgroundImage: `url(${image})` }}
-        />
+      <img src={image} alt={name} width={100} />
 
-        <button
-          className="absolute top-2 right-2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold px-2 rounded-full"
-          onClick={() => {
-            onSelect(id);
-          }}
-        >
-          ⇆
-        </button>
-      </div>
-      <div>
+      <button
+        className="absolute top-2 right-2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold px-2 rounded-full"
+        onClick={() => {
+          onSelect(id);
+        }}
+      >
+        ⇆
+      </button>
+
+      <div className="ml-5">
         <h3 className="text-md font-semibold mb-1">{name}</h3>
 
         <p className="text-sm text-gray-600 mb-2">Category: {category} </p>
