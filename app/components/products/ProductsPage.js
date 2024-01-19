@@ -100,15 +100,15 @@ const ProductPage = ({
   };
 
   return (
-    <div className="App">
+    <section className="App">
       {searchInput == true && (
-        <div className="mb-4">
+        <section className="mb-4">
           <Search
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder={`Search for any ${category} product...`}
           />
-        </div>
+        </section>
       )}
       {sort == true && (
         <Sorting
@@ -133,11 +133,11 @@ const ProductPage = ({
           handleProductSelect={handleProductSelect}
         />
       ) : (
-        <div className="text-gray-500 mt-4">
+        <section className="text-gray-500 mt-4">
           No Product Found With That Name
-        </div>
+        </section>
       )}
-    </div>
+    </section>
   );
 };
 

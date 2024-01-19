@@ -23,19 +23,19 @@ const PhoneDetailPage = () => {
   }, []);
 
   return (
-    <div className="container mx-auto p-4">
+    <section className="container mx-auto p-4">
       {selectedProduct ? (
-        <div className="flex">
+        <section className="flex">
           <ProductImage
             src={selectedProduct.image}
             alt={selectedProduct.name}
           />
           <ProductDetails {...selectedProduct} />
-        </div>
+        </section>
       ) : (
-        <div>Loading...</div>
+        <section>Loading...</section>
       )}
-    </div>
+    </section>
   );
 };
 

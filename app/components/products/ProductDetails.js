@@ -6,23 +6,23 @@ const ProductDetails = ({
   specifications,
   price,
 }) => (
-  <div className="w-1/2">
-    <div className="flex flex-col h-full">
-      <div>
-        <div className="flex justify-between">
+  <section className="w-1/2">
+    <section className="flex flex-col h-full">
+      <section>
+        <section className="flex justify-between">
           <h1 className="text-3xl font-bold mb-2">{name}</h1>
           <p className="text-lg mb-2">-{category}</p>
-        </div>
-        <div className="flex items-start justify-between">
-          <div className="w-4/5">
+        </section>
+        <section className="flex items-start justify-between">
+          <section className="w-4/5">
             <p className="text-sm mb-2">{desc}</p>
-          </div>
-          <div className="flex items-center">
+          </section>
+          <section className="flex items-center">
             <p className="text-sm mb-2">In Stock: {quantity}</p>
-          </div>
-        </div>
+          </section>
+        </section>
 
-        <div className="mt-4">
+        <section className="mt-4">
           <h2 className="text-xl font-bold mb-2">Specifications:</h2>
           <ul>
             {specifications.map((spec, index) => (
@@ -31,16 +31,16 @@ const ProductDetails = ({
               </li>
             ))}
           </ul>
-        </div>
-      </div>
-      <div className="mt-4 flex items-center justify-center">
+        </section>
+      </section>
+      <section className="mt-4 flex items-center justify-center">
         <p className="text-4xl">${price}</p>
         <button className="bg-gray-800 ml-5 text-white px-4 py-2 rounded">
           Add to Cart
         </button>
-      </div>
-    </div>
-  </div>
+      </section>
+    </section>
+  </section>
 );
 
 export default ProductDetails;

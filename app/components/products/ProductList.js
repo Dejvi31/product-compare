@@ -6,9 +6,11 @@ const ProductList = ({
   handleProductsSelect,
   selectedProducts,
   handleProductSelect,
+  limit = sortedProducts.length,
 }) => {
+  sortedProducts = sortedProducts.slice(0, limit);
   return (
-    <div className="grid grid-cols-5 gap-1">
+    <section className={`grid grid-cols-${limit} gap-1`}>
       {sortedProducts.map((product) => (
         <ProductCard
           key={product.id}
@@ -18,7 +20,7 @@ const ProductList = ({
           onProductSelect={handleProductSelect}
         />
       ))}
-    </div>
+    </section>
   );
 };
 

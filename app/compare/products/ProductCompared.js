@@ -38,13 +38,13 @@ const ProductCompared = ({ comparedProducts, products }) => {
   ];
 
   return (
-    <div>
+    <section>
       <Link className="text-gray-500 hover:underline" href="/">
         Go back
       </Link>
       <h2 className="text-2xl text-center">Compared Products</h2>
-      <div className="flex">
-        <div className="w-2/3">
+      <section className="flex">
+        <section className="w-2/3">
           <table className="border-collapse w-full border border-slate-400 dark:border-slate-500 bg-white dark:bg-slate-800 text-sm shadow-sm">
             <TableHeader />
             <TableBody
@@ -52,12 +52,12 @@ const ProductCompared = ({ comparedProducts, products }) => {
               products={products}
             />
           </table>
-        </div>
-        <div className="w-1/3">
+        </section>
+        <section className="w-1/3">
           <ChartComponent labels={chartLabels} datasets={chartDatasets} />
-        </div>
-      </div>
-    </div>
+        </section>
+      </section>
+    </section>
   );
 };
 

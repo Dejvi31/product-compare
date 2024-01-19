@@ -36,9 +36,9 @@ const Compare = ({
   };
 
   return (
-    <div className="fixed bottom-7 right-4 text-gray-800 bg-white">
+    <section className="fixed bottom-7 right-4 text-gray-800 bg-white">
       {selectedProducts.length >= 2 && (
-        <div className="flex flex-col items-center">
+        <section className="flex flex-col items-center">
           <table>
             <tbody>
               <tr>
@@ -61,7 +61,7 @@ const Compare = ({
               )}
             </tbody>
           </table>
-          <div className="flex space-x-4 mt-4 items-center">
+          <section className="flex space-x-4 mt-4 items-center">
             <button
               className="bg-white hover:bg-gray-200 text-gray-700 border-2 border-gray-500 font-bold py-2 px-4 rounded"
               onClick={handleClearList}
@@ -74,10 +74,10 @@ const Compare = ({
             >
               Compare Now
             </button>
-          </div>
-        </div>
+          </section>
+        </section>
       )}
-    </div>
+    </section>
   );
 };
 

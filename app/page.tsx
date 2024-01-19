@@ -94,47 +94,47 @@ const HomePage = () => {
       />
       {filteredProducts.length > 0 ? (
         <>
-          <div className="mt-8">
-            <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-bold mb-4">Phone Products</h2>
+          <section className="mt-8 border">
+            <section className="flex items-center ">
               <span
                 className="underline cursor-pointer hover:text-gray-500"
                 onClick={goToPhone}
               >
-                Go There
+                Phone
               </span>
-            </div>
+            </section>
 
             <ProductList
               sortedProducts={phoneProducts}
               handleProductsSelect={handleProductsSelect}
               selectedProducts={selectedProducts}
               handleProductSelect={handleProductSelect}
+              limit="4"
             />
-          </div>
+          </section>
 
-          <div className="mt-8">
-            <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-bold mb-4">TV Products</h2>
+          <section className="mt-8 border">
+            <section className="flex items-center">
               <span
                 className="underline cursor-pointer hover:text-gray-500"
                 onClick={goToTv}
               >
-                Go There
+                TV
               </span>
-            </div>
+            </section>
             <ProductList
               sortedProducts={tvProducts}
               handleProductsSelect={handleProductsSelect}
               selectedProducts={selectedProducts}
               handleProductSelect={handleProductSelect}
+              limit="4"
             />
-          </div>
+          </section>
         </>
       ) : (
-        <div className="text-gray-500 mt-4">
+        <section className="text-gray-500 mt-4">
           No Product Found With That Name
-        </div>
+        </section>
       )}
       <Compare
         handleCompare={handleCompare}
