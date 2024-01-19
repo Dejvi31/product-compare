@@ -72,10 +72,10 @@ const HomePage = () => {
     localStorage.removeItem("selectedProducts");
   };
   const phoneProducts = filteredProducts.filter(
-    (product) => product.category === "phone"
+    (product) => product.category === "Phone"
   );
   const tvProducts = filteredProducts.filter(
-    (product) => product.category === "tv"
+    (product) => product.category === "TV"
   );
 
   const goToPhone = () => {

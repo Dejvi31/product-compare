@@ -4,7 +4,7 @@ import ProductPage from "../components/products/ProductsPage";
 
 const PhonePage = () => {
   const phoneProducts = products.filter(
-    (product) => product.category === "phone"
+    (product) => product.category === "Phone"
   );
 
   return <ProductPage products={phoneProducts} category="Phone" />;

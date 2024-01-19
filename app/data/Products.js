@@ -6,7 +6,8 @@ const products = [
     price: 350,
     specifications: ["32 inch", "Hdmi", "Smart TV", "HDR", "Screen Mirroring"],
     image: "/images/TvSamsung32.jpg",
-    category: "tv",
+    category: "TV",
+    desc: "Immerse yourself in stunning visuals with the Samsung 32-inch TV. This high-quality TV boasts a 32-inch display, equipped with HDMI for seamless connectivity. Enjoy Smart TV capabilities, HDR support, and convenient Screen Mirroring features for an enhanced viewing experience.",
   },
   {
     id: 2,
@@ -15,7 +16,8 @@ const products = [
     price: 340,
     specifications: ["32 inch", "Smart LED", "Smart TV", "HDMI 1.4", "HDR"],
     image: "/images/TvLg32.jpg",
-    category: "tv",
+    category: "TV",
+    desc: "Elevate your home entertainment with the LG 32-inch Smart LED TV. Featuring a vibrant 32-inch display and Smart TV functionality, this TV delivers an immersive viewing experience. With HDMI 1.4 and HDR support, enjoy crystal-clear visuals and dynamic colors on your favorite shows and movies.",
   },
   {
     id: 3,
@@ -24,7 +26,8 @@ const products = [
     price: 555,
     specifications: ["40 inch", "HDCP", "Smart TV", "LCD", "HDR"],
     image: "/images/TvSony40.jpg",
-    category: "tv",
+    category: "TV",
+    desc: "Experience cinematic brilliance with the Sony 40-inch TV. Boasting a 40-inch LCD display with HDCP support, this Smart TV brings your favorite content to life. Immerse yourself in stunning visuals with HDR technology, enhancing color and contrast for a truly captivating entertainment experience.",
   },
   {
     id: 4,
@@ -33,7 +36,8 @@ const products = [
     price: 650,
     specifications: ["43 inch", "Hdmi", "Smart TV", "HDR", "Screen Mirroring"],
     image: "/images/TvSamsung43.jpg",
-    category: "tv",
+    category: "TV",
+    desc: "Step into a world of entertainment with the Samsung 43-inch TV. This TV features a spacious 43-inch display, equipped with HDMI for seamless connectivity. Enjoy Smart TV features, HDR support, and Screen Mirroring functionality, providing you with endless entertainment options and convenience.",
   },
   {
     id: 5,
@@ -49,7 +53,8 @@ const products = [
       "AI Google Assistant",
     ],
     image: "/images/TvTcl75.png",
-    category: "tv",
+    category: "TV",
+    desc: "Immerse yourself in the ultimate home theater experience with the TCL 75-inch TV. Featuring a massive 75-inch 4K display, this premium TV offers HDR Premium for lifelike visuals. With HDMI, Smart TV capabilities, and AI Google Assistant, this TV brings cutting-edge technology to your living room.",
   },
   {
     id: 6,
@@ -57,14 +62,15 @@ const products = [
     quantity: 25,
     price: 425,
     specifications: [
-      "128gb",
+      "128GB",
       "12MP Camera",
-      "4GB Ram",
+      "4GB RAM",
       "A15 Bionic chip",
       "3240mAh",
     ],
     image: "/images/Iphone13.jpg",
-    category: "phone",
+    category: "Phone",
+    desc: "Unleash the power of innovation with the iPhone 13. Packed with 128GB of storage, a 12MP camera, and 4GB of RAM, this iPhone delivers exceptional performance. The A15 Bionic chip ensures seamless multitasking, while the 3240mAh battery provides long-lasting power for all your daily tasks.",
   },
   {
     id: 7,
@@ -74,12 +80,13 @@ const products = [
     specifications: [
       "256GB",
       "48MP Camera",
-      "6GB Ram",
+      "6GB RAM",
       "A16 Bionic chip",
       "4323mAh",
     ],
     image: "/images/Iphone14_pro_max.jpg",
-    category: "phone",
+    category: "Phone",
+    desc: "Experience the epitome of mobile technology with the iPhone 14 Pro Max. Boasting a massive 256GB storage, a 48MP camera, and 6GB of RAM, this iPhone redefines mobile photography and performance. The A16 Bionic chip ensures lightning-fast speeds, while the 4323mAh battery keeps you powered throughout the day.",
   },
   {
     id: 8,
@@ -89,12 +96,13 @@ const products = [
     specifications: [
       "256GB",
       "108MP Camera",
-      "8GB Ram",
+      "8GB RAM",
       "Exynos 2200",
       "5000mAh",
     ],
     image: "/images/S22Ultra.jpg",
-    category: "phone",
+    category: "Phone",
+    desc: "Unleash the capabilities of the Samsung S22 Ultra, a powerhouse of innovation. With 256GB of storage, a groundbreaking 108MP camera, and 8GB of RAM, this phone sets new standards for mobile technology. Powered by the Exynos 2200 chipset, and a 5000mAh battery, it offers unmatched performance and endurance.",
   },
   {
     id: 9,
@@ -104,12 +112,13 @@ const products = [
     specifications: [
       "256GB",
       "48MP Camera",
-      "8GB Ram",
+      "8GB RAM",
       "A17 Pro chip",
       "4441mAh",
     ],
     image: "/images/Iphone15_pro_max.jpg",
-    category: "phone",
+    category: "Phone",
+    desc: "Embark on a new era of mobile sophistication with the iPhone 15 Pro Max. Featuring 256GB of storage, a cutting-edge 48MP camera, and 8GB of RAM, this iPhone is a technological marvel. The A17 Pro chip ensures lightning-fast performance, while the 4441mAh battery keeps you powered for extended usage.",
   },
   {
     id: 10,
@@ -119,12 +128,13 @@ const products = [
     specifications: [
       "256GB",
       "200MP Camera",
-      "12GB Ram",
+      "12GB RAM",
       "Snapdragon 8 Gen 2",
       "5000mAh",
     ],
     image: "/images/S23Ultra.jpg",
-    category: "phone",
+    category: "Phone",
+    desc: "Step into the future of mobile innovation with the Samsung S23 Ultra. Boasting 256GB of storage, an impressive 200MP camera, and 12GB of RAM, this phone pushes the boundaries of what is possible. Powered by the Snapdragon 8 Gen 2 chipset and a 5000mAh battery, it delivers unparalleled performance and endurance.",
   },
 ];
 
