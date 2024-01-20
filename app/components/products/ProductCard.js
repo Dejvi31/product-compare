@@ -27,7 +27,7 @@ const ProductCard = ({ product, onSelect, selected, onProductSelect }) => {
           <img
             src={image}
             alt={name}
-            className="rounded-md object-cover w-20 h-20 mr-4"
+            className="rounded-md object-cover  h-20 mr-4"
           />
 
           <div>
