@@ -8,9 +8,9 @@ const ProductCard = ({ product, onSelect, selected, onProductSelect }) => {
   link = link.replace(/\s+/g, "-").toLowerCase();
 
   return (
-    <section className="relative">
+    <section className="relative transition duration-300 transform hover:scale-105">
       <button
-        className="absolute top-2 left-2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold px-2 rounded-full"
+        className="absolute top-2 right-2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold px-2 rounded-full"
         onClick={() => {
           onSelect(id);
         }}
@@ -19,18 +19,22 @@ const ProductCard = ({ product, onSelect, selected, onProductSelect }) => {
       </button>
       <Link href={link}>
         <section
-          className={` max-w-md flex items-center justify-center  border p-2 m-2 cursor-pointer ${
-            selected ? "border-gray-800" : ""
+          className={`max-w-md flex items-center justify-center border p-4 m-4 cursor-pointer  ${
+            selected ? "border-gray-800" : "border-gray-300"
           }`}
           onClick={() => onProductSelect(id)}
         >
-          <img src={image} alt={name} width={70} />
+          <img
+            src={image}
+            alt={name}
+            className="rounded-md object-cover w-20 h-20 mr-4"
+          />
 
-          <section className="ml-5">
-            <h3 className="text-md font-semibold mb-1">{name}</h3>
+          <div>
+            <h3 className="text-lg font-semibold mb-1">{name}</h3>
 
-            <p className="text-md text-gray-800 font-bold mb-2">${price}</p>
-          </section>
+            <p className="text-md text-gray-800 font-bold">${price}</p>
+          </div>
         </section>
       </Link>
     </section>

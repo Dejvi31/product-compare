@@ -5,10 +5,12 @@ import Search from "./components/filters/Search";
 import { useRouter } from "next/navigation";
 import ProductList from "./components/products/ProductList";
 import Compare from "./components/buttons/Compare";
+import Popup from "./components/popup/popup";
 
 const HomePage = () => {
   const [search, setSearch] = useState<string>("");
   const [selectedProducts, setSelectedProducts] = useState<number[]>([]);
+  const [showPopup, setShowPopup] = useState(true);
 
   const router = useRouter();
 
@@ -85,8 +87,17 @@ const HomePage = () => {
     router.push("/tv");
   };
 
+  const closePopup = () => {
+    setShowPopup(false);
+  };
   return (
     <>
+      {showPopup && (
+        <Popup onClose={closePopup}>
+          <h2>Welcome to our website!</h2>
+          <p>This is your welcome popup content.</p>
+        </Popup>
+      )}
       <Search
         value={search}
         onChange={handleSearchChange}

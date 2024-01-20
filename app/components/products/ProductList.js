@@ -10,7 +10,7 @@ const ProductList = ({
 }) => {
   sortedProducts = sortedProducts.slice(0, limit);
   return (
-    <section className={`grid grid-cols-${limit} gap-1`}>
+    <section className="grid grid-cols-4 gap-1">
       {sortedProducts.map((product) => (
         <ProductCard
           key={product.id}
