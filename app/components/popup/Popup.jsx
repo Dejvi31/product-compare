@@ -18,30 +18,30 @@ const Popup = ({ onClose, children }) => {
   };
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
+    if (isVisible) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [isVisible]);
 
   return (
-    isVisible && (
-      <section className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-        <section
-          ref={popupRef}
-          className="max-w-lg w-full mx-4 overflow-y-auto bg-white rounded-lg shadow-lg p-6 relative"
+    <section className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+      <section
+        ref={popupRef}
+        className="max-w-lg w-full mx-auto overflow-y-auto bg-white rounded-lg shadow-lg p-5 relative"
+      >
+        <button
+          className="absolute top-0 right-0 m-4 text-gray-600 hover:text-gray-800"
+          onClick={handleClose}
         >
-          <button
-            className="absolute top-0 right-0 m-4 text-gray-600 hover:text-gray-800"
-            onClick={handleClose}
-          >
-            Close
-          </button>
-          {children}
-        </section>
+          ❌
+        </button>
+        {children}
       </section>
-    )
+    </section>
   );
 };
 

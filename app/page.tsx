@@ -5,7 +5,7 @@ import Search from "./components/filters/Search";
 import { useRouter } from "next/navigation";
 import ProductList from "./components/products/ProductList";
 import Compare from "./components/buttons/Compare";
-import Popup from "./components/popup/popup";
+import StartingPopup from "./components/popup/StartingPopup";
 
 const HomePage = () => {
   const [search, setSearch] = useState<string>("");
@@ -92,12 +92,7 @@ const HomePage = () => {
   };
   return (
     <>
-      {showPopup && (
-        <Popup onClose={closePopup}>
-          <h2>Welcome to our website!</h2>
-          <p>This is your welcome popup content.</p>
-        </Popup>
-      )}
+      {showPopup && <StartingPopup closePopup={closePopup} />}
       <Search
         value={search}
         onChange={handleSearchChange}
