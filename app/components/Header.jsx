@@ -1,5 +1,6 @@
 import React from "react";
 import Login from "../components/buttons/Login";
+import Signup from "../components/buttons/Signup";
 
 const Header = () => {
   return (
@@ -22,9 +23,7 @@ const Header = () => {
 
       <section className="flex items-center">
         <Login />
-        <button className="bg-gray-700 hover:bg-gray-400 text-white px-4 py-2 rounded">
-          Sign Up
-        </button>
+        <Signup />
       </section>
     </header>
   );
