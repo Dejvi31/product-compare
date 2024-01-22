@@ -1,7 +1,7 @@
 "use client";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import products from "./data/Products";
-import Search from "./components/filters/Search";
+import Search from "./components/forms/Search";
 import { useRouter } from "next/navigation";
 import ProductList from "./components/products/ProductList";
 import Compare from "./components/buttons/Compare";

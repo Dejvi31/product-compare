@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import ProductList from "./ProductList";
 import Sorting from "../buttons/Sorting";
 import Compare from "../buttons/Compare";
-import Search from "../filters/Search";
+import Search from "../forms/Search";
 import { useRouter } from "next/navigation";
 
 const ProductPage = ({

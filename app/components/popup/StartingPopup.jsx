@@ -6,7 +6,6 @@ const StartingPopup = ({ closePopup }) => {
     <Popup onClose={closePopup}>
       <section>
         <h2>Welcome to our website!</h2>
-        <p>This is your welcome popup content.</p>
       </section>
     </Popup>
   );
