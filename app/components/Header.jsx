@@ -1,6 +1,5 @@
 import React from "react";
 import Login from "../components/buttons/Login";
-import Signup from "../components/buttons/Signup";
 
 const Header = () => {
   return (
@@ -23,7 +22,6 @@ const Header = () => {
 
       <section className="flex items-center">
         <Login />
-        <Signup />
       </section>
     </header>
   );

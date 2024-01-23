@@ -6,7 +6,6 @@ const LoginPopup = ({ toggleLoginPopup }) => {
   return (
     <Popup onClose={toggleLoginPopup}>
       <section className="text-gray-600">
-        <h2>Login</h2>
         <LoginForm />
       </section>
     </Popup>
