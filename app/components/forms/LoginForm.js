@@ -1,4 +1,3 @@
-// LoginForm.js
 import React from "react";
 import { signIn } from "next-auth/react";
 
@@ -7,20 +6,17 @@ const LoginForm = () => {
     try {
       const result = await signIn("google");
 
-      if (result && result.error) {
+      console.log("Full Result Object:", result);
+
+      if (result?.error) {
         console.error("Error during login:", result.error);
+        return;
+      }
 
-        // If available, log the error message and stack trace
-        console.error("Error message:", result.error.message);
-        console.error("Stack trace:", result.error.stack);
-
-        // If it's an authentication error, log specific details
-        if (result.error.name === "AuthenticationError") {
-          console.error("Authentication error code:", result.error.code);
-          console.error("Authentication error data:", result.error.data);
-        }
+      if (result?.user?.email) {
+        console.log("Email:", result.user.email);
       } else {
-        console.log("Result:", result);
+        console.error("Email not found in the result object.");
       }
     } catch (error) {
       console.error("Unhandled error during login:", error);
