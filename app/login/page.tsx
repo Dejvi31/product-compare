@@ -1,14 +1,15 @@
-import React from "react";
+"use client";
 import { signIn, useSession } from "next-auth/react";
+import React from "react";
 
-const LoginForm = () => {
+const page = () => {
   const session = useSession();
   console.log(session);
   return (
-    <div>
+    <section>
       <button onClick={() => signIn("google")}>Log In with Google</button>
-    </div>
+    </section>
   );
 };
 
-export default LoginForm;
+export default page;
