@@ -5,7 +5,7 @@ import LoginForm from "../forms/LoginForm.js";
 const LoginPopup = ({ toggleLoginPopup }) => {
   return (
     <Popup onClose={toggleLoginPopup}>
-      <section className="text-gray-600">
+      <section className="p-7 text-gray-600">
         <LoginForm />
       </section>
     </Popup>

@@ -15,12 +15,21 @@ const Login = () => {
   return (
     <>
       <button
-        className="bg-gray-500 hover:bg-gray-400 text-white px-4 py-2 rounded"
+        className="bg-gray-800 hover:bg-gray-400 text-white px-4 py-2 rounded"
         onClick={toggleLoginPopup}
       >
-        {session.status === "authenticated"
-          ? session.data.user.name
-          : "Sign In"}
+        {session.status === "authenticated" ? (
+          <img
+            src={session.data.user.image}
+            alt={session.data.user.name}
+            width={40}
+            height={40}
+            referrerPolicy="no-referrer"
+            className="rounded-full"
+          />
+        ) : (
+          "Sign In"
+        )}
       </button>
       {showLoginPopup && <LoginPopup toggleLoginPopup={toggleLoginPopup} />}
     </>

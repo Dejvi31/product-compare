@@ -1,5 +1,6 @@
 import React from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
+import ProfileForm from "./ProfileForm";
 
 const LoginForm = () => {
   const session = useSession();
@@ -15,12 +16,19 @@ const LoginForm = () => {
   if (session.status === "authenticated") {
     return (
       <>
-        <section>
-          <h3>Name: {session.data.user.name}</h3>
-          <h3>Email: {session.data.user.email}</h3>
+        <ProfileForm
+          name={session.data.user.name}
+          email={session.data.user.email}
+          image={session.data.user.image}
+        />
+        <section className="flex items-center justify-center">
+          <button
+            className="bg-gray-500 hover:bg-gray-400 text-white px-4 py-2 rounded"
+            onClick={() => signOut("google")}
+          >
+            Sign out
+          </button>
         </section>
-
-        <button onClick={() => signOut("google")}>Sign out</button>
       </>
     );
   }
