@@ -80,13 +80,6 @@ const HomePage = () => {
     (product) => product.category === "TV"
   );
 
-  const goToPhone = () => {
-    router.push("/phone");
-  };
-  const goToTv = () => {
-    router.push("/tv");
-  };
-
   const closePopup = () => {
     setShowPopup(false);
   };
@@ -104,7 +97,7 @@ const HomePage = () => {
             <section className="flex items-center ">
               <span
                 className="underline cursor-pointer hover:text-gray-500"
-                onClick={goToPhone}
+                onClick={() => router.push("phone")}
               >
                 Phone
               </span>
@@ -123,7 +116,7 @@ const HomePage = () => {
             <section className="flex items-center">
               <span
                 className="underline cursor-pointer hover:text-gray-500"
-                onClick={goToTv}
+                onClick={() => router.push("/tv")}
               >
                 TV
               </span>
