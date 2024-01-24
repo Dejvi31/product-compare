@@ -6,9 +6,7 @@ const LoginForm = () => {
 
   const handleLogin = async () => {
     try {
-      await signIn("google", {
-        callbackUrl: "http://localhost:3000/api/auth/callback/google",
-      });
+      await signIn("google");
     } catch (error) {
       console.error("Error during login:", error);
     }
@@ -22,14 +20,14 @@ const LoginForm = () => {
           <h3>Email: {session.data.user.email}</h3>
         </section>
 
-        <button onClick={() => signOut("google")}>Log out</button>
+        <button onClick={() => signOut("google")}>Sign out</button>
       </>
     );
   }
 
   return (
     <section>
-      <button onClick={handleLogin}>Log In with Google</button>
+      <button onClick={handleLogin}>Sign In with Google</button>
     </section>
   );
 };
