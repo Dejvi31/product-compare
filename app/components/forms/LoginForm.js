@@ -14,6 +14,7 @@ const LoginForm = () => {
   };
 
   if (session.status === "authenticated") {
+    console.log(session.data.user);
     return (
       <>
         <ProfileForm
@@ -35,7 +36,12 @@ const LoginForm = () => {
 
   return (
     <section>
-      <button onClick={handleLogin}>Sign In with Google</button>
+      <button
+        className="bg-gray-500 hover:bg-gray-400 text-white px-4 py-2 rounded"
+        onClick={handleLogin}
+      >
+        Sign In with Google
+      </button>
     </section>
   );
 };

@@ -1,22 +1,17 @@
 "use client";
-import React, { useState } from "react";
-import LoginPopup from "../popup/LoginPopup.jsx";
+import React from "react";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation.js";
 
 const Login = () => {
-  const [showLoginPopup, setShowLoginPopup] = useState(false);
-
   const session = useSession();
-
-  const toggleLoginPopup = () => {
-    setShowLoginPopup(!showLoginPopup);
-  };
+  const router = useRouter();
 
   return (
     <>
       <button
         className="bg-gray-800 hover:bg-gray-400 text-white px-4 py-2 rounded"
-        onClick={toggleLoginPopup}
+        onClick={() => router.push("/profile")}
       >
         {session.status === "authenticated" ? (
           <img
@@ -31,7 +26,6 @@ const Login = () => {
           "Sign In"
         )}
       </button>
-      {showLoginPopup && <LoginPopup toggleLoginPopup={toggleLoginPopup} />}
     </>
   );
 };

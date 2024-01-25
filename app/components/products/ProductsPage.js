@@ -3,7 +3,7 @@ import ProductList from "./ProductList";
 import Sorting from "../buttons/Sorting";
 import Compare from "../buttons/Compare";
 import Search from "../forms/Search";
-import useProductManagement from "../../hooks/useProductManagement";
+import useProductManagement from "../../helpers/useProductManagement";
 
 const ProductPage = ({
   products,

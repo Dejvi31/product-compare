@@ -2,7 +2,7 @@
 import React, { ChangeEvent, useState } from "react";
 import products from "./data/Products";
 import Search from "./components/forms/Search";
-import useProductManagement from "./hooks/useProductManagement";
+import useProductManagement from "./helpers/useProductManagement";
 import { useRouter } from "next/navigation";
 import ProductList from "./components/products/ProductList";
 import Compare from "./components/buttons/Compare";
