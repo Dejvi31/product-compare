@@ -19,7 +19,7 @@ const TableBody = ({ comparedProducts, products }) => (
           </TableBodyCell>
           <TableBodyCell>{quantity}</TableBodyCell>
           <TableBodyCell>${price}</TableBodyCell>
-          <TableBodyCell>{specifications.join(", ")}</TableBodyCell>
+          <TableBodyCell>{specifications.SOC}</TableBodyCell>
         </tr>
       );
     })}

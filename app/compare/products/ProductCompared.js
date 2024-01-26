@@ -5,37 +5,64 @@ import TableBody from "./tables/TableBody";
 import Link from "next/link";
 
 const ProductCompared = ({ comparedProducts, products }) => {
-  const chartLabels = comparedProducts.map((productId) => {
-    const product = products.find((p) => p.id === productId);
-    return product ? product.name : "";
-  });
+  const getMaxValue = (property, comparedProducts, products) => {
+    return Math.max(
+      ...comparedProducts.map((productId) => {
+        const product = products.find((p) => p.id === productId);
+        return product && typeof product.specifications[property] === "number"
+          ? product.specifications[property]
+          : 0;
+      })
+    );
+  };
 
-  const chartDatasets = [
-    {
-      label: "Price Comparison",
-      backgroundColor: "rgba(75,192,192,0.4)",
-      borderColor: "rgba(75,192,192,1)",
-      borderWidth: 1,
-      hoverBackgroundColor: "rgba(75,192,192,0.6)",
-      hoverBorderColor: "rgba(75,192,192,1)",
-      data: comparedProducts.map((productId) => {
-        const product = products.find((p) => p.id === productId);
-        return product ? product.price : 0;
-      }),
-    },
-    {
-      label: "Quantity Comparison",
-      backgroundColor: "rgba(192,75,192,0.4)",
-      borderColor: "rgba(192,75,192,1)",
-      borderWidth: 1,
-      hoverBackgroundColor: "rgba(192,75,192,0.6)",
-      hoverBorderColor: "rgba(192,75,192,1)",
-      data: comparedProducts.map((productId) => {
-        const product = products.find((p) => p.id === productId);
-        return product ? product.quantity : 0;
-      }),
-    },
-  ];
+  const maxBattery = getMaxValue("battery", comparedProducts, products);
+  const maxPrice = Math.max(
+    ...comparedProducts.map((productId) => {
+      const product = products.find((p) => p.id === productId);
+      return product ? product.price : 0;
+    })
+  );
+  const maxStorage = getMaxValue("storage", comparedProducts, products);
+  const maxDisplay = getMaxValue("display", comparedProducts, products);
+  const maxRam = getMaxValue("ram", comparedProducts, products);
+
+  const data = {
+    labels: ["Price", "Battery", "Storage", "Display", "RAM"],
+    datasets: comparedProducts.map((productId) => {
+      const product = products.find((p) => p.id === productId);
+      const color = `rgba(${Math.random() * 255},${Math.random() * 255},${
+        Math.random() * 255
+      },0.2)`;
+
+      const specificationsData = [
+        product.price,
+        product.specifications.battery,
+        product.specifications.storage,
+        product.specifications.display,
+        product.specifications.ram,
+      ];
+
+      const scaledData = specificationsData.map(
+        (value, index) =>
+          (value /
+            [maxPrice, maxBattery, maxStorage, maxDisplay, maxRam][index]) *
+          100
+      );
+
+      return {
+        label: product ? product.name : "",
+        data: scaledData,
+        fill: true,
+        backgroundColor: color,
+        borderColor: color,
+        pointBackgroundColor: color,
+        pointBorderColor: color,
+        pointHoverBackgroundColor: color,
+        pointHoverBorderColor: color,
+      };
+    }),
+  };
 
   return (
     <section>
@@ -54,11 +81,10 @@ const ProductCompared = ({ comparedProducts, products }) => {
           </table>
         </section>
         <section className="w-1/3">
-          <ChartComponent labels={chartLabels} datasets={chartDatasets} />
+          <ChartComponent data={data} />
         </section>
       </section>
     </section>
   );
 };
-
 export default ProductCompared;
