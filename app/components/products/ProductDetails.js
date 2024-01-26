@@ -25,11 +25,12 @@ const ProductDetails = ({
         <section className="mt-4">
           <h2 className="text-xl font-bold mb-2">Specifications:</h2>
           <ul>
-            {specifications.map((spec, index) => (
-              <li key={index} className="text-base mb-1">
-                {spec}
-              </li>
-            ))}
+            <li>Display: {specifications.display} inches</li>
+            <li>Storage: {specifications.storage} GB</li>
+            <li>Camera: {specifications.camera} MP</li>
+            <li>RAM: {specifications.ram} GB</li>
+            <li>SOC: {specifications.SOC}</li>
+            <li>Battery: {specifications.battery} mAh</li>
           </ul>
         </section>
       </section>
