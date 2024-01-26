@@ -1,12 +1,24 @@
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/navigation";
 
+interface ObjectSpecifications {
+  specifications: {
+    display?: number;
+    storage?: number;
+    camera?: number;
+    ram?: number;
+    SOC?: string;
+    battery?: number;
+    [key: string]: any;
+  };
+}
+
 interface Product {
   id: number;
   name: string;
-  price: number;
   quantity: number;
-  specifications: string[];
+  price: number;
+  specifications: string[] | ObjectSpecifications["specifications"];
   image: string;
   category: string;
   desc: string;
@@ -44,12 +56,11 @@ const useProductManagement = ({
   const router = useRouter();
 
   useEffect(() => {
-    // The selectedProducts are checked if they are in local storage
     const storedSelectedProducts = localStorage.getItem("selectedProducts");
     if (storedSelectedProducts) {
       setSelectedProducts(JSON.parse(storedSelectedProducts));
     }
-  }, []); // Include category in the dependency array
+  }, []);
 
   const handleSort = (type: string) => {
     if (type === sortBy) {
