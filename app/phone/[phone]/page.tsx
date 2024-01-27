@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import ProductImage from "../../components/products/ProductImage";
 import ProductDetails from "../../components/products/ProductDetails";
+import Breadcrumbs from "../../components/Breadcrumbs";
+import { useBreadCrumbs } from "../../helpers/useBreadCrumbs";
 
 const PhoneDetailPage = () => {
   const [selectedProduct, setSelectedProduct] = useState({
@@ -22,8 +24,11 @@ const PhoneDetailPage = () => {
     }
   }, []);
 
+  const breadCrumbs = useBreadCrumbs(selectedProduct);
+
   return (
     <section className="container mx-auto p-4">
+      <Breadcrumbs breadCrumbs={breadCrumbs} />
       {selectedProduct ? (
         <section className="flex">
           <ProductImage
