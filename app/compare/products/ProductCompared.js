@@ -64,6 +64,16 @@ const ProductCompared = ({ comparedProducts, products }) => {
     }),
   };
 
+  const options = {
+    scales: {
+      r: {
+        beginAtZero: true,
+        suggestedMin: 50,
+        suggestedMax: 100,
+      },
+    },
+  };
+
   return (
     <section>
       <Link className="text-gray-500 hover:underline" href="/">
@@ -81,10 +91,11 @@ const ProductCompared = ({ comparedProducts, products }) => {
           </table>
         </section>
         <section className="w-1/3">
-          <ChartComponent data={data} />
+          <ChartComponent data={data} options={options} />
         </section>
       </section>
     </section>
   );
 };
+
 export default ProductCompared;
