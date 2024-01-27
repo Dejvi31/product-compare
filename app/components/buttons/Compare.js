@@ -36,7 +36,7 @@ const Compare = ({
   };
 
   return (
-    <section className="fixed bottom-7 right-4 text-gray-800 bg-white">
+    <section className="fixed z-50 bottom-7 right-4 text-gray-800 bg-white">
       {selectedProducts.length >= 2 && (
         <section className="flex flex-col items-center">
           <table>

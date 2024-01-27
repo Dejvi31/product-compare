@@ -68,7 +68,7 @@ const ProductCompared = ({ comparedProducts, products }) => {
     scales: {
       r: {
         beginAtZero: true,
-        suggestedMin: 50,
+        suggestedMin: 0,
         suggestedMax: 100,
       },
     },
