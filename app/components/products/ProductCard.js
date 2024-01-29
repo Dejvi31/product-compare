@@ -30,11 +30,10 @@ const ProductCard = ({ product, onSelect, selected, onProductSelect }) => {
             className="rounded-md object-cover  h-20 mr-4"
           />
 
-          <div>
+          <section>
             <h3 className="text-lg font-semibold mb-1">{name}</h3>
-
             <p className="text-md text-gray-800 font-bold">${price}</p>
-          </div>
+          </section>
         </section>
       </Link>
     </section>
