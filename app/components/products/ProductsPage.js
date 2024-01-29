@@ -1,15 +1,21 @@
 "use client";
+import React from "react";
 import ProductList from "./ProductList";
 import Sorting from "../buttons/Sorting";
 import Compare from "../buttons/Compare";
 import Search from "../forms/Search";
 import useProductManagement from "../../helpers/useProductManagement";
+import Pagination from "../Pagination";
 
 const ProductPage = ({
   products,
   category,
   searchInput = true,
   sort = true,
+  paginate,
+  currentPage,
+  productsPerPage,
+  totalProducts,
 }) => {
   const {
     selectedProducts,
@@ -27,6 +33,8 @@ const ProductPage = ({
   } = useProductManagement({
     initialProducts: products || [],
   });
+
+  const totalPages = Math.ceil(totalProducts / productsPerPage);
 
   return (
     <section className="App">
@@ -54,7 +62,7 @@ const ProductPage = ({
         handleClearList={handleClearList}
         handleProductRemove={handleProductRemove}
       />
-      {products.length > 0 ? (
+      {filteredProducts.length > 0 ? (
         <ProductList
           sortedProducts={filteredProducts}
           handleProductsSelect={handleProductsSelect}
@@ -64,6 +72,15 @@ const ProductPage = ({
       ) : (
         <section className="text-gray-500 mt-4">
           No Product Found With That Name
+        </section>
+      )}
+      {totalPages > 1 && (
+        <section className="mt-4">
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            paginate={paginate}
+          />
         </section>
       )}
     </section>

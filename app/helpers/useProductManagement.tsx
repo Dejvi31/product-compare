@@ -61,6 +61,9 @@ const useProductManagement = ({
       setSelectedProducts(JSON.parse(storedSelectedProducts));
     }
   }, []);
+  useEffect(() => {
+    setProducts(initialProducts || []);
+  }, [initialProducts]);
 
   const handleSort = (type: string) => {
     if (type === sortBy) {
@@ -120,7 +123,6 @@ const useProductManagement = ({
     localStorage.removeItem("selectedProducts");
   };
 
-  // Sort products without modifying the original array
   const sortedProducts = [...products].sort((a, b) => {
     if (sortBy === "price") {
       return sortOrder === "asc" ? a.price - b.price : b.price - a.price;
