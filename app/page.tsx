@@ -49,7 +49,7 @@ const HomePage = () => {
       />
       {filteredProducts.length > 0 ? (
         <>
-          <section className="mt-8 border">
+          <section className="mt-8 w-full border-b border-gray-800">
             <section className="flex items-center ">
               <span
                 className="underline cursor-pointer hover:text-gray-500"
@@ -68,7 +68,7 @@ const HomePage = () => {
             />
           </section>
 
-          <section className="mt-8 border">
+          <section className="mt-8 w-full border-t border-gray-800">
             <section className="flex items-center">
               <span
                 className="underline cursor-pointer hover:text-gray-500"
