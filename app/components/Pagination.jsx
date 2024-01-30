@@ -13,13 +13,13 @@ const Pagination = ({ currentPage, totalPages, paginate }) => {
         {pageNumbers.map((number) => (
           <li
             key={number}
-            className={`px-3 py-1 border rounded ${
+            className={` border rounded ${
               number === currentPage ? "bg-blue-500 text-white" : "bg-gray-300"
             }`}
           >
             <button
               onClick={() => paginate(number)}
-              className="focus:outline-none"
+              className="px-3 py-1 focus:outline-none"
             >
               {number}
             </button>
