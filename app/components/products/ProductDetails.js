@@ -1,3 +1,5 @@
+import { useSession } from "next-auth/react";
+
 const ProductDetails = ({
   name,
   category,
@@ -6,6 +8,7 @@ const ProductDetails = ({
   specifications,
   price,
 }) => {
+  const session = useSession();
   return (
     <>
       <section className="w-1/2">
@@ -38,8 +41,17 @@ const ProductDetails = ({
           </section>
           <section className="mt-4 flex items-center justify-center">
             <p className="text-4xl">${price}</p>
-            <button className="bg-gray-800 ml-5 text-white px-4 py-2 rounded">
-              Add to Cart
+            <button className=" ml-5  px-4 py-2 rounded">
+              {session?.status === "authenticated" ? (
+                <img
+                  src="/shopping-cart.svg"
+                  alt="shopping cart"
+                  width={24}
+                  height={24}
+                />
+              ) : (
+                "Log in to add to cart"
+              )}
             </button>
           </section>
         </section>
