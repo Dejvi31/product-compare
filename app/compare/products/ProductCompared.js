@@ -2,6 +2,7 @@ import React from "react";
 import ChartComponent from "./ChartComponent";
 import ProductComparedDetails from "./ProductComparedDetails";
 import Link from "next/link";
+import ComparedTable from "./ComparedTable";
 
 const ProductCompared = ({ comparedProducts, products }) => {
   const getMaxValue = (property, comparedProducts, products) => {
@@ -81,6 +82,10 @@ const ProductCompared = ({ comparedProducts, products }) => {
       <section className="flex">
         <section className="w-2/3">
           <ProductComparedDetails
+            comparedProducts={comparedProducts}
+            products={products}
+          />
+          <ComparedTable
             comparedProducts={comparedProducts}
             products={products}
           />

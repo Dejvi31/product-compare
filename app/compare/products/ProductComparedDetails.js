@@ -2,7 +2,7 @@ import React from "react";
 
 const ProductComparedDetails = ({ comparedProducts, products }) => {
   return (
-    <section className="grid grid-cols-2 gap-4">
+    <section className="grid grid-cols-3 gap-4">
       {comparedProducts.map((productId, index) => {
         const { name, image, price, specifications } =
           products.find((p) => p.id === productId) || {};
@@ -25,12 +25,6 @@ const ProductComparedDetails = ({ comparedProducts, products }) => {
               <p className="absolute right-3 bottom-2 text-xl font-bold bg-gray-800 text-white bg-opacity-75 px-3">
                 ${price}
               </p>
-            </section>
-
-            <section>
-              <p>Display: {specifications.display} inches</p>
-              <p>SOC: {specifications.SOC}</p>
-              <p>Battery: {specifications.battery} mAh</p>
             </section>
           </section>
         );
