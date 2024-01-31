@@ -53,6 +53,7 @@ const ProductCompared = ({ comparedProducts, products }) => {
       return {
         label: product ? product.name : "",
         data: scaledData,
+        originalData: specificationsData,
         fill: true,
         backgroundColor: color,
         borderColor: color,
@@ -74,6 +75,17 @@ const ProductCompared = ({ comparedProducts, products }) => {
     },
     plugins: {
       tooltip: {
+        callbacks: {
+          label: (context) => {
+            const datasetLabel = context.dataset.label || "";
+            const originalValue =
+              context.dataset.originalData[context.dataIndex];
+            return `${datasetLabel}: ${originalValue}`;
+          },
+          title: () => {
+            return "";
+          },
+        },
         backgroundColor: "rgba(0, 0, 0, 0.7)",
         bodyFont: {
           size: 10,

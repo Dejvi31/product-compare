@@ -2,7 +2,7 @@ import React from "react";
 
 const ComparedTable = ({ comparedProducts, products }) => {
   return (
-    <table className="w-full border-collapse border">
+    <table className="w-full mt-5 border-collapse border">
       <thead>
         <tr className="bg-gray-800 text-white">
           <th className="py-2 px-4 border">Specifications</th>
