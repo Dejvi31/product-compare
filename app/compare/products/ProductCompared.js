@@ -72,6 +72,17 @@ const ProductCompared = ({ comparedProducts, products }) => {
         suggestedMax: 100,
       },
     },
+    plugins: {
+      tooltip: {
+        backgroundColor: "rgba(0, 0, 0, 0.7)",
+        bodyFont: {
+          size: 10,
+        },
+        bodySpacing: 2,
+        padding: 10,
+        cornerRadius: 25,
+      },
+    },
   };
 
   return (
