@@ -23,6 +23,12 @@ const HomePage = () => {
 
   const [showPopup, setShowPopup] = useState(true);
 
+  const getProducts = async () => {
+    const res = await fetch("http://localhost:3000/api");
+    const { downloads } = await res.json();
+    console.log("downloads", downloads);
+  };
+
   const router = useRouter();
 
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -47,6 +53,7 @@ const HomePage = () => {
         onChange={handleSearchChange}
         placeholder="Search for any product..."
       />
+      <button onClick={getProducts}>Get Products</button>
       {filteredProducts.length > 0 ? (
         <>
           <section className="mt-8 w-full border-b border-gray-800">
