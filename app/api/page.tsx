@@ -1,17 +1,20 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import { JSDOM } from "jsdom";
 
-const getProducts = async (req: NextApiRequest, res: NextApiResponse) => {
-  const response = await fetch("https://www.npmjs.com/package/puppeteer");
-  const html = await response.text();
+const getProducts = async () => {
+  const response = await fetch(
+    `https://www.gsmarena.com/samsung_galaxy_s24_ultra-12771.php`
+  );
 
+  const html = await response.text();
   const dom = new JSDOM(html);
   const document = dom.window.document;
 
-  const downloads = document.querySelector("._9ba9a726")?.textContent;
+  const downloads = document.querySelector(
+    "h1.specs-phone-name-title"
+  )?.textContent;
   console.log("downloads", downloads);
 
-  res.status(200).json({ downloads });
+  return "";
 };
 
 export default getProducts;

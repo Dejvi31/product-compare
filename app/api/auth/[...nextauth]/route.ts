@@ -1,5 +1,7 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import FacebookProvider from "next-auth/providers/facebook";
+import InstagramProvider from "next-auth/providers/instagram";
 
 const handler = NextAuth({
   providers: [
@@ -13,6 +15,19 @@ const handler = NextAuth({
           response_type: "code",
         },
       },
+    }),
+    FacebookProvider({
+      clientId: process.env.FACEBOOK_CLIENT_ID as string,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET as string,
+      authorization: {
+        params: {
+          scope: "openid profile email",
+        },
+      },
+    }),
+    InstagramProvider({
+      clientId: process.env.INSTAGRAM_CLIENT_ID as string,
+      clientSecret: process.env.INSTAGRAM_CLIENT_SECRET as string,
     }),
   ],
 });

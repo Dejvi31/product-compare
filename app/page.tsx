@@ -24,9 +24,8 @@ const HomePage = () => {
   const [showPopup, setShowPopup] = useState(true);
 
   const getProducts = async () => {
-    const res = await fetch("http://localhost:3000/api");
-    const { downloads } = await res.json();
-    console.log("downloads", downloads);
+    fetch(`http://localhost:3000/api`);
+    console.log("punon");
   };
 
   const router = useRouter();

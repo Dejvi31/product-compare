@@ -28,7 +28,13 @@ const ProductCompared = ({ comparedProducts, products }) => {
   const maxRam = getMaxValue("ram", comparedProducts, products);
 
   const data = {
-    labels: ["Price", "Battery", "Storage", "Display", "RAM"],
+    labels: [
+      "Price",
+      "Battery (mAh)",
+      "Storage (GB)",
+      "Display (inch)",
+      "RAM (GB)",
+    ],
     datasets: comparedProducts.map((productId) => {
       const product = products.find((p) => p.id === productId);
       const color = `rgba(${Math.random() * 255},${Math.random() * 255},${
@@ -77,18 +83,18 @@ const ProductCompared = ({ comparedProducts, products }) => {
       tooltip: {
         callbacks: {
           label: (context) => {
-            const datasetLabel = context.dataset.label || "";
             const originalValue =
               context.dataset.originalData[context.dataIndex];
-            return `${datasetLabel}: ${originalValue}`;
+            return `${context.label}: ${originalValue}`;
           },
-          title: () => {
-            return "";
+          title: (tooltipItems) => {
+            const item = tooltipItems[0];
+            return `${item.dataset.label}`;
           },
         },
         backgroundColor: "rgba(0, 0, 0, 0.7)",
         bodyFont: {
-          size: 10,
+          size: 12,
         },
         bodySpacing: 2,
         padding: 10,
