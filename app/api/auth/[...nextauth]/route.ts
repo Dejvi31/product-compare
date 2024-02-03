@@ -30,6 +30,7 @@ const handler = NextAuth({
       clientSecret: process.env.INSTAGRAM_CLIENT_SECRET as string,
     }),
   ],
+  callbacks: {},
 });
 
 export { handler as GET, handler as POST };

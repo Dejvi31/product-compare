@@ -42,6 +42,12 @@ interface UseProductManagementReturn {
   handleCompare: () => void;
   handleProductRemove: (productIdToRemove: number) => void;
   handleClearList: () => void;
+  phoneNames: string[];
+  setPhoneNames: Dispatch<SetStateAction<string[]>>;
+  phoneImages: string[];
+  setPhoneImages: Dispatch<SetStateAction<string[]>>;
+  dataFetched: boolean;
+  setDataFetched: Dispatch<SetStateAction<boolean>>;
 }
 
 const useProductManagement = ({
@@ -52,6 +58,9 @@ const useProductManagement = ({
   const [sortOrder, setSortOrder] = useState<string>("asc");
   const [search, setSearch] = useState<string>("");
   const [products, setProducts] = useState<Product[]>(initialProducts || []);
+  const [phoneNames, setPhoneNames] = useState<string[]>([]);
+  const [phoneImages, setPhoneImages] = useState<string[]>([]);
+  const [dataFetched, setDataFetched] = useState(false);
 
   const router = useRouter();
 
@@ -64,6 +73,22 @@ const useProductManagement = ({
   useEffect(() => {
     setProducts(initialProducts || []);
   }, [initialProducts]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/api");
+        const data = await response.json();
+        setPhoneNames(data.phoneNames);
+        setPhoneImages(data.phoneImages);
+        setDataFetched(true);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleSort = (type: string) => {
     if (type === sortBy) {
@@ -152,6 +177,12 @@ const useProductManagement = ({
     handleCompare,
     handleProductRemove,
     handleClearList,
+    phoneNames,
+    setPhoneNames,
+    phoneImages,
+    setPhoneImages,
+    dataFetched,
+    setDataFetched,
   };
 };
 

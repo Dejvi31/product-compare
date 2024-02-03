@@ -1,5 +1,5 @@
 "use client";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import products from "./data/Products";
 import Search from "./components/forms/Search";
 import useProductManagement from "./helpers/useProductManagement";
@@ -19,14 +19,12 @@ const HomePage = () => {
     handleCompare,
     handleProductRemove,
     handleClearList,
+    phoneNames,
+    phoneImages,
+    dataFetched,
   } = useProductManagement({ initialProducts: products });
 
   const [showPopup, setShowPopup] = useState(true);
-
-  const getProducts = async () => {
-    fetch(`http://localhost:3000/api`);
-    console.log("punon");
-  };
 
   const router = useRouter();
 
@@ -52,7 +50,16 @@ const HomePage = () => {
         onChange={handleSearchChange}
         placeholder="Search for any product..."
       />
-      <button onClick={getProducts}>Get Products</button>
+      {dataFetched ? (
+        phoneNames.map((name, index) => (
+          <div key={index}>
+            <p>{name}</p>
+            <img src={phoneImages[index]} alt={name} />
+          </div>
+        ))
+      ) : (
+        <p>Loading phone names...</p>
+      )}
       {filteredProducts.length > 0 ? (
         <>
           <section className="mt-8 w-full border-b border-gray-800">

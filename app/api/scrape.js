@@ -5,7 +5,7 @@ async function scrapeGSMarena() {
   const page = await browser.newPage();
 
   // Navigate to GSM Arena's URL
-  await page.goto("https://www.gsmarena.com/");
+  await page.goto("https://versus.com/en/phone");
 
   // Example: Extract the titles of all products
   const productTitles = await page.evaluate(() => {
