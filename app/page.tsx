@@ -6,6 +6,7 @@ import useProductManagement from "./helpers/useProductManagement";
 import { useRouter } from "next/navigation";
 import ProductList from "./components/products/ProductList";
 import Compare from "./components/buttons/Compare";
+import ScrapedProductList from "./components/scrapedProducts/ScrapedProductList";
 import StartingPopup from "./components/popup/StartingPopup";
 
 const HomePage = () => {
@@ -49,39 +50,7 @@ const HomePage = () => {
         onChange={handleSearchChange}
         placeholder="Search for any product..."
       />
-      <section className="grid grid-cols-4 gap-2">
-        {dataFetched ? (
-          phoneData.names.map((name, index) => (
-            <div
-              key={index}
-              className="flex items-center border p-4 mb-4 rounded-md shadow-md"
-            >
-              <img
-                src={phoneData.images[index]}
-                alt={name}
-                className="rounded-md shadow-md w-16 h-16 mr-4"
-              />
-
-              <div className="flex flex-col">
-                <p className="text-xl font-semibold mb-2">{name}</p>
-                <section className="grid grid-cols-2 gap-1">
-                  {Object.entries(phoneData.properties[index]).map(
-                    ([property, value]) => (
-                      <section key={property} className="text-sm mb-1">
-                        <strong>{value}</strong>
-                      </section>
-                    )
-                  )}
-                </section>
-              </div>
-            </div>
-          ))
-        ) : (
-          <p className="text-center text-gray-500 col-span-4">
-            Loading phone data...
-          </p>
-        )}
-      </section>
+      <ScrapedProductList dataFetched={dataFetched} phoneData={phoneData} />
 
       {filteredProducts.length > 0 ? (
         <>
