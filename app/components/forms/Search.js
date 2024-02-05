@@ -2,7 +2,7 @@ import React from "react";
 
 const Search = ({ value, onChange, placeholder }) => {
   return (
-    <section className="flex items-center justify-center">
+    <section className="flex items-center justify-center my-4">
       <input
         type="text"
         name="search"

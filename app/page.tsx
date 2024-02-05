@@ -7,7 +7,9 @@ import { useRouter } from "next/navigation";
 import ProductList from "./components/products/ProductList";
 import Compare from "./components/buttons/Compare";
 import ScrapedProductList from "./components/scrapedProducts/ScrapedProductList";
+import ScrapedCompare from "./components/scrapedProducts/ScrapedCompare";
 import StartingPopup from "./components/popup/StartingPopup";
+import useScrapedProductManagement from "./helpers/useScrapedProductManagement";
 
 const HomePage = () => {
   const {
@@ -20,9 +22,8 @@ const HomePage = () => {
     handleCompare,
     handleProductRemove,
     handleClearList,
-    phoneData,
-    dataFetched,
   } = useProductManagement({ initialProducts: products });
+  const { phoneData, dataFetched } = useScrapedProductManagement();
 
   const [showPopup, setShowPopup] = useState(true);
 
@@ -42,6 +43,7 @@ const HomePage = () => {
   const closePopup = () => {
     setShowPopup(false);
   };
+
   return (
     <>
       {/* {showPopup && <StartingPopup closePopup={closePopup} />} */}
@@ -96,13 +98,14 @@ const HomePage = () => {
           No Product Found With That Name
         </section>
       )}
-      <Compare
+      <ScrapedCompare />
+      {/* <Compare
         handleCompare={handleCompare}
         selectedProducts={selectedProducts}
         products={products}
         handleClearList={handleClearList}
         handleProductRemove={handleProductRemove}
-      />
+      /> */}
     </>
   );
 };

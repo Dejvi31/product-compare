@@ -42,13 +42,6 @@ interface UseProductManagementReturn {
   handleCompare: () => void;
   handleProductRemove: (productIdToRemove: number) => void;
   handleClearList: () => void;
-  phoneData: {
-    names: string[];
-    images: string[];
-    properties: Record<string, string>;
-  };
-  dataFetched: boolean;
-  setDataFetched: Dispatch<SetStateAction<boolean>>;
 }
 
 const useProductManagement = ({
@@ -59,12 +52,6 @@ const useProductManagement = ({
   const [sortOrder, setSortOrder] = useState<string>("asc");
   const [search, setSearch] = useState<string>("");
   const [products, setProducts] = useState<Product[]>(initialProducts || []);
-  const [phoneData, setPhoneData] = useState({
-    names: [],
-    images: [],
-    properties: {},
-  });
-  const [dataFetched, setDataFetched] = useState(false);
 
   const router = useRouter();
 
@@ -77,25 +64,6 @@ const useProductManagement = ({
   useEffect(() => {
     setProducts(initialProducts || []);
   }, [initialProducts]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("http://localhost:3000/api");
-        const data = await response.json();
-        setPhoneData({
-          names: data.phoneNames,
-          images: data.phoneImages,
-          properties: data.phoneProperties,
-        });
-        setDataFetched(true);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   const handleSort = (type: string) => {
     if (type === sortBy) {
@@ -184,9 +152,6 @@ const useProductManagement = ({
     handleCompare,
     handleProductRemove,
     handleClearList,
-    phoneData,
-    dataFetched,
-    setDataFetched,
   };
 };
 

@@ -85,9 +85,9 @@ export async function GET() {
     phonePropertiesArray.push(phoneProperties);
   });
 
-  console.log("phoneNames", phoneNames);
-  console.log("phoneImages", phoneImages);
-  console.log("Phone Properties:", phonePropertiesArray);
+  // console.log("phoneNames", phoneNames);
+  // console.log("phoneImages", phoneImages);
+  // console.log("Phone Properties:", phonePropertiesArray);
 
   return Response.json({
     phoneNames,
