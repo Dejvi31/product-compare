@@ -34,7 +34,7 @@ export async function GET() {
       );
 
       const phoneProperties: PhoneProperties = {};
-      const propertyNames = ["Display", "RAM", "Pixel", "Battery"];
+      const propertyNames = [`Display`, `RAM`, `Pixel`, `Battery`];
 
       propElements.forEach((element, index) => {
         const propertyName = propertyNames[index];

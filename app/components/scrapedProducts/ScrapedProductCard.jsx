@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { DisplaySvg, RamSvg, PixelSvg, BatterySvg } from "../svg";
 
 const ScrapedProductCard = ({
   scrapedProduct,
@@ -32,16 +33,23 @@ const ScrapedProductCard = ({
         <img
           src={image}
           alt={name}
-          className="rounded-md object-cover  h-20 mr-4"
+          className="rounded-md object-cover h-28 mr-4"
         />
 
         <section className="flex flex-col">
-          <p className="text-xl font-semibold mb-2">{name}</p>
+          <p className="text-xs font-semibold mb-2">{name}</p>
           <section className="grid grid-cols-2 gap-1">
             {properties &&
               Object.entries(properties).map(([property, value]) => (
-                <section key={property} className="text-xs mb-1">
-                  {property}: {value}
+                <section
+                  key={property}
+                  className="flex items-center gap-1 text-xs mb-1"
+                >
+                  {property === "Display" && <DisplaySvg />}
+                  {property === "RAM" && <RamSvg />}
+                  {property === "Pixel" && <PixelSvg />}
+                  {property === "Battery" && <BatterySvg />}
+                  {value}
                 </section>
               ))}
           </section>
