@@ -23,7 +23,16 @@ const HomePage = () => {
     handleProductRemove,
     handleClearList,
   } = useProductManagement({ initialProducts: products });
-  const { phoneData, dataFetched } = useScrapedProductManagement();
+
+  const {
+    selectedScrapedProducts,
+    scrapedProducts,
+    handleScrapedProductSelect,
+    handleScrapedProductsSelect,
+    handleScrapedProductCompare,
+    handleScrapedProductRemove,
+    handleClearScrapedList,
+  } = useScrapedProductManagement();
 
   const [showPopup, setShowPopup] = useState(true);
 
@@ -52,7 +61,12 @@ const HomePage = () => {
         onChange={handleSearchChange}
         placeholder="Search for any product..."
       />
-      <ScrapedProductList dataFetched={dataFetched} phoneData={phoneData} />
+      <ScrapedProductList
+        sortedScrapedProducts={scrapedProducts}
+        handleScrapedProductsSelect={handleScrapedProductsSelect}
+        selectedScrapedProducts={selectedScrapedProducts}
+        handleScrapedProductSelect={handleScrapedProductSelect}
+      />
 
       {filteredProducts.length > 0 ? (
         <>
@@ -98,7 +112,13 @@ const HomePage = () => {
           No Product Found With That Name
         </section>
       )}
-      <ScrapedCompare />
+      <ScrapedCompare
+        handleScrapedProductCompare={handleScrapedProductCompare}
+        handleScrapedProductRemove={handleScrapedProductRemove}
+        handleClearScrapedList={handleClearScrapedList}
+        selectedScrapedProducts={selectedScrapedProducts}
+        scrapedProducts={scrapedProducts}
+      />
       {/* <Compare
         handleCompare={handleCompare}
         selectedProducts={selectedProducts}

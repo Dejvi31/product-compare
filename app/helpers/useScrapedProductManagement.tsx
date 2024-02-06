@@ -1,143 +1,108 @@
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/navigation";
+import { fetchScrapedProducts } from "../api/api";
 
 interface ScrapedProduct {
+  id: number;
   name: string;
   image: string;
   properties: Record<string, string>;
 }
 
 interface UseScrapedProductManagementReturn {
-  selectedProducts: ScrapedProduct[];
+  selectedScrapedProducts: number[];
+  scrapedProducts: ScrapedProduct[];
   setScrapedProducts: Dispatch<SetStateAction<ScrapedProduct[]>>;
   handleScrapedProductSelect: (productId: number) => void;
   handleScrapedProductsSelect: (productId: number) => void;
   handleScrapedProductCompare: () => void;
   handleScrapedProductRemove: (productIdToRemove: number) => void;
   handleClearScrapedList: () => void;
-  phoneData: {
-    names: string[];
-    images: string[];
-    properties: Record<string, string>;
-  };
-  dataFetched: boolean;
-  setDataFetched: Dispatch<SetStateAction<boolean>>;
 }
 
 const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
-  const [selectedProducts, setSelectedProducts] = useState<ScrapedProduct[]>(
-    []
-  );
+  const [selectedScrapedProducts, setSelectedScrapedProducts] = useState<
+    number[]
+  >([]);
   const [scrapedProducts, setScrapedProducts] = useState<ScrapedProduct[]>([]);
-  const [phoneData, setPhoneData] = useState({
-    names: [],
-    images: [],
-    properties: {},
-  });
-  const [dataFetched, setDataFetched] = useState(false);
-
   const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await fetch("http://localhost:3000/api");
-        const data = await response.json();
-        setPhoneData({
-          names: data.phoneNames,
-          images: data.phoneImages,
-          properties: data.phoneProperties,
-        });
-        setDataFetched(true);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+      const scrapedProductsArray = await fetchScrapedProducts();
+
+      setScrapedProducts(scrapedProductsArray);
     };
 
     fetchData();
   }, []);
 
   useEffect(() => {
-    const storedSelectedProducts = localStorage.getItem(
+    const storedSelectedScrapedProducts = localStorage.getItem(
       "selectedScrapedProducts"
     );
-    if (storedSelectedProducts) {
-      setSelectedProducts(JSON.parse(storedSelectedProducts));
+    if (storedSelectedScrapedProducts) {
+      setSelectedScrapedProducts(JSON.parse(storedSelectedScrapedProducts));
     }
   }, []);
 
   const handleScrapedProductSelect = (productId: number) => {
-    if (scrapedProducts.length > productId) {
-      const selectedProduct = scrapedProducts[productId];
+    const product = scrapedProducts.find((product) => product.id === productId);
 
-      if (selectedProduct) {
-        // Save selected product to Local Storage
-        localStorage.setItem(
-          "selectedScrapedProduct",
-          JSON.stringify(selectedProduct)
-        );
-      } else {
-        console.error(`Scraped product with index ${productId} not found.`);
-      }
+    if (product) {
+      // Save selected product to Local Storage
+      localStorage.setItem("selectedScrapedProduct", JSON.stringify(product));
     } else {
-      console.error(
-        `Scraped product with index ${productId} not found. The scrapedProducts array may be empty or not yet fetched.`
-      );
+      console.error(`Scraped product with id ${productId} not found.`);
     }
   };
 
   const handleScrapedProductsSelect = (productId: number) => {
-    setSelectedProducts((prev) => {
-      const index = prev.findIndex(
-        (p) => p.name === scrapedProducts[productId].name
-      );
+    setSelectedScrapedProducts((prev) => {
+      const index = prev.indexOf(productId);
       if (index !== -1) {
-        return prev.filter((p) => p.name !== scrapedProducts[productId].name);
+        return prev.filter((id) => id !== productId);
       } else {
-        const updatedSelectedProducts = [...prev, scrapedProducts[productId]];
+        const updatedSelectedProducts = [...prev, productId];
         return updatedSelectedProducts;
       }
     });
   };
 
   const handleScrapedProductCompare = () => {
-    if (selectedProducts.length >= 2) {
+    if (selectedScrapedProducts.length >= 2) {
       // Save selected products to Local Storage
       localStorage.setItem(
         "selectedScrapedProducts",
-        JSON.stringify(selectedProducts)
+        JSON.stringify(selectedScrapedProducts)
       );
-
-      router.push("/compare");
+      router.push("/compare"); // Adjust the route as needed
     } else {
-      console.log("Please select at least 2 products to compare.");
+      console.log("Please select at least 2 scraped products to compare.");
     }
   };
 
   const handleScrapedProductRemove = (productIdToRemove: number) => {
-    setSelectedProducts((prevSelected) =>
-      prevSelected.filter(
-        (product) => product.name !== scrapedProducts[productIdToRemove].name
-      )
+    setSelectedScrapedProducts((prevSelected) =>
+      prevSelected.filter((productId) => productId !== productIdToRemove)
     );
   };
 
   const handleClearScrapedList = () => {
-    setSelectedProducts([]);
+    // Clear the selection in both state and localStorage
+    setSelectedScrapedProducts([]);
     localStorage.removeItem("selectedScrapedProducts");
   };
 
   return {
-    selectedProducts,
+    selectedScrapedProducts,
+    scrapedProducts,
     setScrapedProducts,
     handleScrapedProductSelect,
     handleScrapedProductsSelect,
     handleScrapedProductCompare,
     handleScrapedProductRemove,
     handleClearScrapedList,
-    phoneData,
-    dataFetched,
-    setDataFetched,
   };
 };
 
