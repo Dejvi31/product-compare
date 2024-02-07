@@ -30,19 +30,27 @@
 import React from "react";
 import ProductCompared from "./products/ProductCompared";
 import useScrapedProductManagement from "../helpers/useScrapedProductManagement";
+import { BatterySvg, DisplaySvg, PixelSvg, RamSvg } from "../components/svg";
 
 const ComparePage = () => {
   const { selectedScrapedProducts, scrapedProducts } =
     useScrapedProductManagement();
 
+  const selectedProductsDetails = selectedScrapedProducts.map((productId) => {
+    const selectedProduct = scrapedProducts.find(
+      (product) => product.id === productId
+    );
+    return selectedProduct;
+  });
   return (
-    <div>
+    <section>
       <h1>Compare Scraped Products</h1>
+
       <ProductCompared
-        comparedProducts={selectedScrapedProducts}
+        selectedProductsDetails={selectedProductsDetails}
         scrapedProducts={scrapedProducts}
       />
-    </div>
+    </section>
   );
 };
 

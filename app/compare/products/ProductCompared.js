@@ -128,53 +128,63 @@
 // };
 
 // export default ProductCompared;
-
 import React from "react";
 import ChartComponent from "./ChartComponent";
 import ProductComparedDetails from "./ProductComparedDetails";
 import Link from "next/link";
-import ComparedTable from "./ComparedTable";
 
-const ProductCompared = ({ comparedProducts, scrapedProducts }) => {
-  console.log(scrapedProducts);
-  const getMaxValue = (property, comparedProducts, scrapedProducts) => {
+const ProductCompared = ({ selectedProductsDetails, scrapedProducts }) => {
+  const getMaxValue = (property, selectedProductsDetails, scrapedProducts) => {
     return Math.max(
-      ...comparedProducts.map((productId) => {
-        const product = scrapedProducts.find((p) => p.id === productId);
-        return product && typeof product.properties[property] === "string"
-          ? parseInt(product.properties[property])
+      ...selectedProductsDetails.map((product) => {
+        const productDetails = scrapedProducts.find((p) => p.id === product.id);
+        return productDetails &&
+          typeof productDetails.properties[property] === "string"
+          ? parseInt(productDetails.properties[property])
           : 0;
       })
     );
   };
 
-  const maxBattery = getMaxValue("battery", comparedProducts, scrapedProducts);
-  const maxStorage = getMaxValue("storage", comparedProducts, scrapedProducts);
-  const maxDisplay = getMaxValue("display", comparedProducts, scrapedProducts);
-  const maxRam = getMaxValue("ram", comparedProducts, scrapedProducts);
+  const maxBattery = getMaxValue(
+    "Battery",
+    selectedProductsDetails,
+    scrapedProducts
+  );
+  const maxPixel = getMaxValue(
+    "Pixel",
+    selectedProductsDetails,
+    scrapedProducts
+  );
+  const maxDisplay = getMaxValue(
+    "Display",
+    selectedProductsDetails,
+    scrapedProducts
+  );
+  const maxRam = getMaxValue("RAM", selectedProductsDetails, scrapedProducts);
 
   const data = {
-    labels: ["Battery (mAh)", "Storage (GB)", "Display (inch)", "RAM (GB)"],
-    datasets: comparedProducts.map((productId) => {
-      const product = scrapedProducts.find((p) => p.id === productId);
+    labels: ["Battery (mAh)", "Pixel (ppi)", "Display (inch)", "RAM (GB)"],
+    datasets: selectedProductsDetails.map((product) => {
+      const productDetails = scrapedProducts.find((p) => p.id === product.id);
       const color = `rgba(${Math.random() * 255},${Math.random() * 255},${
         Math.random() * 255
       },0.2)`;
 
       const specificationsData = [
-        parseInt(product.properties.battery),
-        parseInt(product.properties.storage),
-        parseInt(product.properties.display),
-        parseInt(product.properties.ram),
+        parseInt(productDetails?.properties?.Battery) || 0,
+        parseInt(productDetails?.properties?.Pixel) || 0,
+        parseFloat(productDetails?.properties?.Display) || 0,
+        parseInt(productDetails?.properties?.RAM) || 0,
       ];
 
       const scaledData = specificationsData.map(
         (value, index) =>
-          (value / [maxBattery, maxStorage, maxDisplay, maxRam][index]) * 100
+          (value / [maxBattery, maxPixel, maxDisplay, maxRam][index]) * 100
       );
 
       return {
-        label: product ? product.name : "",
+        label: productDetails ? productDetails.name : "",
         data: scaledData,
         originalData: specificationsData,
         fill: true,
@@ -228,12 +238,7 @@ const ProductCompared = ({ comparedProducts, scrapedProducts }) => {
       <section className="flex">
         <section className="w-2/3">
           <ProductComparedDetails
-            comparedProducts={comparedProducts}
-            scrapedProducts={scrapedProducts}
-          />
-          <ComparedTable
-            comparedProducts={comparedProducts}
-            scrapedProducts={scrapedProducts}
+            selectedProductsDetails={selectedProductsDetails}
           />
         </section>
         <section className="w-1/3">

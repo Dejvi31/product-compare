@@ -1,34 +1,28 @@
 import React from "react";
+import { BatterySvg, DisplaySvg, PixelSvg, RamSvg } from "../../components/svg";
 
-const ProductComparedDetails = ({ comparedProducts, products }) => {
+const ProductComparedDetails = ({ selectedProductsDetails }) => {
   return (
-    <section className="w-full grid grid-cols-2 gap-1">
-      {comparedProducts.map((productId, index) => {
-        const { name, image, price, specifications } =
-          products.find((p) => p.id === productId) || {};
-
-        const isLastProduct = index === comparedProducts.length - 1;
-
-        return (
-          <section
-            key={index}
-            className={`relative flex flex-col items-center ${
-              isLastProduct ? "" : "border-r pr-4"
-            }`}
-          >
-            <h1 className="text-lg font-bold mb-2">{name}</h1>
-            <section className="relative flex items-center justify-center w-full">
-              <img src={image} alt={`${name} Image`} className="w-full h-72" />
-              <p className="absolute left-0 top-0 p-2 bg-gray-800 text-white bg-opacity-75">
-                {specifications.storage}GB / {specifications.ram}GB RAM
-              </p>
-              <p className="absolute right-3 bottom-2 text-xl font-bold bg-gray-800 text-white bg-opacity-75 px-3">
-                ${price}
-              </p>
-            </section>
+    <section className="grid grid-cols-2 gap-1">
+      {selectedProductsDetails.map((product, index) => (
+        <section key={index}>
+          <img src={product?.image} alt={product?.name} />
+          <h3 className="font-bold">{product?.name}</h3>
+          <section className="grid grid-cols-2 gap-1 w-3/4">
+            {Object.entries(product?.properties || {}).map(
+              ([property, value]) => (
+                <section key={property}>
+                  {property === "Display" && <DisplaySvg />}
+                  {property === "RAM" && <RamSvg />}
+                  {property === "Pixel" && <PixelSvg />}
+                  {property === "Battery" && <BatterySvg />}
+                  {value}
+                </section>
+              )
+            )}
           </section>
-        );
-      })}
+        </section>
+      ))}
     </section>
   );
 };
