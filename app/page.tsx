@@ -9,14 +9,15 @@ import Compare from "./components/buttons/Compare";
 import ScrapedProductList from "./components/scrapedProducts/ScrapedProductList";
 import ScrapedCompare from "./components/scrapedProducts/ScrapedCompare";
 import StartingPopup from "./components/popup/StartingPopup";
+
 import useScrapedProductManagement from "./helpers/useScrapedProductManagement";
 
 const HomePage = () => {
   const {
     selectedProducts,
-    search,
-    products: filteredProducts,
-    setSearch,
+    //  search,
+    // products: filteredProducts,
+    // setSearch,
     handleProductSelect,
     handleProductsSelect,
     handleCompare,
@@ -26,12 +27,15 @@ const HomePage = () => {
 
   const {
     selectedScrapedProducts,
-    scrapedProducts,
+    scrapedProducts: filteredProducts,
     handleScrapedProductSelect,
     handleScrapedProductsSelect,
     handleScrapedProductCompare,
     handleScrapedProductRemove,
     handleClearScrapedList,
+    search,
+    setSearch,
+    isLoading,
   } = useScrapedProductManagement();
 
   const [showPopup, setShowPopup] = useState(true);
@@ -42,12 +46,12 @@ const HomePage = () => {
     setSearch(e.target.value);
   };
 
-  const phoneProducts = filteredProducts.filter(
-    (product) => product.category === "Phone"
-  );
-  const tvProducts = filteredProducts.filter(
-    (product) => product.category === "TV"
-  );
+  // const phoneProducts = filteredProducts.filter(
+  //   (product) => product.category === "Phone"
+  // );
+  // const tvProducts = filteredProducts.filter(
+  //   (product) => product.category === "TV"
+  // );
 
   const closePopup = () => {
     setShowPopup(false);
@@ -61,14 +65,28 @@ const HomePage = () => {
         onChange={handleSearchChange}
         placeholder="Search for any product..."
       />
-      <ScrapedProductList
-        sortedScrapedProducts={scrapedProducts}
-        handleScrapedProductsSelect={handleScrapedProductsSelect}
-        selectedScrapedProducts={selectedScrapedProducts}
-        handleScrapedProductSelect={handleScrapedProductSelect}
-      />
+      {isLoading ? (
+        <section className="flex items-center justify-center">
+          <span>Loading... ⏳</span>
+        </section>
+      ) : (
+        <>
+          {filteredProducts.length > 0 ? (
+            <ScrapedProductList
+              sortedScrapedProducts={filteredProducts}
+              handleScrapedProductsSelect={handleScrapedProductsSelect}
+              selectedScrapedProducts={selectedScrapedProducts}
+              handleScrapedProductSelect={handleScrapedProductSelect}
+            />
+          ) : (
+            <section className="text-gray-500 mt-4">
+              No Product Found With That Name
+            </section>
+          )}
+        </>
+      )}
 
-      {filteredProducts.length > 0 ? (
+      {/* {filteredProducts.length > 0 ? (
         <>
           <section className="mt-8 w-full border-b border-gray-800">
             <section className="flex items-center ">
@@ -111,13 +129,13 @@ const HomePage = () => {
         <section className="text-gray-500 mt-4">
           No Product Found With That Name
         </section>
-      )}
+      )} */}
       <ScrapedCompare
         handleScrapedProductCompare={handleScrapedProductCompare}
         handleScrapedProductRemove={handleScrapedProductRemove}
         handleClearScrapedList={handleClearScrapedList}
         selectedScrapedProducts={selectedScrapedProducts}
-        scrapedProducts={scrapedProducts}
+        scrapedProducts={filteredProducts}
       />
       {/* <Compare
         handleCompare={handleCompare}

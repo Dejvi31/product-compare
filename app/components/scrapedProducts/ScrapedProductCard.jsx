@@ -10,8 +10,8 @@ const ScrapedProductCard = ({
 }) => {
   const { id, name, image, properties } = scrapedProduct;
 
-  // let link = "scraped/" + name;
-  // link = link.replace(/\s+/g, "-").toLowerCase();
+  let link = "/" + name;
+  link = link.replace(/\s+/g, "-").toLowerCase();
 
   return (
     <section className="relative transition duration-300 transform hover:scale-105">
@@ -23,39 +23,39 @@ const ScrapedProductCard = ({
       >
         ⇆
       </button>
-      {/* <Link href={link}> */}
-      <section
-        className={`max-w-md flex items-center justify-center border p-4 m-4 cursor-pointer  ${
-          selected ? "border-gray-800" : "border-gray-300"
-        }`}
-        onClick={() => onScrapedProductSelect(id)}
-      >
-        <img
-          src={image}
-          alt={name}
-          className="rounded-md object-cover h-28 mr-4"
-        />
+      <Link href={link}>
+        <section
+          className={`max-w-md flex items-center justify-center border p-4 m-4 cursor-pointer  ${
+            selected ? "border-gray-800" : "border-gray-300"
+          }`}
+          onClick={() => onScrapedProductSelect(id)}
+        >
+          <img
+            src={image}
+            alt={name}
+            className="rounded-md object-cover h-28 mr-4"
+          />
 
-        <section className="flex flex-col">
-          <p className="text-xs font-semibold mb-2">{name}</p>
-          <section className="grid grid-cols-2 gap-1">
-            {properties &&
-              Object.entries(properties).map(([property, value]) => (
-                <section
-                  key={property}
-                  className="flex items-center gap-1 text-xs mb-1"
-                >
-                  {property === "Display" && <DisplaySvg />}
-                  {property === "RAM" && <RamSvg />}
-                  {property === "Pixel" && <PixelSvg />}
-                  {property === "Battery" && <BatterySvg />}
-                  {value}
-                </section>
-              ))}
+          <section className="flex flex-col">
+            <p className="text-xs font-semibold mb-2">{name}</p>
+            <section className="grid grid-cols-2 gap-1">
+              {properties &&
+                Object.entries(properties).map(([property, value]) => (
+                  <section
+                    key={property}
+                    className="flex items-center gap-1 text-xs mb-1"
+                  >
+                    {property === "Display" && <DisplaySvg />}
+                    {property === "RAM" && <RamSvg />}
+                    {property === "Pixel" && <PixelSvg />}
+                    {property === "Battery" && <BatterySvg />}
+                    {value}
+                  </section>
+                ))}
+            </section>
           </section>
         </section>
-      </section>
-      {/* </Link> */}
+      </Link>
     </section>
   );
 };

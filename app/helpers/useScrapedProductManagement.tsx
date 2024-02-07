@@ -12,7 +12,10 @@ interface ScrapedProduct {
 interface UseScrapedProductManagementReturn {
   selectedScrapedProducts: number[];
   scrapedProducts: ScrapedProduct[];
+  search: string;
+  setSearch: Dispatch<SetStateAction<string>>;
   setScrapedProducts: Dispatch<SetStateAction<ScrapedProduct[]>>;
+  isLoading: boolean;
   handleScrapedProductSelect: (productId: number) => void;
   handleScrapedProductsSelect: (productId: number) => void;
   handleScrapedProductCompare: () => void;
@@ -25,13 +28,21 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
     number[]
   >([]);
   const [scrapedProducts, setScrapedProducts] = useState<ScrapedProduct[]>([]);
+  const [search, setSearch] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
-      const scrapedProductsArray = await fetchScrapedProducts();
-
-      setScrapedProducts(scrapedProductsArray);
+      try {
+        setIsLoading(true);
+        const scrapedProductsArray = await fetchScrapedProducts();
+        setScrapedProducts(scrapedProductsArray);
+      } catch (error) {
+        console.error("Error fetching scraped products:", error);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     fetchData();
@@ -76,7 +87,7 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
         "selectedScrapedProducts",
         JSON.stringify(selectedScrapedProducts)
       );
-      router.push("/compare"); // Adjust the route as needed
+      router.push("/compare");
     } else {
       console.log("Please select at least 2 scraped products to compare.");
     }
@@ -89,15 +100,21 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
   };
 
   const handleClearScrapedList = () => {
-    // Clear the selection in both state and localStorage
     setSelectedScrapedProducts([]);
     localStorage.removeItem("selectedScrapedProducts");
   };
 
+  const filteredScrapedProducts = scrapedProducts.filter((product) =>
+    product.name.toLowerCase().includes(search.toLowerCase())
+  );
+
   return {
     selectedScrapedProducts,
-    scrapedProducts,
+    scrapedProducts: filteredScrapedProducts,
     setScrapedProducts,
+    search,
+    setSearch,
+    isLoading,
     handleScrapedProductSelect,
     handleScrapedProductsSelect,
     handleScrapedProductCompare,
