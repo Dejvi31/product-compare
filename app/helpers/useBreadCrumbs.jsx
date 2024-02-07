@@ -5,29 +5,13 @@ export const useBreadCrumbs = (selectedProduct) => {
 
   const homeBreadcrumb = { name: "Home", url: "/" };
 
-  if (
-    selectedProduct.category !== undefined &&
-    selectedProduct.name !== undefined
-  ) {
-    const categoryBreadcrumb = {
-      name: selectedProduct.category,
-      url: `/${selectedProduct.category.toLowerCase()}`,
-    };
-
+  if (selectedProduct.name !== undefined) {
     const productBreadcrumb = {
       name: selectedProduct.name,
-      url: `/${selectedProduct.category.toLowerCase()}/${selectedProduct.name}`,
+      url: `/${selectedProduct.name}`,
     };
 
-    const breadcrumbs = [homeBreadcrumb, categoryBreadcrumb, productBreadcrumb];
-    return breadcrumbs;
-  } else if (selectedProduct.category !== undefined) {
-    const categoryBreadcrumb = {
-      name: selectedProduct.category,
-      url: `/${selectedProduct.category.toLowerCase()}`,
-    };
-
-    const breadcrumbs = [homeBreadcrumb, categoryBreadcrumb];
+    const breadcrumbs = [homeBreadcrumb, productBreadcrumb];
     return breadcrumbs;
   }
 

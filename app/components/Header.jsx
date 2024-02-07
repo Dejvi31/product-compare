@@ -12,12 +12,6 @@ const Header = () => {
         <a href="/" className="hover:text-gray-300">
           Home
         </a>
-        <a href="/tv" className="hover:text-gray-300">
-          TV
-        </a>
-        <a href="/phone" className="hover:text-gray-300">
-          Phone
-        </a>
       </nav>
 
       <section className="flex items-center">

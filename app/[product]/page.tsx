@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import useScrapedProductManagement from "../helpers/useScrapedProductManagement";
 import ProductImage from "../components/products/ProductImage";
 import ProductDetails from "../components/products/ProductDetails";
+import { useBreadCrumbs } from "../helpers/useBreadCrumbs";
+import Breadcrumbs from "../components/Breadcrumbs";
 
 const page = () => {
   const { isLoading } = useScrapedProductManagement();
@@ -23,22 +25,28 @@ const page = () => {
     }
   }, []);
 
+  const breadcrumbs = useBreadCrumbs(selectedProduct);
   return (
     <section>
       {isLoading ? (
-        "Loading..."
+        <section className="flex items-center justify-center">
+          <span>Loading... ⏳</span>
+        </section>
       ) : (
         <>
           {selectedProduct ? (
             <>
               {selectedProduct ? (
-                <section className="flex">
-                  <ProductImage
-                    src={selectedProduct.image}
-                    alt={selectedProduct.name}
-                  />
-                  <ProductDetails {...selectedProduct} />
-                </section>
+                <>
+                  <Breadcrumbs breadCrumbs={breadcrumbs} />
+                  <section className="flex">
+                    <ProductImage
+                      src={selectedProduct.image}
+                      alt={selectedProduct.name}
+                    />
+                    <ProductDetails {...selectedProduct} />
+                  </section>
+                </>
               ) : (
                 <div>No selected product.</div>
               )}
