@@ -1,28 +1,10 @@
-import { useState, useEffect, Dispatch, SetStateAction } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { fetchScrapedProducts } from "../api/api";
-
-interface ScrapedProduct {
-  id: number;
-  name: string;
-  image: string;
-  properties: Record<string, string>;
-}
-
-interface UseScrapedProductManagementReturn {
-  selectedScrapedProducts: number[];
-  scrapedProducts: ScrapedProduct[];
-  search: string;
-  setSearch: Dispatch<SetStateAction<string>>;
-  setScrapedProducts: Dispatch<SetStateAction<ScrapedProduct[]>>;
-  isLoading: boolean;
-  selectedProduct: ScrapedProduct | null;
-  handleScrapedProductSelect: (productId: number) => void;
-  handleScrapedProductsSelect: (productId: number) => void;
-  handleScrapedProductCompare: () => void;
-  handleScrapedProductRemove: (productIdToRemove: number) => void;
-  handleClearScrapedList: () => void;
-}
+import {
+  ScrapedProduct,
+  UseScrapedProductManagementReturn,
+} from "./interfaces";
 
 const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
   const [selectedScrapedProducts, setSelectedScrapedProducts] = useState<
@@ -94,7 +76,6 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
 
   const handleScrapedProductCompare = () => {
     if (selectedScrapedProducts.length >= 2) {
-      // Save selected products to Local Storage
       localStorage.setItem(
         "selectedScrapedProducts",
         JSON.stringify(selectedScrapedProducts)
