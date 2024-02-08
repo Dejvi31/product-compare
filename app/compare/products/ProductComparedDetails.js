@@ -6,20 +6,24 @@ const ProductComparedDetails = ({ selectedProductsDetails }) => {
     <section className="grid grid-cols-2 gap-1">
       {selectedProductsDetails.map((product, index) => (
         <section key={index}>
-          <img src={product?.image} alt={product?.name} />
-          <h3 className="font-bold">{product?.name}</h3>
-          <section className="grid grid-cols-2 gap-1 w-3/4">
-            {Object.entries(product?.properties || {}).map(
-              ([property, value]) => (
-                <section key={property}>
-                  {property === "Display" && <DisplaySvg />}
-                  {property === "RAM" && <RamSvg />}
-                  {property === "Pixel" && <PixelSvg />}
-                  {property === "Battery" && <BatterySvg />}
-                  {value}
-                </section>
-              )
-            )}
+          <section className="flex items-center justify-center">
+            <img src={product?.image} alt={product?.name} className="h-64" />
+          </section>
+          <section className="mt-2">
+            <h3 className="font-bold">{product?.name}</h3>
+            <section className="grid grid-cols-2 gap-1">
+              {Object.entries(product?.properties || {}).map(
+                ([property, value]) => (
+                  <section key={property} className="flex items-center gap-1">
+                    {property === "Display" && <DisplaySvg />}
+                    {property === "RAM" && <RamSvg />}
+                    {property === "Pixel" && <PixelSvg />}
+                    {property === "Battery" && <BatterySvg />}
+                    {value}
+                  </section>
+                )
+              )}
+            </section>
           </section>
         </section>
       ))}

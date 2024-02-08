@@ -32,7 +32,7 @@ const HomePage = () => {
 
   return (
     <>
-      {showPopup && <StartingPopup closePopup={closePopup} />}
+      {/* {showPopup && <StartingPopup closePopup={closePopup} />} */}
       <Search
         value={search}
         onChange={handleSearchChange}

@@ -16,6 +16,7 @@ interface UseScrapedProductManagementReturn {
   setSearch: Dispatch<SetStateAction<string>>;
   setScrapedProducts: Dispatch<SetStateAction<ScrapedProduct[]>>;
   isLoading: boolean;
+  selectedProduct: ScrapedProduct | null;
   handleScrapedProductSelect: (productId: number) => void;
   handleScrapedProductsSelect: (productId: number) => void;
   handleScrapedProductCompare: () => void;
@@ -27,6 +28,9 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
   const [selectedScrapedProducts, setSelectedScrapedProducts] = useState<
     number[]
   >([]);
+  const [selectedProduct, setSelectedProduct] = useState<ScrapedProduct | null>(
+    null
+  );
   const [scrapedProducts, setScrapedProducts] = useState<ScrapedProduct[]>([]);
   const [search, setSearch] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -47,6 +51,14 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
 
     fetchData();
   }, []);
+  useEffect(() => {
+    const storedSelectedProduct = localStorage.getItem(
+      "selectedScrapedProduct"
+    );
+    if (storedSelectedProduct) {
+      setSelectedProduct(JSON.parse(storedSelectedProduct));
+    }
+  }, []);
 
   useEffect(() => {
     const storedSelectedScrapedProducts = localStorage.getItem(
@@ -61,8 +73,8 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
     const product = scrapedProducts.find((product) => product.id === productId);
 
     if (product) {
-      // Save selected product to Local Storage
       localStorage.setItem("selectedScrapedProduct", JSON.stringify(product));
+      setSelectedProduct(product);
     } else {
       console.error(`Scraped product with id ${productId} not found.`);
     }
@@ -110,6 +122,7 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
 
   return {
     selectedScrapedProducts,
+    selectedProduct,
     scrapedProducts: filteredScrapedProducts,
     setScrapedProducts,
     search,
