@@ -80,6 +80,24 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
     localStorage.removeItem("selectedScrapedProducts");
   };
 
+  const generateRandomProducts = (count: number): ScrapedProduct[] => {
+    const shuffledProducts = [...scrapedProducts].sort(
+      () => 0.5 - Math.random()
+    );
+    return shuffledProducts.slice(0, count);
+  };
+
+  const handleRandomProductSelect = (productId: number) => {
+    const product = scrapedProducts.find((product) => product.id === productId);
+
+    if (product) {
+      localStorage.setItem("selectedScrapedProduct", JSON.stringify(product));
+      setSelectedProduct(product);
+    } else {
+      console.error(`Random product with id ${productId} not found.`);
+    }
+  };
+
   const filteredScrapedProducts = scrapedProducts.filter((product) =>
     product.name.toLowerCase().includes(search.toLowerCase())
   );
@@ -97,6 +115,8 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
     handleScrapedProductCompare,
     handleScrapedProductRemove,
     handleClearScrapedList,
+    generateRandomProducts,
+    handleRandomProductSelect,
   };
 };
 

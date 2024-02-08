@@ -19,4 +19,6 @@ export interface UseScrapedProductManagementReturn {
   handleScrapedProductCompare: () => void;
   handleScrapedProductRemove: (productIdToRemove: number) => void;
   handleClearScrapedList: () => void;
+  generateRandomProducts: (count: number) => ScrapedProduct[];
+  handleRandomProductSelect: (productId: number) => void;
 }
