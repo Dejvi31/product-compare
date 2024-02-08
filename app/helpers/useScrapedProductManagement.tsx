@@ -5,14 +5,14 @@ import {
   ScrapedProduct,
   UseScrapedProductManagementReturn,
 } from "./interfaces";
+import useLocalStorage from "./useLocalStorage";
 
 const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
-  const [selectedScrapedProducts, setSelectedScrapedProducts] = useState<
+  const [selectedScrapedProducts, setSelectedScrapedProducts] = useLocalStorage<
     number[]
-  >([]);
-  const [selectedProduct, setSelectedProduct] = useState<ScrapedProduct | null>(
-    null
-  );
+  >("selectedScrapedProducts", []);
+  const [selectedProduct, setSelectedProduct] =
+    useLocalStorage<ScrapedProduct | null>("selectedScrapedProduct", null);
   const [scrapedProducts, setScrapedProducts] = useState<ScrapedProduct[]>([]);
   const [search, setSearch] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -32,23 +32,6 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
     };
 
     fetchData();
-  }, []);
-  useEffect(() => {
-    const storedSelectedProduct = localStorage.getItem(
-      "selectedScrapedProduct"
-    );
-    if (storedSelectedProduct) {
-      setSelectedProduct(JSON.parse(storedSelectedProduct));
-    }
-  }, []);
-
-  useEffect(() => {
-    const storedSelectedScrapedProducts = localStorage.getItem(
-      "selectedScrapedProducts"
-    );
-    if (storedSelectedScrapedProducts) {
-      setSelectedScrapedProducts(JSON.parse(storedSelectedScrapedProducts));
-    }
   }, []);
 
   const handleScrapedProductSelect = (productId: number) => {
