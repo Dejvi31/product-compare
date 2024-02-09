@@ -34,32 +34,24 @@ const page = () => {
         </section>
       ) : (
         <>
-          {selectedProduct ? (
+          {selectedProduct && (
             <>
-              {selectedProduct ? (
-                <>
-                  <Breadcrumbs breadCrumbs={breadcrumbs} />
-                  <section className="flex">
-                    <ProductImage
-                      src={selectedProduct.image}
-                      alt={selectedProduct.name}
-                    />
-                    <ProductDetails {...selectedProduct} />
-                  </section>
-                  <section className="border-t-2 mt-2">
-                    <h2>Random Suggestions</h2>
-                    <RandomSuggest
-                      randomProducts={randomProducts}
-                      onRandomProductSelect={handleRandomProductSelect}
-                    />
-                  </section>
-                </>
-              ) : (
-                <div>No selected product.</div>
-              )}
+              <Breadcrumbs breadCrumbs={breadcrumbs} />
+              <section className="flex">
+                <ProductImage
+                  src={selectedProduct.image}
+                  alt={selectedProduct.name}
+                />
+                <ProductDetails {...selectedProduct} />
+              </section>
+              <section className="border-t-2 mt-2">
+                <h2>Random Suggestions</h2>
+                <RandomSuggest
+                  randomProducts={randomProducts}
+                  onRandomProductSelect={handleRandomProductSelect}
+                />
+              </section>
             </>
-          ) : (
-            "No selected product."
           )}
         </>
       )}

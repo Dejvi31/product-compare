@@ -1,6 +1,5 @@
 "use client";
-import React, { ChangeEvent, useState } from "react";
-import Search from "./components/forms/Search";
+import React, { useState } from "react";
 import ScrapedProductList from "./components/scrapedProducts/ScrapedProductList";
 import ScrapedCompare from "./components/scrapedProducts/ScrapedCompare";
 import StartingPopup from "./components/popup/StartingPopup";
@@ -15,16 +14,11 @@ const HomePage = () => {
     handleScrapedProductCompare,
     handleScrapedProductRemove,
     handleClearScrapedList,
-    search,
-    setSearch,
+
     isLoading,
   } = useScrapedProductManagement();
 
   const [showPopup, setShowPopup] = useState(true);
-
-  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-  };
 
   const closePopup = () => {
     setShowPopup(false);
@@ -33,11 +27,7 @@ const HomePage = () => {
   return (
     <>
       {/* {showPopup && <StartingPopup closePopup={closePopup} />} */}
-      <Search
-        value={search}
-        onChange={handleSearchChange}
-        placeholder="Search for any product..."
-      />
+
       {isLoading ? (
         <section className="flex items-center justify-center">
           <span>Loading... ⏳</span>
