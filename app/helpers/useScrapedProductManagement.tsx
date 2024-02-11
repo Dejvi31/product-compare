@@ -18,6 +18,10 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const productsPerPage = 12;
+  const [searchSuggestions, setSearchSuggestions] = useState<ScrapedProduct[]>(
+    []
+  );
+
   const router = useRouter();
 
   // Custom hook for fetching scraped products
@@ -132,6 +136,22 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
     return filteredAndSlicedProducts;
   };
 
+  // Function to handle search suggestions for the HeaderSearch component
+  const handleSearchSuggestions = (inputValue: string) => {
+    const suggestions = scrapedProducts
+      .filter((product) =>
+        product.name.toLowerCase().includes(inputValue.toLowerCase())
+      )
+      .slice(0, 5);
+
+    setSearchSuggestions(suggestions);
+  };
+
+  // Function to clear search suggestions
+  const handleClearSearch = () => {
+    setSearchSuggestions([]);
+  };
+
   // useEffect for fetching scraped products data on component mount
   useEffect(() => {
     fetchScrapedProductsData();
@@ -180,6 +200,9 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
     setCurrentPage,
     productsPerPage,
     getCurrentPageProducts,
+    searchSuggestions,
+    handleSearchSuggestions,
+    handleClearSearch,
   };
 };
 

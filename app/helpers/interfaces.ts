@@ -25,4 +25,7 @@ export interface UseScrapedProductManagementReturn {
   setCurrentPage: Dispatch<SetStateAction<number>>;
   productsPerPage: number;
   getCurrentPageProducts: () => ScrapedProduct[];
+  searchSuggestions: ScrapedProduct[];
+  handleSearchSuggestions: (inputValue: string) => void;
+  handleClearSearch: () => void;
 }

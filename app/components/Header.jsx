@@ -1,19 +1,25 @@
 "use client";
 import React from "react";
 import Login from "../components/buttons/Login";
-import Search from "./forms/Search";
+import HeaderSearch from "../components/forms/HeaderSearch";
 import useScrapedProductManagement from "../helpers/useScrapedProductManagement";
 
 const Header = () => {
   const {
     search,
     setSearch,
-    scrapedProducts: filteredProducts,
+    handleSearchSuggestions,
+    searchSuggestions,
+    handleClearSearch,
   } = useScrapedProductManagement();
 
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
-    console.log(filteredProducts);
+    handleSearchSuggestions(e.target.value);
+  };
+
+  const handleClearSearchInput = () => {
+    handleClearSearch();
   };
   return (
     <header className="bg-gray-800  flex justify-between items-center fixed w-full top-0 z-10 ">
@@ -24,10 +30,12 @@ const Header = () => {
       </section>
 
       <nav className="flex items-center space-x-4 justify-center">
-        <Search
+        <HeaderSearch
           value={search}
           onChange={handleSearchChange}
           placeholder="Search for any product..."
+          suggestions={searchSuggestions}
+          onClearSearch={handleClearSearchInput}
         />
       </nav>
 
