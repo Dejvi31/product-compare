@@ -16,6 +16,8 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
   const [scrapedProducts, setScrapedProducts] = useState<ScrapedProduct[]>([]);
   const [search, setSearch] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const productsPerPage = 12;
   const router = useRouter();
 
   // Custom hook for fetching scraped products
@@ -120,6 +122,16 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
     product.name.toLowerCase().includes(search.toLowerCase())
   );
 
+  // Function to get the products for the current page, considering the search query
+  const getCurrentPageProducts = () => {
+    const filteredAndSlicedProducts = filteredScrapedProducts.slice(
+      (currentPage - 1) * productsPerPage,
+      currentPage * productsPerPage
+    );
+
+    return filteredAndSlicedProducts;
+  };
+
   // useEffect for fetching scraped products data on component mount
   useEffect(() => {
     fetchScrapedProductsData();
@@ -164,6 +176,10 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
     handleClearScrapedList,
     generateRandomProducts,
     handleRandomProductSelect,
+    currentPage,
+    setCurrentPage,
+    productsPerPage,
+    getCurrentPageProducts,
   };
 };
 

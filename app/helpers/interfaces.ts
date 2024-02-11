@@ -21,4 +21,8 @@ export interface UseScrapedProductManagementReturn {
   handleClearScrapedList: () => void;
   generateRandomProducts: (count: number) => ScrapedProduct[];
   handleRandomProductSelect: (productId: number) => void;
+  currentPage: number;
+  setCurrentPage: Dispatch<SetStateAction<number>>;
+  productsPerPage: number;
+  getCurrentPageProducts: () => ScrapedProduct[];
 }

@@ -5,11 +5,12 @@ import ScrapedCompare from "./components/scrapedProducts/ScrapedCompare";
 import StartingPopup from "./components/popup/StartingPopup";
 import useScrapedProductManagement from "./helpers/useScrapedProductManagement";
 import Search from "./components/forms/Search";
+import Pagination from "./components/Pagination";
 
 const HomePage = () => {
   const {
     selectedScrapedProducts,
-    scrapedProducts: filteredProducts,
+    scrapedProducts,
     handleScrapedProductSelect,
     handleScrapedProductsSelect,
     handleScrapedProductCompare,
@@ -18,7 +19,13 @@ const HomePage = () => {
     search,
     setSearch,
     isLoading,
+    getCurrentPageProducts,
+    currentPage,
+    setCurrentPage,
+    productsPerPage,
   } = useScrapedProductManagement();
+
+  const currentProducts = getCurrentPageProducts();
 
   const [showPopup, setShowPopup] = useState(true);
 
@@ -26,10 +33,10 @@ const HomePage = () => {
     setShowPopup(false);
   };
 
+  const totalPages = Math.ceil(scrapedProducts.length / productsPerPage);
+
   const handleSearchChange = (e: any) => {
     setSearch(e.target.value);
-
-    console.log(filteredProducts);
   };
 
   return (
@@ -46,20 +53,25 @@ const HomePage = () => {
         </section>
       ) : (
         <>
-          {filteredProducts.length > 0 ? (
+          {scrapedProducts.length > 0 ? (
             <>
               <ScrapedProductList
-                sortedScrapedProducts={filteredProducts}
+                sortedScrapedProducts={currentProducts}
                 handleScrapedProductsSelect={handleScrapedProductsSelect}
                 selectedScrapedProducts={selectedScrapedProducts}
                 handleScrapedProductSelect={handleScrapedProductSelect}
+              />
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                paginate={setCurrentPage}
               />
               <ScrapedCompare
                 handleScrapedProductCompare={handleScrapedProductCompare}
                 handleScrapedProductRemove={handleScrapedProductRemove}
                 handleClearScrapedList={handleClearScrapedList}
                 selectedScrapedProducts={selectedScrapedProducts}
-                scrapedProducts={filteredProducts}
+                scrapedProducts={scrapedProducts}
               />
             </>
           ) : (
