@@ -11,6 +11,7 @@ const Header = () => {
     handleSearchSuggestions,
     searchSuggestions,
     handleClearSearch,
+    handleScrapedProductSelect,
   } = useScrapedProductManagement();
 
   const handleSearchChange = (e) => {
@@ -25,7 +26,7 @@ const Header = () => {
     <header className="bg-gray-800  flex justify-between items-center fixed w-full top-0 z-10 ">
       <section className="flex items-center">
         <span className="text-xl text-white font-bold cursor-pointer">
-          Logo
+          Home
         </span>
       </section>
 
@@ -36,6 +37,7 @@ const Header = () => {
           placeholder="Search for any product..."
           suggestions={searchSuggestions}
           onClearSearch={handleClearSearchInput}
+          onScrapedProductSelect={handleScrapedProductSelect}
         />
       </nav>
 

@@ -45,6 +45,8 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
       // Save the selected product to local storage and state
       localStorage.setItem("selectedScrapedProduct", JSON.stringify(product));
       setSelectedProduct(product);
+      handleClearSearch();
+      setSearch("");
     } else {
       // Throw an error if the product is not found
       throw new Error(`Scraped product with id ${productId} not found.`);

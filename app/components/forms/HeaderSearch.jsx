@@ -1,4 +1,5 @@
 import React from "react";
+import SuggestionsList from "./SuggestionsList";
 
 const HeaderSearch = ({
   value,
@@ -6,6 +7,7 @@ const HeaderSearch = ({
   placeholder,
   suggestions,
   onClearSearch,
+  onScrapedProductSelect,
 }) => {
   const handleInputChange = (e) => {
     onChange(e);
@@ -15,7 +17,6 @@ const HeaderSearch = ({
     }
   };
 
-  console.log(suggestions);
   return (
     <section className="flex items-center justify-center my-4 relative">
       <input
@@ -27,16 +28,10 @@ const HeaderSearch = ({
         placeholder={placeholder}
       />
       {suggestions.length > 0 && (
-        <ul className="absolute top-10 z-10 bg-white border border-slate-300 mt-1 w-full max-w-md rounded-md shadow-lg">
-          {suggestions.map((suggestion) => (
-            <li
-              key={suggestion.id}
-              className="py-2 px-4 cursor-pointer hover:bg-gray-100"
-            >
-              {suggestion.name}
-            </li>
-          ))}
-        </ul>
+        <SuggestionsList
+          suggestions={suggestions}
+          onScrapedProductSelect={onScrapedProductSelect}
+        />
       )}
     </section>
   );
