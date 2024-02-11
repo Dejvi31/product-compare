@@ -32,7 +32,7 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
   };
 
   // Custom hook for handling selection of a specific scraped product by ID
-  const handleScrapedProductSelect = (productId: number): void | never => {
+  const handleScrapedProductSelect = (productId: number): void => {
     const product = scrapedProducts.find((product) => product.id === productId);
 
     if (product) {
@@ -46,7 +46,7 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
   };
 
   // Custom hook for handling selection/deselection of multiple scraped products
-  const handleScrapedProductsSelect = (productId: number): void | never => {
+  const handleScrapedProductsSelect = (productId: number): void => {
     try {
       setSelectedScrapedProducts((prev) => {
         const index = prev.indexOf(productId);
@@ -102,7 +102,7 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
   };
 
   // Custom hook for handling selection of a random scraped product by ID
-  const handleRandomProductSelect = (productId: number): void | never => {
+  const handleRandomProductSelect = (productId: number): void => {
     const product = scrapedProducts.find((product) => product.id === productId);
 
     if (product) {

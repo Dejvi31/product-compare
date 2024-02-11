@@ -4,6 +4,7 @@ import ScrapedProductList from "./components/scrapedProducts/ScrapedProductList"
 import ScrapedCompare from "./components/scrapedProducts/ScrapedCompare";
 import StartingPopup from "./components/popup/StartingPopup";
 import useScrapedProductManagement from "./helpers/useScrapedProductManagement";
+import Search from "./components/forms/Search";
 
 const HomePage = () => {
   const {
@@ -14,7 +15,8 @@ const HomePage = () => {
     handleScrapedProductCompare,
     handleScrapedProductRemove,
     handleClearScrapedList,
-
+    search,
+    setSearch,
     isLoading,
   } = useScrapedProductManagement();
 
@@ -24,10 +26,20 @@ const HomePage = () => {
     setShowPopup(false);
   };
 
+  const handleSearchChange = (e: any) => {
+    setSearch(e.target.value);
+
+    console.log(filteredProducts);
+  };
+
   return (
     <>
       {/* {showPopup && <StartingPopup closePopup={closePopup} />} */}
-
+      <Search
+        value={search}
+        onChange={handleSearchChange}
+        placeholder="Search for any product..."
+      />
       {isLoading ? (
         <section className="flex items-center justify-center">
           <span>Loading... ⏳</span>

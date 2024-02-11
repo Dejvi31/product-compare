@@ -5,10 +5,15 @@ import Search from "./forms/Search";
 import useScrapedProductManagement from "../helpers/useScrapedProductManagement";
 
 const Header = () => {
-  const { search, setSearch } = useScrapedProductManagement();
+  const {
+    search,
+    setSearch,
+    scrapedProducts: filteredProducts,
+  } = useScrapedProductManagement();
 
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
+    console.log(filteredProducts);
   };
   return (
     <header className="bg-gray-800  flex justify-between items-center fixed w-full top-0 z-10 ">

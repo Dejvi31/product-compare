@@ -48,9 +48,11 @@ const ProductCompared = ({ selectedProductsDetails, scrapedProducts }) => {
         parseInt(productDetails?.properties?.RAM) || 0,
       ];
 
-      const scaledData = specificationsData.map(
-        (value, index) =>
-          (value / [maxBattery, maxPixel, maxDisplay, maxRam][index]) * 100
+      const scaledData = specificationsData.map((value, index) =>
+        Math.min(
+          (value / [maxBattery, maxPixel, maxDisplay, maxRam][index]) * 100,
+          100
+        )
       );
 
       return {
@@ -72,7 +74,7 @@ const ProductCompared = ({ selectedProductsDetails, scrapedProducts }) => {
     scales: {
       r: {
         beginAtZero: true,
-        suggestedMin: 0,
+        // suggestedMin: 0,
         suggestedMax: 100,
       },
     },
