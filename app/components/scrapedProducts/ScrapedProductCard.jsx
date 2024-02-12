@@ -14,7 +14,7 @@ const ScrapedProductCard = ({
   link = link.replace(/\s+/g, "-").toLowerCase();
 
   return (
-    <section className="relative transition duration-300 transform hover:scale-105">
+    <section className="relative transition duration-300 transform hover:scale-95">
       <button
         className="absolute top-2 right-2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold px-2 rounded-full"
         onClick={() => {

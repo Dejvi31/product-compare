@@ -82,6 +82,8 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
         JSON.stringify(selectedScrapedProducts)
       );
       router.push("/compare");
+      handleClearSearch();
+      setSearch("");
     } else {
       // Log a message if fewer than 2 products are selected
       console.log("Please select at least 2 scraped products to compare.");

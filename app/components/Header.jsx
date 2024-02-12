@@ -12,6 +12,10 @@ const Header = () => {
     searchSuggestions,
     handleClearSearch,
     handleScrapedProductSelect,
+    handleScrapedProductsSelect,
+    handleScrapedProductCompare,
+    selectedScrapedProducts,
+    handleClearScrapedList,
   } = useScrapedProductManagement();
 
   const handleSearchChange = (e) => {
@@ -38,6 +42,10 @@ const Header = () => {
           suggestions={searchSuggestions}
           onClearSearch={handleClearSearchInput}
           onScrapedProductSelect={handleScrapedProductSelect}
+          handleScrapedProductsSelect={handleScrapedProductsSelect}
+          handleScrapedProductCompare={handleScrapedProductCompare}
+          selectedScrapedProducts={selectedScrapedProducts}
+          handleClearScrapedList={handleClearScrapedList}
         />
       </nav>
 

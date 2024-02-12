@@ -8,6 +8,10 @@ const HeaderSearch = ({
   suggestions,
   onClearSearch,
   onScrapedProductSelect,
+  handleScrapedProductsSelect,
+  handleScrapedProductCompare,
+  selectedScrapedProducts,
+  handleClearScrapedList,
 }) => {
   const handleInputChange = (e) => {
     onChange(e);
@@ -36,6 +40,10 @@ const HeaderSearch = ({
         <SuggestionsList
           suggestions={suggestions}
           onScrapedProductSelect={onScrapedProductSelect}
+          onSelect={handleScrapedProductsSelect}
+          handleScrapedProductCompare={handleScrapedProductCompare}
+          selectedScrapedProducts={selectedScrapedProducts}
+          handleClearScrapedList={handleClearScrapedList}
         />
       )}
     </section>

@@ -19,18 +19,12 @@ const handler = NextAuth({
     FacebookProvider({
       clientId: process.env.FACEBOOK_CLIENT_ID as string,
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET as string,
-      authorization: {
-        params: {
-          scope: "openid profile email",
-        },
-      },
     }),
     InstagramProvider({
       clientId: process.env.INSTAGRAM_CLIENT_ID as string,
       clientSecret: process.env.INSTAGRAM_CLIENT_SECRET as string,
     }),
   ],
-  callbacks: {},
 });
 
 export { handler as GET, handler as POST };
