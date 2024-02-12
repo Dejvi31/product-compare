@@ -10,7 +10,7 @@ const SuggestionsList = ({
   handleClearScrapedList,
 }) => {
   return (
-    <section className="absolute top-10 z-10 bg-white border border-slate-300 mt-1 w-full max-w-md rounded-md shadow-lg">
+    <section className="absolute top-10 z-10 bg-white border border-slate-300 mt-1 w-full max-w-xl rounded-md shadow-lg">
       {suggestions.map((suggestion) => (
         <section
           key={suggestion.id}
