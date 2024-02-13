@@ -34,7 +34,7 @@ const Header = () => {
         </span>
       </section>
 
-      <nav className="flex items-center justify-center w-9/12">
+      <nav className="flex items-center justify-center w-72">
         <HeaderSearch
           value={search}
           onChange={handleSearchChange}

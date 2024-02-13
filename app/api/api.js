@@ -1,6 +1,10 @@
 export const fetchScrapedProducts = async () => {
   try {
     const response = await fetch("http://localhost:3000/api");
+    if (!response.ok) {
+      throw new Error(`Failed to fetch data. Status: ${response.status}`);
+    }
+
     const data = await response.json();
 
     if (data.productsArray) {
