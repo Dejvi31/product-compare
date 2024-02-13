@@ -21,7 +21,7 @@ const SuggestionsList = ({
           }`}
         >
           <button
-            className="absolute top-2 right-2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold px-2 rounded-full"
+            className="absolute exclude top-2 right-2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold px-2 rounded-full"
             onClick={() => {
               onSelect(suggestion.id);
             }}
@@ -29,6 +29,7 @@ const SuggestionsList = ({
             ⇆
           </button>
           <Link
+            className="exclude"
             href={`/${suggestion.name.replace(/\s+/g, "-").toLowerCase()}`}
             onClick={() => onScrapedProductSelect(suggestion.id)}
           >
@@ -45,13 +46,13 @@ const SuggestionsList = ({
         {selectedScrapedProducts.length > 1 && (
           <>
             <button
-              className="bg-gray-100 hover:bg-gray-200 text-gray-700  font-bold text-xs p-1 rounded"
+              className="exclude bg-gray-100 hover:bg-gray-200 text-gray-700  font-bold text-xs p-1 rounded"
               onClick={handleClearScrapedList}
             >
               Clear List
             </button>
             <button
-              className="bg-blue-900 hover:bg-blue-950 text-white font-bold text-xs p-1 rounded"
+              className="exclude bg-blue-900 hover:bg-blue-950 text-white font-bold text-xs p-1 rounded"
               onClick={handleScrapedProductCompare}
             >
               Compare Now

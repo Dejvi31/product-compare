@@ -25,7 +25,10 @@ const HeaderSearch = ({
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (!searchRef.current.contains(event.target)) {
+      if (
+        !searchRef.current.contains(event.target) &&
+        !event.target.closest(".exclude")
+      ) {
         setIsSuggestionsVisible(false);
       }
     };
