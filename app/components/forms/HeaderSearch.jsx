@@ -30,21 +30,28 @@ const HeaderSearch = ({
       }
     };
 
+    const handleKeyPress = (e) => {
+      if (e.key === "/" && searchRef.current) {
+        e.preventDefault();
+        searchRef.current.focus();
+      }
+    };
+
     window.addEventListener("mousedown", handleClickOutside);
+    window.addEventListener("keydown", handleKeyPress);
 
     return () => {
       window.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("keydown", handleKeyPress);
     };
   }, []);
 
   return (
-    <section
-      className="flex items-center justify-center my-4 w-full relative"
-      ref={searchRef}
-    >
+    <section className="flex items-center justify-center my-4 w-full relative">
       <input
         type="text"
         name="search"
+        ref={searchRef}
         value={value}
         onFocus={() => setIsSuggestionsVisible(true)}
         onChange={handleInputChange}
