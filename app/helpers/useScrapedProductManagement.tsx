@@ -17,7 +17,7 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
   const [search, setSearch] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const productsPerPage = 12;
+  const productsPerPage = 20;
   const [searchSuggestions, setSearchSuggestions] = useState<ScrapedProduct[]>(
     []
   );

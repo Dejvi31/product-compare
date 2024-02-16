@@ -14,7 +14,7 @@ const Pagination = ({ currentPage, totalPages, paginate }) => {
           <li className="border rounded bg-gray-300">
             <button
               onClick={() => paginate(currentPage - 1)}
-              className="px-3 py-1 focus:outline-none"
+              className="p-1 focus:outline-none"
             >
               Previous
             </button>
@@ -29,7 +29,7 @@ const Pagination = ({ currentPage, totalPages, paginate }) => {
           >
             <button
               onClick={() => paginate(number)}
-              className="px-3 py-1 focus:outline-none"
+              className="px-2 py-1 focus:outline-none"
             >
               {number}
             </button>
@@ -39,7 +39,7 @@ const Pagination = ({ currentPage, totalPages, paginate }) => {
           <li className="border rounded bg-gray-300">
             <button
               onClick={() => paginate(currentPage + 1)}
-              className="px-3 py-1 focus:outline-none"
+              className="p-1 focus:outline-none"
             >
               Next
             </button>

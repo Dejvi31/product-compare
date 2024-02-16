@@ -57,6 +57,11 @@ const HomePage = () => {
         <>
           {scrapedProducts.length > 0 ? (
             <>
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                paginate={setCurrentPage}
+              />
               <ScrapedProductList
                 sortedScrapedProducts={currentProducts}
                 handleScrapedProductsSelect={handleScrapedProductsSelect}

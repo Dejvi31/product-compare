@@ -5,9 +5,13 @@ interface PhoneProperties {
 }
 
 export const dynamic = "force-dynamic";
-export async function GET() {
+
+// Function to scrape data from a specific page
+async function scrapePage(
+  pageUrl: string
+): Promise<{ productsArray?: any[]; error?: string }> {
   try {
-    const response = await fetch(`https://versus.com/en/phone`);
+    const response = await fetch(pageUrl);
     const html = await response.text();
     const dom = new JSDOM(html);
     const document = dom.window.document;
@@ -52,11 +56,42 @@ export async function GET() {
       image: phoneImages[id],
       properties: phonePropertiesArray[id],
     }));
-    return Response.json({
+
+    return {
       productsArray,
+    };
+  } catch (error) {
+    console.error(`Error fetching data from ${pageUrl}:`, error);
+    return { error: `Failed to fetch data from ${pageUrl}` };
+  }
+}
+
+export async function GET() {
+  const basePageUrl = "https://versus.com/en/phone";
+  const totalPages = 4; // Set the total number of pages you want to scrape
+
+  const pageUrls = Array.from(
+    { length: totalPages },
+    (_, index) => `${basePageUrl}?page=${index + 1}`
+  );
+
+  try {
+    const results = await Promise.all(pageUrls.map(scrapePage));
+
+    const allProductsArray = results.flatMap(({ productsArray, error }) => {
+      if (error) {
+        // Handle error, e.g., log it
+        console.error(error);
+        return [];
+      }
+      return productsArray;
+    });
+
+    return Response.json({
+      productsArray: allProductsArray,
     });
   } catch (error) {
-    console.error("Error fetching data:", error);
-    return Response.json({ error: "Failed to fetch data" });
+    console.error("Error fetching data from multiple pages:", error);
+    return Response.json({ error: "Failed to fetch data from multiple pages" });
   }
 }
