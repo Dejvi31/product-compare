@@ -28,8 +28,21 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
   // Custom hook for fetching scraped products
   const fetchScrapedProductsData = async () => {
     try {
-      const scrapedProductsArray = await fetchScrapedProducts();
-      setScrapedProducts(scrapedProductsArray);
+      // Check if data is present in sessionStorage
+      const cachedData = sessionStorage.getItem("scrapedProducts");
+
+      if (cachedData) {
+        setScrapedProducts(JSON.parse(cachedData));
+      } else {
+        const scrapedProductsArray = await fetchScrapedProducts();
+        setScrapedProducts(scrapedProductsArray);
+
+        // Save data to sessionStorage
+        sessionStorage.setItem(
+          "scrapedProducts",
+          JSON.stringify(scrapedProductsArray)
+        );
+      }
     } catch (error) {
       console.error("Error fetching scraped products:", error);
     } finally {
@@ -42,8 +55,8 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
     const product = scrapedProducts.find((product) => product.id === productId);
 
     if (product) {
-      // Save the selected product to local storage and state
-      localStorage.setItem("selectedScrapedProduct", JSON.stringify(product));
+      // Save the selected product to session storage and state
+      sessionStorage.setItem("selectedScrapedProduct", JSON.stringify(product));
       setSelectedProduct(product);
       handleClearSearch();
       setSearch("");
@@ -68,7 +81,6 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
         }
       });
     } catch {
-      // Throw an error if an issue occurs during selection/deselection
       throw new Error(`Error handling product selection for id ${productId}.`);
     }
   };
@@ -76,8 +88,8 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
   // Custom hook for redirecting to the compare page with selected products
   const handleScrapedProductCompare = () => {
     if (selectedScrapedProducts.length >= 2) {
-      // Save selected products to local storage and navigate to the compare page
-      localStorage.setItem(
+      // Save selected products to session storage and navigate to the compare page
+      sessionStorage.setItem(
         "selectedScrapedProducts",
         JSON.stringify(selectedScrapedProducts)
       );
@@ -85,7 +97,6 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
       handleClearSearch();
       setSearch("");
     } else {
-      // Log a message if fewer than 2 products are selected
       console.log("Please select at least 2 scraped products to compare.");
     }
   };
@@ -100,7 +111,7 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
   // Custom hook for clearing the list of selected scraped products
   const handleClearScrapedList = () => {
     setSelectedScrapedProducts([]);
-    localStorage.removeItem("selectedScrapedProducts");
+    sessionStorage.removeItem("selectedScrapedProducts");
   };
 
   // Custom hook for generating an array of random scraped products
@@ -116,8 +127,8 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
     const product = scrapedProducts.find((product) => product.id === productId);
 
     if (product) {
-      // Save the randomly selected product to local storage and state
-      localStorage.setItem("selectedScrapedProduct", JSON.stringify(product));
+      // Save the randomly selected product to session storage and state
+      sessionStorage.setItem("selectedScrapedProduct", JSON.stringify(product));
       setSelectedProduct(product);
     } else {
       // Throw an error if the randomly selected product is not found
@@ -172,9 +183,9 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
     fetchScrapedProductsData();
   }, []);
 
-  // useEffect for loading selected scraped product from local storage on component mount
+  // useEffect for loading selected scraped product from session storage on component mount
   useEffect(() => {
-    const storedSelectedProduct = localStorage.getItem(
+    const storedSelectedProduct = sessionStorage.getItem(
       "selectedScrapedProduct"
     );
 
@@ -184,9 +195,9 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
     }
   }, []);
 
-  // useEffect for loading selected scraped products from local storage on component mount
+  // useEffect for loading selected scraped products from session storage on component mount
   useEffect(() => {
-    const storedSelectedProducts = localStorage.getItem(
+    const storedSelectedProducts = sessionStorage.getItem(
       "selectedScrapedProducts"
     );
 
