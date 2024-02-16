@@ -11,7 +11,6 @@ const ScrapedProductCard = ({
   isBookmarked,
 }) => {
   const { id, name, image, properties } = scrapedProduct;
-
   let link = "/" + name;
   link = link.replace(/\s+/g, "-").toLowerCase();
 

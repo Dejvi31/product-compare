@@ -11,9 +11,9 @@ const ScrapedProductList = ({
 }) => {
   return (
     <section className="grid grid-cols-4 gap-1">
-      {sortedScrapedProducts.map((scrapedProduct) => (
+      {sortedScrapedProducts.map((scrapedProduct, index) => (
         <ScrapedProductCard
-          key={scrapedProduct.id}
+          key={index}
           scrapedProduct={scrapedProduct}
           onSelect={handleScrapedProductsSelect}
           selected={selectedScrapedProducts.includes(scrapedProduct.id)}

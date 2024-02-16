@@ -5,10 +5,10 @@ import { BatterySvg, DisplaySvg, PixelSvg, RamSvg } from "./svg";
 const RandomSuggest = ({ randomProducts, onRandomProductSelect }) => {
   return (
     <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
-      {randomProducts.map((product) => (
+      {randomProducts.map((product, index) => (
         <Link
           href={`/${product.name.toLowerCase().replace(/\s+/g, "-")}`}
-          key={product.id}
+          key={index}
         >
           <section
             className="max-w-md flex items-center justify-center border p-4 m-4 cursor-pointer"

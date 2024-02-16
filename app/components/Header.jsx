@@ -3,6 +3,7 @@ import React from "react";
 import Login from "../components/buttons/Login";
 import HeaderSearch from "../components/forms/HeaderSearch";
 import useScrapedProductManagement from "../helpers/useScrapedProductManagement";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
   const {
@@ -16,8 +17,11 @@ const Header = () => {
     handleScrapedProductCompare,
     selectedScrapedProducts,
     handleClearScrapedList,
+    recentlyVisitedProducts,
+    setSearchSuggestions,
   } = useScrapedProductManagement();
 
+  const router = useRouter();
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
     handleSearchSuggestions(e.target.value);
@@ -29,7 +33,10 @@ const Header = () => {
   return (
     <header className="bg-gray-800  flex justify-between items-center fixed w-full top-0 z-10 ">
       <section className="flex items-center">
-        <span className="text-xl text-white font-bold cursor-pointer">
+        <span
+          className="text-xl text-white font-bold cursor-pointer"
+          onClick={() => router.push("/")}
+        >
           Home
         </span>
       </section>
@@ -46,6 +53,8 @@ const Header = () => {
           handleScrapedProductCompare={handleScrapedProductCompare}
           selectedScrapedProducts={selectedScrapedProducts}
           handleClearScrapedList={handleClearScrapedList}
+          recentlyVisitedProducts={recentlyVisitedProducts}
+          setSearchSuggestions={setSearchSuggestions}
         />
       </nav>
 

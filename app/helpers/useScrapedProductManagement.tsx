@@ -21,6 +21,9 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
   const [searchSuggestions, setSearchSuggestions] = useState<ScrapedProduct[]>(
     []
   );
+  const [recentlyVisitedProducts, setRecentlyVisitedProducts] = useState<
+    ScrapedProduct[]
+  >([]);
   const [bookmarkedProducts, setBookmarkedProducts] = useState<number[]>([]);
 
   const router = useRouter();
@@ -49,7 +52,10 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
       setIsLoading(false);
     }
   };
-
+  // useEffect for fetching scraped products data on component mount
+  useEffect(() => {
+    fetchScrapedProductsData();
+  }, []);
   // Custom hook for handling selection of a specific scraped product by ID
   const handleScrapedProductSelect = (productId: number): void => {
     const product = scrapedProducts.find((product) => product.id === productId);
@@ -58,6 +64,20 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
       // Save the selected product to session storage and state
       sessionStorage.setItem("selectedScrapedProduct", JSON.stringify(product));
       setSelectedProduct(product);
+
+      // Update recently visited products
+      setRecentlyVisitedProducts((prev) => {
+        const updatedList = [
+          product,
+          ...prev.filter((item) => item.id !== productId),
+        ];
+        sessionStorage.setItem(
+          "recentlyVisitedProducts",
+          JSON.stringify(updatedList)
+        );
+        return updatedList;
+      });
+
       handleClearSearch();
       setSearch("");
     } else {
@@ -65,6 +85,14 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
       throw new Error(`Scraped product with id ${productId} not found.`);
     }
   };
+
+  useEffect(() => {
+    // Retrieve recently visited products from sessionStorage
+    const recentlyVisited = sessionStorage.getItem("recentlyVisitedProducts");
+    if (recentlyVisited) {
+      setRecentlyVisitedProducts(JSON.parse(recentlyVisited));
+    }
+  }, []);
 
   // Custom hook for handling selection/deselection of multiple scraped products
   const handleScrapedProductsSelect = (productId: number): void => {
@@ -178,11 +206,6 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
     });
   };
 
-  // useEffect for fetching scraped products data on component mount
-  useEffect(() => {
-    fetchScrapedProductsData();
-  }, []);
-
   // useEffect for loading selected scraped product from session storage on component mount
   useEffect(() => {
     const storedSelectedProduct = sessionStorage.getItem(
@@ -227,8 +250,10 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
     productsPerPage,
     getCurrentPageProducts,
     searchSuggestions,
+    setSearchSuggestions,
     handleSearchSuggestions,
     handleClearSearch,
+    recentlyVisitedProducts,
     bookmarkedProducts,
     handleBookmarkToggle,
   };

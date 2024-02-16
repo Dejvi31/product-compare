@@ -11,9 +11,9 @@ const SuggestionsList = ({
 }) => {
   return (
     <section className="absolute top-10 z-10 bg-white border border-slate-300 mt-1 w-full max-w-xl rounded-md shadow-lg">
-      {suggestions.map((suggestion) => (
+      {suggestions.map((suggestion, index) => (
         <section
-          key={suggestion.id}
+          key={index}
           className={`relative  ${
             selectedScrapedProducts.includes(suggestion.id)
               ? "bg-slate-700 text-white"
