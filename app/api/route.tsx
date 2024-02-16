@@ -8,7 +8,8 @@ export const dynamic = "force-dynamic";
 
 // Function to scrape data from a specific page
 async function scrapePage(
-  pageUrl: string
+  pageUrl: string,
+  startProductId: number
 ): Promise<{ productsArray?: any[]; error?: string }> {
   try {
     const response = await fetch(pageUrl);
@@ -51,7 +52,7 @@ async function scrapePage(
     });
 
     const productsArray = phoneNames.map((name, id) => ({
-      id,
+      id: startProductId + id,
       name,
       image: phoneImages[id],
       properties: phonePropertiesArray[id],
@@ -70,17 +71,19 @@ export async function GET() {
   const basePageUrl = "https://versus.com/en/phone";
   const totalPages = 4; // Set the total number of pages you want to scrape
 
-  const pageUrls = Array.from(
-    { length: totalPages },
-    (_, index) => `${basePageUrl}?page=${index + 1}`
-  );
-
   try {
-    const results = await Promise.all(pageUrls.map(scrapePage));
+    let startProductId = 0;
+    const results = await Promise.all(
+      Array.from({ length: totalPages }, (_, index) => {
+        const pageUrl = `${basePageUrl}?page=${index + 1}`;
+        const result = scrapePage(pageUrl, startProductId);
+        startProductId += 100; // Increment for the next page
+        return result;
+      })
+    );
 
     const allProductsArray = results.flatMap(({ productsArray, error }) => {
       if (error) {
-        // Handle error, e.g., log it
         console.error(error);
         return [];
       }

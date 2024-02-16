@@ -8,12 +8,18 @@ const SuggestionsList = ({
   handleScrapedProductCompare,
   selectedScrapedProducts,
   handleClearScrapedList,
+  recentlyVisitedProducts,
 }) => {
   return (
     <section className="absolute top-10 z-10 bg-white border border-slate-300 mt-1 w-full max-w-xl rounded-md shadow-lg">
-      {suggestions.map((suggestion, index) => (
+      {recentlyVisitedProducts.length > 0 ? (
+        <p className="text-xs">Recently Visited</p>
+      ) : (
+        <p className="text-xs">Latest Products</p>
+      )}
+      {suggestions.map((suggestion) => (
         <section
-          key={index}
+          key={suggestion.id}
           className={`relative  ${
             selectedScrapedProducts.includes(suggestion.id)
               ? "bg-slate-700 text-white"
