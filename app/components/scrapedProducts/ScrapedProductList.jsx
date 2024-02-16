@@ -6,6 +6,8 @@ const ScrapedProductList = ({
   handleScrapedProductsSelect,
   selectedScrapedProducts,
   handleScrapedProductSelect,
+  bookmarkedProducts,
+  handleBookmarkToggle,
 }) => {
   return (
     <section className="grid grid-cols-4 gap-1">
@@ -16,6 +18,8 @@ const ScrapedProductList = ({
           onSelect={handleScrapedProductsSelect}
           selected={selectedScrapedProducts.includes(scrapedProduct.id)}
           onScrapedProductSelect={handleScrapedProductSelect}
+          onBookmarkToggle={handleBookmarkToggle}
+          isBookmarked={bookmarkedProducts.includes(scrapedProduct.id)}
         />
       ))}
     </section>

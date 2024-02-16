@@ -28,4 +28,6 @@ export interface UseScrapedProductManagementReturn {
   searchSuggestions: ScrapedProduct[];
   handleSearchSuggestions: (inputValue: string) => void;
   handleClearSearch: () => void;
+  bookmarkedProducts: number[];
+  handleBookmarkToggle: (productId: number) => void;
 }

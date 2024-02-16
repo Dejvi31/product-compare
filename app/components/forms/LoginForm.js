@@ -1,6 +1,7 @@
 import React from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import ProfileForm from "./ProfileForm";
+import Bookmark from "../../profile/Bookmark";
 
 const LoginForm = () => {
   const session = useSession();
@@ -22,7 +23,6 @@ const LoginForm = () => {
   };
 
   if (session.status === "authenticated") {
-    console.log(session.data.user);
     return (
       <>
         <ProfileForm
@@ -38,6 +38,7 @@ const LoginForm = () => {
             Sign out
           </button>
         </section>
+        <Bookmark />
       </>
     );
   }

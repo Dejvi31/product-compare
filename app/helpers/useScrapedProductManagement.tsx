@@ -15,19 +15,19 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
   );
   const [scrapedProducts, setScrapedProducts] = useState<ScrapedProduct[]>([]);
   const [search, setSearch] = useState<string>("");
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const productsPerPage = 12;
   const [searchSuggestions, setSearchSuggestions] = useState<ScrapedProduct[]>(
     []
   );
+  const [bookmarkedProducts, setBookmarkedProducts] = useState<number[]>([]);
 
   const router = useRouter();
 
   // Custom hook for fetching scraped products
   const fetchScrapedProductsData = async () => {
     try {
-      setIsLoading(true);
       const scrapedProductsArray = await fetchScrapedProducts();
       setScrapedProducts(scrapedProductsArray);
     } catch (error) {
@@ -156,6 +156,17 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
     setSearchSuggestions([]);
   };
 
+  // Function to toggle bookmark status
+  const handleBookmarkToggle = (productId: number) => {
+    setBookmarkedProducts((prev) => {
+      if (prev.includes(productId)) {
+        return prev.filter((id) => id !== productId);
+      } else {
+        return [...prev, productId];
+      }
+    });
+  };
+
   // useEffect for fetching scraped products data on component mount
   useEffect(() => {
     fetchScrapedProductsData();
@@ -207,6 +218,8 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
     searchSuggestions,
     handleSearchSuggestions,
     handleClearSearch,
+    bookmarkedProducts,
+    handleBookmarkToggle,
   };
 };
 

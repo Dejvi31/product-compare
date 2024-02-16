@@ -7,6 +7,8 @@ const ScrapedProductCard = ({
   onSelect,
   selected,
   onScrapedProductSelect,
+  onBookmarkToggle,
+  isBookmarked,
 }) => {
   const { id, name, image, properties } = scrapedProduct;
 
@@ -56,6 +58,12 @@ const ScrapedProductCard = ({
           </section>
         </section>
       </Link>
+      <button
+        className={`absolute top-2 left-2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold px-2 rounded-ful`}
+        onClick={() => onBookmarkToggle(id)}
+      >
+        {isBookmarked ? "🌟" : "☆"}
+      </button>
     </section>
   );
 };

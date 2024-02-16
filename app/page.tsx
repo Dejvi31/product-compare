@@ -23,6 +23,8 @@ const HomePage = () => {
     currentPage,
     setCurrentPage,
     productsPerPage,
+    bookmarkedProducts,
+    handleBookmarkToggle,
   } = useScrapedProductManagement();
 
   const currentProducts = getCurrentPageProducts();
@@ -60,6 +62,8 @@ const HomePage = () => {
                 handleScrapedProductsSelect={handleScrapedProductsSelect}
                 selectedScrapedProducts={selectedScrapedProducts}
                 handleScrapedProductSelect={handleScrapedProductSelect}
+                bookmarkedProducts={bookmarkedProducts}
+                handleBookmarkToggle={handleBookmarkToggle}
               />
               <Pagination
                 currentPage={currentPage}
