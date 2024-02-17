@@ -65,11 +65,6 @@ const HeaderSearch = ({
         ref={searchRef}
         value={value}
         onFocus={() => {
-          if (recentlyVisitedProducts.length > 0) {
-            setSearchSuggestions(recentlyVisitedProducts.slice(0, 5));
-          } else {
-            setSearchSuggestions(suggestions.slice(0, 5));
-          }
           setIsSuggestionsVisible(true);
         }}
         onChange={handleInputChange}

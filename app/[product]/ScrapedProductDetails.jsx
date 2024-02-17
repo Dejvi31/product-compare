@@ -1,7 +1,7 @@
 import React from "react";
-import { BatterySvg, DisplaySvg, PixelSvg, RamSvg } from "../svg";
+import { BatterySvg, DisplaySvg, PixelSvg, RamSvg } from "../components/svg";
 
-const ProductDetails = ({ name, properties }) => {
+const ScrapedProductDetails = ({ name, properties }) => {
   return (
     <section className="flex flex-col">
       <p className="text-lg font-semibold mb-2">{name}</p>
@@ -24,4 +24,4 @@ const ProductDetails = ({ name, properties }) => {
   );
 };
 
-export default ProductDetails;
+export default ScrapedProductDetails;

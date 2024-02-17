@@ -1,7 +1,7 @@
 import React from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import ProfileForm from "./ProfileForm";
-import Bookmark from "../../profile/Bookmark";
+import Bookmark from "./Bookmark";
 
 const LoginForm = () => {
   const session = useSession();

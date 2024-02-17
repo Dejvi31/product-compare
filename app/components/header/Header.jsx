@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
-import Login from "../components/buttons/Login";
-import HeaderSearch from "../components/forms/HeaderSearch";
-import useScrapedProductManagement from "../helpers/useScrapedProductManagement";
+import Login from "../buttons/Login";
+import HeaderSearch from "./HeaderSearch";
+import useScrapedProductManagement from "../../helpers/useScrapedProductManagement";
 import { useRouter } from "next/navigation";
 
 const Header = () => {

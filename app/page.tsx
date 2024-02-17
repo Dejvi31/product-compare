@@ -5,7 +5,7 @@ import ScrapedCompare from "./components/scrapedProducts/ScrapedCompare";
 import StartingPopup from "./components/popup/StartingPopup";
 import useScrapedProductManagement from "./helpers/useScrapedProductManagement";
 import Search from "./components/forms/Search";
-import Pagination from "./components/Pagination";
+import Pagination from "./components/features/Pagination";
 
 const HomePage = () => {
   const {

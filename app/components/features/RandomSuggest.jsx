@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import { BatterySvg, DisplaySvg, PixelSvg, RamSvg } from "./svg";
+import { BatterySvg, DisplaySvg, PixelSvg, RamSvg } from "../svg";
 
 const RandomSuggest = ({ randomProducts, onRandomProductSelect }) => {
   return (

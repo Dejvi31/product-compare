@@ -1,11 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import useScrapedProductManagement from "../helpers/useScrapedProductManagement";
-import ProductImage from "../components/products/ProductImage";
-import ProductDetails from "../components/products/ProductDetails";
+import ScrapedProductImage from "./ScrapedProductImage";
+import ScrapedProductDetails from "./ScrapedProductDetails";
 import { useBreadCrumbs } from "../helpers/useBreadCrumbs";
-import Breadcrumbs from "../components/Breadcrumbs";
-import RandomSuggest from "../components/RandomSuggest";
+import Breadcrumbs from "../components/features/Breadcrumbs";
+import RandomSuggest from "../components/features/RandomSuggest";
 import { ScrapedProduct } from "../helpers/interfaces";
 
 const page = () => {
@@ -38,11 +38,11 @@ const page = () => {
             <>
               <Breadcrumbs breadCrumbs={breadcrumbs} />
               <section className="flex">
-                <ProductImage
+                <ScrapedProductImage
                   src={selectedProduct.image}
                   alt={selectedProduct.name}
                 />
-                <ProductDetails {...selectedProduct} />
+                <ScrapedProductDetails {...selectedProduct} />
               </section>
               <section className="border-t-2 mt-2">
                 <h2>Random Suggestions</h2>
