@@ -34,7 +34,7 @@ const Header = () => {
     <header className="bg-gray-800  flex justify-between items-center fixed w-full top-0 z-10 ">
       <section className="flex items-center">
         <span
-          className="text-xl text-white font-bold cursor-pointer"
+          className="text-xl text-white font-bold cursor-pointer ml-4"
           onClick={() => router.push("/")}
         >
           Home

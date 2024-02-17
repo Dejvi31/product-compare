@@ -1,11 +1,7 @@
 import React from "react";
-import { signIn, signOut, useSession } from "next-auth/react";
-import ProfileForm from "./ProfileForm";
-import Bookmark from "./Bookmark";
+import { signIn } from "next-auth/react";
 
 const LoginForm = () => {
-  const session = useSession();
-
   const handleLogin = async (provider) => {
     try {
       await signIn(provider);
@@ -13,35 +9,6 @@ const LoginForm = () => {
       console.error("Error during login:", error);
     }
   };
-
-  const handleLogout = async () => {
-    try {
-      await signOut();
-    } catch (error) {
-      console.error("Error during logout:", error);
-    }
-  };
-
-  if (session.status === "authenticated") {
-    return (
-      <>
-        <ProfileForm
-          name={session.data.user.name}
-          email={session.data.user.email}
-          image={session.data.user.image}
-        />
-        <section className="flex items-center justify-center">
-          <button
-            className="bg-gray-500 hover:bg-gray-400 text-white px-4 py-2 rounded"
-            onClick={() => handleLogout()}
-          >
-            Sign out
-          </button>
-        </section>
-        <Bookmark />
-      </>
-    );
-  }
 
   return (
     <section>
