@@ -59,7 +59,9 @@ const ScrapedProductCard = ({
       </Link>
       <button
         className={`absolute top-2 left-2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold px-2 rounded-ful`}
-        onClick={() => onBookmarkToggle(id)}
+        onClick={() => {
+          onBookmarkToggle(id);
+        }}
       >
         {isBookmarked ? "🌟" : "☆"}
       </button>

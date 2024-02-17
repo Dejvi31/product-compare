@@ -195,16 +195,32 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
     setSearchSuggestions([]);
   };
 
-  // Function to toggle bookmark status
+  // Custom hook for handling selection/deselection of bookmarked products
   const handleBookmarkToggle = (productId: number) => {
     setBookmarkedProducts((prev) => {
-      if (prev.includes(productId)) {
-        return prev.filter((id) => id !== productId);
-      } else {
-        return [...prev, productId];
-      }
+      const updatedBookmarks = prev.includes(productId)
+        ? prev.filter((id) => id !== productId)
+        : [...prev, productId];
+
+      // Save updated bookmarks to sessionStorage
+      sessionStorage.setItem(
+        "bookmarkedProducts",
+        JSON.stringify(updatedBookmarks)
+      );
+
+      return updatedBookmarks;
     });
   };
+  // useEffect for loading bookmarked products from sessionStorage on component mount
+  useEffect(() => {
+    const storedBookmarkedProducts =
+      sessionStorage.getItem("bookmarkedProducts");
+
+    if (storedBookmarkedProducts) {
+      const parsedBookmarkedProducts = JSON.parse(storedBookmarkedProducts);
+      setBookmarkedProducts(parsedBookmarkedProducts);
+    }
+  }, []);
 
   // useEffect for loading selected scraped product from session storage on component mount
   useEffect(() => {
