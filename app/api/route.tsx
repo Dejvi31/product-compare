@@ -69,7 +69,7 @@ async function scrapePage(
 
 export async function GET() {
   const basePageUrl = "https://versus.com/en/phone";
-  const totalPages = 4; // Set the total number of pages you want to scrape
+  const totalPages = 4;
 
   try {
     let startProductId = 0;

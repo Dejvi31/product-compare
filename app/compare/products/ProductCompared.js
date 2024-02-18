@@ -83,11 +83,11 @@ const ProductCompared = ({ selectedProductsDetails, scrapedProducts }) => {
           label: (context) => {
             const originalValue =
               context.dataset.originalData[context.dataIndex];
-            return `${context.label}: ${originalValue}`;
+            return `${context.dataset.label}: ${originalValue}`;
           },
           title: (tooltipItems) => {
             const item = tooltipItems[0];
-            return `${item.dataset.label} `;
+            return `${item.label} `;
           },
         },
         backgroundColor: "rgba(0, 0, 0, 0.7)",
