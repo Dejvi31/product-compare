@@ -9,12 +9,14 @@ const SuggestionsList = ({
   selectedScrapedProducts,
   handleClearScrapedList,
   recentlyVisitedProducts,
+  value,
 }) => {
   return (
     <section className="absolute top-10 z-10 bg-white border border-slate-300 mt-1 w-full max-w-xl rounded-md shadow-lg">
-      {recentlyVisitedProducts.length > 0 ? (
+      {value.trim() === "" && recentlyVisitedProducts.length > 0 && (
         <p className="text-xs">Recently Visited</p>
-      ) : (
+      )}
+      {value.trim() === "" && recentlyVisitedProducts.length === 0 && (
         <p className="text-xs">Latest Products</p>
       )}
       {suggestions.map((suggestion) => (

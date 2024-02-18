@@ -87,6 +87,7 @@ const HeaderSearch = ({
           selectedScrapedProducts={selectedScrapedProducts}
           handleClearScrapedList={handleClearScrapedList}
           recentlyVisitedProducts={recentlyVisitedProducts}
+          value={value}
         />
       )}
     </section>
