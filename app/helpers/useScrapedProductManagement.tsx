@@ -28,32 +28,31 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
 
   const router = useRouter();
 
-  // Custom hook for fetching scraped products
-  const fetchScrapedProductsData = async () => {
-    try {
-      // Check if data is present in sessionStorage
-      const cachedData = sessionStorage.getItem("scrapedProducts");
-
-      if (cachedData) {
-        setScrapedProducts(JSON.parse(cachedData));
-      } else {
-        const scrapedProductsArray = await fetchScrapedProducts();
-        setScrapedProducts(scrapedProductsArray);
-
-        // Save data to sessionStorage
-        sessionStorage.setItem(
-          "scrapedProducts",
-          JSON.stringify(scrapedProductsArray)
-        );
-      }
-    } catch (error) {
-      console.error("Error fetching scraped products:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
   // useEffect for fetching scraped products data on component mount
   useEffect(() => {
+    const fetchScrapedProductsData = async () => {
+      try {
+        // Check if data is present in sessionStorage
+        const cachedData = sessionStorage.getItem("scrapedProducts");
+
+        if (cachedData) {
+          setScrapedProducts(JSON.parse(cachedData));
+        } else {
+          const scrapedProductsArray = await fetchScrapedProducts();
+          setScrapedProducts(scrapedProductsArray);
+          // Save data to sessionStorage
+          sessionStorage.setItem(
+            "scrapedProducts",
+            JSON.stringify(scrapedProductsArray)
+          );
+        }
+      } catch (error) {
+        console.error("Error fetching scraped products:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
     fetchScrapedProductsData();
   }, []);
   // Custom hook for handling selection of a specific scraped product by ID

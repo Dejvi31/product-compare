@@ -42,10 +42,10 @@ const ProductCompared = ({ selectedProductsDetails, scrapedProducts }) => {
       },0.2)`;
 
       const specificationsData = [
-        parseInt(productDetails?.properties?.Battery) || 0,
-        parseInt(productDetails?.properties?.Pixel) || 0,
-        parseFloat(productDetails?.properties?.Display) || 0,
-        parseInt(productDetails?.properties?.RAM) || 0,
+        parseInt(productDetails.properties?.Battery) || 0,
+        parseInt(productDetails.properties?.Pixel) || 0,
+        parseFloat(productDetails.properties?.Display) || 0,
+        parseInt(productDetails.properties?.RAM) || 0,
       ];
 
       const scaledData = specificationsData.map((value, index) =>
