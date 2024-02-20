@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { DisplaySvg, RamSvg, PixelSvg, BatterySvg } from "../svg";
+import { useSession } from "next-auth/react";
 
 const ScrapedProductCard = ({
   scrapedProduct,
@@ -10,6 +11,7 @@ const ScrapedProductCard = ({
   onBookmarkToggle,
   isBookmarked,
 }) => {
+  const session = useSession();
   const { id, name, image, properties } = scrapedProduct;
   let link = "/" + name;
   link = link.replace(/\s+/g, "-").toLowerCase();
@@ -57,14 +59,16 @@ const ScrapedProductCard = ({
           </section>
         </section>
       </Link>
-      <button
-        className={`absolute top-2 left-2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold px-2 rounded-ful`}
-        onClick={() => {
-          onBookmarkToggle(id);
-        }}
-      >
-        {isBookmarked ? "🌟" : "☆"}
-      </button>
+      {session.status === "authenticated" && (
+        <button
+          className={`absolute top-2 left-2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold px-2 rounded-ful`}
+          onClick={() => {
+            onBookmarkToggle(id);
+          }}
+        >
+          {isBookmarked ? "🌟" : "☆"}
+        </button>
+      )}
     </section>
   );
 };

@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import ProductCompared from "./products/ProductCompared";
 import useScrapedProductManagement from "../helpers/useScrapedProductManagement";
