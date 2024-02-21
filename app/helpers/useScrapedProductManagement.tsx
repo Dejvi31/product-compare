@@ -157,6 +157,18 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
       // Save the randomly selected product to session storage and state
       sessionStorage.setItem("selectedScrapedProduct", JSON.stringify(product));
       setSelectedProduct(product);
+      // Update recently visited products
+      setRecentlyVisitedProducts((prev) => {
+        const updatedList = [
+          product,
+          ...prev.filter((item) => item.id !== productId),
+        ];
+        sessionStorage.setItem(
+          "recentlyVisitedProducts",
+          JSON.stringify(updatedList)
+        );
+        return updatedList;
+      });
     } else {
       // Throw an error if the randomly selected product is not found
       throw new Error(`Random product with id ${productId} not found.`);
