@@ -39,7 +39,7 @@ async function scrapePage(
       );
 
       const phoneProperties: PhoneProperties = {};
-      const propertyNames = [`Display`, `RAM`, `Pixel`, `Battery`];
+      const propertyNames = [`Display`, `RAM`, `PPI`, `Battery`];
 
       propElements.forEach((element, index) => {
         const propertyName = propertyNames[index];

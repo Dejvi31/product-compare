@@ -1,6 +1,6 @@
 import { ResponsiveRadar } from "@nivo/radar";
 
-const Radial = ({ data, keys, indexBy }) => {
+const Radial = ({ data = {}, keys = {}, indexBy = {} }) => {
   return (
     <ResponsiveRadar
       data={data}

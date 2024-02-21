@@ -14,7 +14,7 @@ const ScrapedProductDetails = ({ name, properties }) => {
             >
               {property === "Display" && <DisplaySvg />}
               {property === "RAM" && <RamSvg />}
-              {property === "Pixel" && <PixelSvg />}
+              {property === "PPI" && <PixelSvg />}
               {property === "Battery" && <BatterySvg />}
               {value}
             </section>
