@@ -14,6 +14,7 @@ const page = () => {
     isLoading,
     generateRandomProducts,
     handleRandomProductSelect,
+    recentlyVisitedProducts,
   } = useScrapedProductManagement();
   const [randomProducts, setRandomProducts] = useState<ScrapedProduct[]>([]);
 

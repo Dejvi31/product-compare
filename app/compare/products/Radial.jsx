@@ -1,6 +1,6 @@
 import { ResponsiveRadar } from "@nivo/radar";
 
-const Radial = ({ data = {}, keys = {}, indexBy = {} }) => {
+const Radial = ({ data = {}, keys = {}, indexBy = {}, originalData }) => {
   return (
     <ResponsiveRadar
       data={data}
@@ -16,6 +16,10 @@ const Radial = ({ data = {}, keys = {}, indexBy = {} }) => {
       colors={{ scheme: "nivo" }}
       blendMode="multiply"
       motionConfig="wobbly"
+      // sliceTooltip={() => {
+      //   // console.log(originalData.map((data) => Object.keys(data)[1]));
+      //   console.log(originalData);
+      // }}
       legends={[
         {
           anchor: "top-left",

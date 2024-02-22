@@ -63,7 +63,6 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
       // Save the selected product to session storage and state
       sessionStorage.setItem("selectedScrapedProduct", JSON.stringify(product));
       setSelectedProduct(product);
-
       // Update recently visited products
       setRecentlyVisitedProducts((prev) => {
         const updatedList = [
@@ -85,14 +84,35 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
     }
   };
 
+  // useEffect for loading recentlyVisitedProducts from sessionStorage on component mount
   useEffect(() => {
-    // Retrieve recently visited products from sessionStorage
-    const recentlyVisited = sessionStorage.getItem("recentlyVisitedProducts");
-    if (recentlyVisited) {
-      setRecentlyVisitedProducts(JSON.parse(recentlyVisited));
+    const storedRecentlyVisitedProducts = sessionStorage.getItem(
+      "recentlyVisitedProducts"
+    );
+
+    if (storedRecentlyVisitedProducts) {
+      const parsedRecentlyVisitedProducts = JSON.parse(
+        storedRecentlyVisitedProducts
+      );
+      setRecentlyVisitedProducts(parsedRecentlyVisitedProducts);
     }
   }, []);
 
+  // useEffect to listen for changes in sessionStorage
+  useEffect(() => {
+    const handleStorageChange = (event: any) => {
+      if (event.key === "recentlyVisitedProducts") {
+        const parsedRecentlyVisitedProducts = JSON.parse(event.newValue);
+        setRecentlyVisitedProducts(parsedRecentlyVisitedProducts);
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
   // Custom hook for handling selection/deselection of multiple scraped products
   const handleScrapedProductsSelect = (productId: number): void => {
     try {

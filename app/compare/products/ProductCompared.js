@@ -262,11 +262,23 @@ const ProductCompared = ({ selectedProductsDetails, scrapedProducts }) => {
     ),
   }));
 
+  const originalData = properties.map((property) => ({
+    name: property,
+    ...Object.fromEntries(
+      selectedProductsDetails.map((product) => {
+        const productDetails = scrapedProducts.find((p) => p.id === product.id);
+        return [
+          productDetails ? productDetails.name : "",
+          parseFloat(productDetails.properties[property]) || 0,
+        ];
+      })
+    ),
+  }));
   const keys = selectedProductsDetails.map((product) => {
     const productDetails = scrapedProducts.find((p) => p.id === product.id);
     return productDetails ? productDetails.name : "";
   });
-
+  // let result = Object.keys(products[2]).map((key) => [key, products[2][key]]);
   return (
     <section>
       <Link className="text-gray-500 hover:underline" href="/">
@@ -279,7 +291,12 @@ const ProductCompared = ({ selectedProductsDetails, scrapedProducts }) => {
           />
         </section>
         <section className="w-1/3">
-          <Radial data={products} keys={keys} indexBy="name" />
+          <Radial
+            data={originalData}
+            keys={keys}
+            indexBy="name"
+            originalData={originalData}
+          />
         </section>
       </section>
     </section>
