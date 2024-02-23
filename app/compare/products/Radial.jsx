@@ -1,4 +1,22 @@
 import { ResponsiveRadar } from "@nivo/radar";
+import TooltipParams from "../../components/tooltipRadar/TooltipParams";
+
+// To be removed in future releases
+if (process.env.NODE_ENV !== "production") {
+  // eslint-disable-next-line no-console
+  const originalWarn = console.error;
+  // eslint-disable-next-line no-console
+  console.error = (...args) => {
+    if (
+      args[0].includes(
+        "Support for defaultProps will be removed from function components in a future major release."
+      )
+    ) {
+      return;
+    }
+    originalWarn(...args);
+  };
+}
 
 const Radial = ({ data = {}, keys = {}, indexBy = {}, originalData }) => {
   return (
@@ -11,15 +29,26 @@ const Radial = ({ data = {}, keys = {}, indexBy = {}, originalData }) => {
       borderColor={{ from: "color" }}
       gridLabelOffset={36}
       dotSize={10}
-      dotColor={{ theme: "background" }}
+      dotColor="#ffffff"
       dotBorderWidth={2}
+      dotBorderColor={{ from: "color", modifiers: [] }}
       colors={{ scheme: "nivo" }}
       blendMode="multiply"
       motionConfig="wobbly"
-      // sliceTooltip={() => {
-      //   // console.log(originalData.map((data) => Object.keys(data)[1]));
-      //   console.log(originalData);
-      // }}
+      animate={false}
+      sliceTooltip={(params) => {
+        return originalData.map((data, index) => {
+          if (params["index"] == "Battery" && index == 3) {
+            return <TooltipParams key={index} data={data} />;
+          } else if (params["index"] == "RAM" && index == 0) {
+            return <TooltipParams key={index} data={data} />;
+          } else if (params["index"] == "PPI" && index == 1) {
+            return <TooltipParams key={index} data={data} />;
+          } else if (params["index"] == "Display" && index == 2) {
+            return <TooltipParams key={index} data={data} />;
+          }
+        });
+      }}
       legends={[
         {
           anchor: "top-left",
