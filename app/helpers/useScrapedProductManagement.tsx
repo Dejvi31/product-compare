@@ -64,18 +64,7 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
       sessionStorage.setItem("selectedScrapedProduct", JSON.stringify(product));
       setSelectedProduct(product);
       // Update recently visited products
-      setRecentlyVisitedProducts((prev) => {
-        const updatedList = [
-          product,
-          ...prev.filter((item) => item.id !== productId),
-        ];
-        sessionStorage.setItem(
-          "recentlyVisitedProducts",
-          JSON.stringify(updatedList)
-        );
-        return updatedList;
-      });
-
+      updateRecentlyVisitedProducts(product);
       handleClearSearch();
       setSearch("");
     } else {
@@ -84,6 +73,19 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
     }
   };
 
+  const updateRecentlyVisitedProducts = (product: ScrapedProduct) => {
+    setRecentlyVisitedProducts((prev) => {
+      const updatedList = [
+        product,
+        ...prev.filter((item) => item.id !== product.id),
+      ];
+      sessionStorage.setItem(
+        "recentlyVisitedProducts",
+        JSON.stringify(updatedList)
+      );
+      return updatedList;
+    });
+  };
   // useEffect for loading recentlyVisitedProducts from sessionStorage on component mount
   useEffect(() => {
     const storedRecentlyVisitedProducts = sessionStorage.getItem(
@@ -98,21 +100,6 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
     }
   }, []);
 
-  // useEffect to listen for changes in sessionStorage
-  useEffect(() => {
-    const handleStorageChange = (event: any) => {
-      if (event.key === "recentlyVisitedProducts") {
-        const parsedRecentlyVisitedProducts = JSON.parse(event.newValue);
-        setRecentlyVisitedProducts(parsedRecentlyVisitedProducts);
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
-  }, []);
   // Custom hook for handling selection/deselection of multiple scraped products
   const handleScrapedProductsSelect = (productId: number): void => {
     try {

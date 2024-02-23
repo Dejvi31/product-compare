@@ -19,6 +19,7 @@ const Header = () => {
     handleClearScrapedList,
     recentlyVisitedProducts,
     setSearchSuggestions,
+    scrapedProducts,
   } = useScrapedProductManagement();
 
   const router = useRouter();
@@ -55,6 +56,7 @@ const Header = () => {
           handleClearScrapedList={handleClearScrapedList}
           recentlyVisitedProducts={recentlyVisitedProducts}
           setSearchSuggestions={setSearchSuggestions}
+          scrapedProducts={scrapedProducts}
         />
       </nav>
 

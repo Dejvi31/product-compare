@@ -292,7 +292,7 @@ const ProductCompared = ({ selectedProductsDetails, scrapedProducts }) => {
         </section>
         <section className="w-1/3">
           <Radial
-            data={originalData}
+            data={products}
             keys={keys}
             indexBy="name"
             originalData={originalData}

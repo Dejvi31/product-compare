@@ -14,12 +14,10 @@ const HeaderSearch = ({
   handleClearScrapedList,
   recentlyVisitedProducts,
   setSearchSuggestions,
+  scrapedProducts,
 }) => {
   const [isSuggestionsVisible, setIsSuggestionsVisible] = useState(false);
   const searchRef = useRef(null);
-  const handleInputChange = (e) => {
-    onChange(e);
-  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -48,15 +46,36 @@ const HeaderSearch = ({
   }, []);
   useEffect(() => {
     const handleSuggestions = () => {
-      if (recentlyVisitedProducts.length > 0) {
-        setSearchSuggestions(recentlyVisitedProducts.slice(0, 5));
+      if (recentlyVisitedProducts.length > 0 && value.trim() === "") {
+        setSearchSuggestions((prevSuggestions) => {
+          const newSuggestions = recentlyVisitedProducts.slice(0, 5);
+
+          if (
+            JSON.stringify(prevSuggestions) !== JSON.stringify(newSuggestions)
+          ) {
+            return newSuggestions;
+          }
+
+          return prevSuggestions;
+        });
       } else {
-        setSearchSuggestions(suggestions.slice(0, 5));
+        setSearchSuggestions((prevSuggestions) => {
+          const newSuggestions = scrapedProducts.slice(0, 5);
+
+          if (
+            JSON.stringify(prevSuggestions) !== JSON.stringify(newSuggestions)
+          ) {
+            return newSuggestions;
+          }
+
+          return prevSuggestions;
+        });
       }
     };
 
     handleSuggestions();
-  }, [recentlyVisitedProducts, setSearchSuggestions]);
+  }, [recentlyVisitedProducts, setSearchSuggestions, scrapedProducts, value]);
+
   return (
     <section className="flex items-center justify-center my-4 w-full relative">
       <input
@@ -67,7 +86,7 @@ const HeaderSearch = ({
         onFocus={() => {
           setIsSuggestionsVisible(true);
         }}
-        onChange={handleInputChange}
+        onChange={(e) => onChange(e)}
         className="block bg-white w-full max-w-md border border-slate-300 rounded-md mt-2 py-2 pl-9 pr-3 shadow-sm placeholder:italic placeholder:text-slate-400 focus:outline-none focus:border-gray-800 focus:ring-gray-800 focus:ring-1 sm:text-sm"
         placeholder={placeholder}
       />
