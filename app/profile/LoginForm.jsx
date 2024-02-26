@@ -4,7 +4,10 @@ import { signIn } from "next-auth/react";
 const LoginForm = () => {
   const handleLogin = async (provider) => {
     try {
-      await signIn(provider);
+      await signIn(provider, {
+        redirect: true,
+        callbackUrl: "http://localhost:3000",
+      });
     } catch (error) {
       console.error("Error during login:", error);
     }

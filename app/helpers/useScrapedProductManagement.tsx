@@ -28,9 +28,12 @@ const useScrapedProductManagement = (): UseScrapedProductManagementReturn => {
 
   const router = useRouter();
 
+  console.log("123");
   // useEffect for fetching scraped products data on component mount
   useEffect(() => {
+    console.log("use effect");
     const fetchScrapedProductsData = async () => {
+      console.log("fetch");
       try {
         // Check if data is present in sessionStorage
         const cachedData = sessionStorage.getItem("scrapedProducts");

@@ -1,4 +1,6 @@
 export const fetchScrapedProducts = async () => {
+  console.log("Fetching data...");
+
   try {
     const response = await fetch("http://localhost:3000/api");
     const data = await response.json();

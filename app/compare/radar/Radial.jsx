@@ -1,5 +1,5 @@
 import { ResponsiveRadar } from "@nivo/radar";
-import TooltipParams from "../../components/tooltipRadar/TooltipParams";
+import TooltipParams from "./tooltipRadar/TooltipParams";
 
 // To be removed in future releases
 if (process.env.NODE_ENV !== "production") {
