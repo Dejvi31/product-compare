@@ -3,6 +3,9 @@ export const fetchScrapedProducts = async () => {
 
   try {
     const response = await fetch("http://localhost:3000/api");
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
     const data = await response.json();
     if (data && data.productsArray) {
       const scrapedProductsArray = data.productsArray.map((productObject) => ({
